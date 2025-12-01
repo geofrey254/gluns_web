@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="bg-[#ffffff] px-8 py-4">
+      <nav className="bg-[#ffffff] px-4 md:px-8 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
@@ -57,7 +57,7 @@ export default function Navbar() {
           <div className="flex gap-2 items-center">
             <Link
               href="/registration"
-              className="
+              className="hidden md:flex 
     relative overflow-hidden 
     border border-[#104179] text-[#104179]
     px-6 md:px-4 py-2 font-semibold ml-4 rounded-md 
@@ -72,22 +72,28 @@ export default function Navbar() {
             </Link>
 
             {/* Mobile Menu Button */}
-            <button className="ml-2 md:hidden" onClick={toggleMenu}>
-              <HiMenuAlt2 size={35} className="text-[#104179]" />
+            <button
+              className="ml-2 md:hidden cursor-pointer hover:scale-105 transition-transform"
+              onClick={toggleMenu}
+            >
+              <HiMenuAlt2 size={40} className="text-[#104179]" />
             </button>
           </div>
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="fixed inset-0 z-50 md:hidden">
+            <div className="fixed inset-0 z-50 md:hidden transition-all duration-300 animate-in fade-in">
               {/* Backdrop */}
               <div className="absolute inset-0 bg-[#104179]/40 backdrop-blur-sm" />
 
               {/* Drawer */}
-              <div className="absolute top-0 right-0 h-screen w-1/2 bg-[#ffffff] flex flex-col p-4 space-y-6 shadow-lg">
+              <div className="absolute top-0 left-0 h-screen w-[60%] bg-[#ffffff] flex flex-col p-4 space-y-6 shadow-lg">
                 {/* Close Button */}
                 <div className="flex justify-end">
-                  <button onClick={toggleMenu}>
+                  <button
+                    onClick={toggleMenu}
+                    className="cursor-pointer hover:scale-105 transition-transform"
+                  >
                     <RiCloseLargeLine size={30} className="text-[#104179]" />
                   </button>
                 </div>

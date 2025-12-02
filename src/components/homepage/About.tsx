@@ -3,22 +3,22 @@ import Image from 'next/image'
 
 export default function About() {
   return (
-    <section className="relative bg-white min-h-[60vh] rounded-t-3xl -mt-7 z-30 overflow-hidden">
+    <section className="relative bg-white min-h-[60vh] rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
 
         {/* IMAGE WITH OVERLAY */}
-        <div className="relative h-[50vh] md:h-auto order-1 lg:order-1">
+        <div className="relative h-[50vh] md:h-auto order-2 lg:order-1">
           <div className="absolute inset-0">
             <Image
               fill
               src="/images/about.jpg"
               alt="About GLUNS"
-              className="object-cover rounded-t-3xl lg:rounded-tr-none lg:rounded-tl-3xl"
+              className="object-cover object-bottom lg:rounded-tr-none lg:rounded-tl-3xl"
               priority
             />
 
             {/* Enhanced Gradient Overlay */}
-            <div className="absolute inset-0 bg-linear-to-b lg:bg-linear-to-r from-black/70 via-black/40 to-transparent rounded-t-3xl lg:rounded-tr-none lg:rounded-tl-3xl"></div>
+            <div className="absolute inset-0 bg-linear-to-b lg:bg-linear-to-r from-black/70 via-black/40 to-transparent lg:rounded-tr-none lg:rounded-tl-3xl"></div>
           </div>
 
           {/* Enhanced Floating Highlight Card */}
@@ -39,7 +39,7 @@ export default function About() {
         </div>
 
         {/* TEXT SECTION */}
-        <div className="order-2 lg:order-2 px-6 md:px-10 lg:px-16 xl:px-20 py-12 md:py-16 lg:py-20 flex flex-col justify-center space-y-8">
+        <div className="order-1 lg:order-2 px-6 md:px-10 py-12 md:py-8 flex flex-col justify-center space-y-8">
           
           {/* Header with decorative element */}
           <div className="space-y-3">
@@ -63,15 +63,15 @@ export default function About() {
           <div className="space-y-6">
 
             {/* Focus Areas Card */}
-            <div className="group bg-linear-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-100 hover:border-[#104179]/30 hover:shadow-lg transition-all duration-300">
+            <div className="group bg-[#104179] p-6 rounded-xl border border-gray-100 hover:border-[#104179]/30 hover:shadow-lg transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 bg-[#104179]/10 rounded-lg flex items-center justify-center group-hover:bg-[#104179]/20 transition-colors duration-300">
-                  <svg className="w-5 h-5 text-[#104179]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#104179] mb-3">Our Focus Areas</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">Our Focus Areas</h3>
                   <ul className="space-y-2">
                     {[
                       'Leadership & Diplomacy Training',
@@ -79,8 +79,8 @@ export default function About() {
                       'Collaborative Problem-Solving Workshops',
                       'Cross-Cultural Dialogue & Exposure'
                     ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3 text-gray-700 text-sm md:text-base">
-                        <svg className="w-5 h-5 text-[#104179] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <li key={index} className="flex items-start gap-3 text-white/80 text-sm md:text-base">
+                        <svg className="w-5 h-5 text-[#ffffff] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                         </svg>
                         <span>{item}</span>

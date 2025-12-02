@@ -46,7 +46,7 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.link}
-                className="mx-2 font-semibold text-[#104179] tracking-wide text-lg hover:text-[#fcb129] transition-colors duration-300"
+                className="mx-2 font-semibold text-[#104179] tracking-wide text-lg hover:text-[#85c226] transition-colors duration-300"
               >
                 {item.name}
               </Link>

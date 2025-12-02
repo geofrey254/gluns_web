@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
+import { VscActivateBreakpoints } from 'react-icons/vsc'
 
 export default function About() {
   return (
-    <section className="relative bg-white min-h-[60vh] rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white">
+    <section className="relative bg-white min-h-[70vh] rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
-
         {/* IMAGE WITH OVERLAY */}
         <div className="relative h-[50vh] md:h-auto order-2 lg:order-1">
           <div className="absolute inset-0">
@@ -22,7 +22,7 @@ export default function About() {
           </div>
 
           {/* Enhanced Floating Highlight Card */}
-          <div className="absolute bottom-8 left-6 right-6 md:left-8 md:right-8 lg:left-8 lg:right-auto lg:max-w-sm bg-white/95 backdrop-blur-lg p-6 md:p-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:shadow-[0_20px_60px_rgba(16,65,121,0.3)] hover:scale-[1.02]">
+          <div className="absolute bottom-14 md:bottom-12 left-6 right-6 md:left-8 md:right-8 lg:left-8 lg:right-auto lg:max-w-sm bg-white/95 backdrop-blur-lg p-6 md:p-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:shadow-[0_20px_60px_rgba(16,65,121,0.3)] hover:scale-[1.02]">
             <div className="flex items-start gap-3">
               <div className="shrink-0 w-1 h-full bg-[#104179] rounded-full"></div>
               <div>
@@ -39,13 +39,14 @@ export default function About() {
         </div>
 
         {/* TEXT SECTION */}
-        <div className="order-1 lg:order-2 px-6 md:px-10 py-12 md:py-8 flex flex-col justify-center space-y-8">
-          
+        <div className="order-1 lg:order-2 px-6 md:px-10 py-12 md:py-16 flex flex-col justify-center space-y-8">
           {/* Header with decorative element */}
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-12 h-1 bg-[#104179] rounded-full"></div>
-              <span className="text-sm font-semibold text-[#104179]/70 uppercase tracking-wider">Who We Are</span>
+              <span className="text-sm font-semibold text-[#104179]/70 uppercase tracking-wider">
+                Who We Are
+              </span>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#104179] leading-tight">
               About GLUNS
@@ -61,28 +62,40 @@ export default function About() {
 
           {/* Enhanced Info Cards */}
           <div className="space-y-6">
-
             {/* Focus Areas Card */}
             <div className="group bg-[#104179] p-6 rounded-xl border border-gray-100 hover:border-[#104179]/30 hover:shadow-lg transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 bg-[#104179]/10 rounded-lg flex items-center justify-center group-hover:bg-[#104179]/20 transition-colors duration-300">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                    />
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">Our Focus Areas</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
+                    Our Focus Areas
+                  </h3>
                   <ul className="space-y-2">
                     {[
                       'Leadership & Diplomacy Training',
                       'Model UN Committee Simulations',
                       'Collaborative Problem-Solving Workshops',
-                      'Cross-Cultural Dialogue & Exposure'
+                      'Cross-Cultural Dialogue & Exposure',
                     ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3 text-white/80 text-sm md:text-base">
-                        <svg className="w-5 h-5 text-[#ffffff] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
+                      <li
+                        key={index}
+                        className="flex items-start gap-3 text-white/80 text-sm md:text-base"
+                      >
+                        <VscActivateBreakpoints size={20} className="text-[#85c226]" />{' '}
                         <span>{item}</span>
                       </li>
                     ))}

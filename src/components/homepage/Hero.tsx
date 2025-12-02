@@ -6,13 +6,13 @@ import { SiUnitednations } from "react-icons/si";
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#051220] md:min-h-screen flex items-center overflow-hidden">
+    <section className="relative bg-[#051220] md:min-h-screen flex px-6 md:px-8 items-center overflow-hidden">
       {/* gradient overlay */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920')] bg-cover bg-center" />
 
       <div className="absolute inset-0 bg-linear-to-br from-[#051220]/95 via-[#051220]/85 to-transparent" />
 
-      <div className="relative z-10 w-full max-w-3xl px-6 md:px-12 py-20">
+      <div className="relative z-10 w-full max-w-3xl py-20">
         <h3 className="text-[#ffffff] font-semibold text-xl flex items-center">
             <span>
                 <SiUnitednations className="inline-block mr-2 text-3xl mb-1" />

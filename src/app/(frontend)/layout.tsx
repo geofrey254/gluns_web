@@ -2,17 +2,18 @@ import React from 'react'
 import './styles.css'
 import Navbar from '@/components/navigation/Navbar'
 import Footer from '@/components/navigation/Footer'
-import {Barlow_Condensed} from 'next/font/google'
+import { Barlow_Condensed } from 'next/font/google'
 
 const barlow = Barlow_Condensed({
   subsets: ['latin'],
-  weight: ['100','200','300','400','500','600','700','800','900'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-barlow',
 })
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: 'GLUNS — Global Leaders United Nations Symposium',
+  description:
+    'GLUNS is a premier Model United Nations symposium empowering high school students with leadership, diplomacy, and global policy skills through immersive debates, workshops, and collaborative simulations.',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -24,8 +25,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <main>
           <Navbar />
           {children}
-          <Footer/>
-          </main>
+          <Footer />
+        </main>
       </body>
     </html>
   )

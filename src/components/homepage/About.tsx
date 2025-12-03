@@ -4,10 +4,10 @@ import { VscActivateBreakpoints } from 'react-icons/vsc'
 
 export default function About() {
   return (
-    <section className="relative bg-white min-h-[70vh] rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white">
+    <section className="relative bg-white min-h-[70vh] md:min-h-[55vh] lg:min-h-[70vh] rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
         {/* IMAGE WITH OVERLAY */}
-        <div className="relative h-[50vh] md:h-auto order-2 lg:order-1">
+        <div className="relative h-[50vh] md:h-auto order-2 md:order-1 lg:order-1">
           <div className="absolute inset-0">
             <Image
               fill
@@ -39,7 +39,7 @@ export default function About() {
         </div>
 
         {/* TEXT SECTION */}
-        <div className="order-1 lg:order-2 px-6 md:px-10 py-12 md:py-16 flex flex-col justify-center space-y-8">
+        <div className="order-1 md:order-2 lg:order-2 px-6 md:px-10 py-12 md:py-16 flex flex-col justify-center space-y-8">
           {/* Header with decorative element */}
           <div className="space-y-3">
             <div className="flex items-center gap-3">

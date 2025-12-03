@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="bg-[#ffffff] px-4 md:px-8 py-4">
+      <nav className="bg-[#ffffff] px-4 md:px-8 py-4 md:py-6 lg:py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
@@ -60,7 +60,7 @@ export default function Navbar() {
               className="hidden md:flex 
     relative overflow-hidden 
     border border-[#104179] text-[#104179]
-    px-6 md:px-4 py-2 font-semibold ml-4 rounded-md 
+    px-6 md:px-4 py-2 md:py-1 lg:py-2 font-semibold ml-4 rounded-md 
     transition-colors duration-300
     before:absolute before:inset-0 before:bg-[#104179]
     before:translate-y-full before:transition-transform before:duration-300

@@ -38,10 +38,10 @@ export default function Committee() {
   ]
 
   return (
-    <section className="relative bg-[#ffffff] min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 py-20 overflow-hidden">
+    <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 py-20 overflow-hidden">
       {/* Section Header */}
       <div className="text-center mb-12">
-        <h3 className="border border-[#104179] text-[#104179] rounded-3xl px-2 mx-auto w-[10%] flex items-center text-center justify-center">
+        <h3 className="border border-[#104179] text-[#104179] rounded-3xl px-2 mx-auto w-[40%] flex items-center text-center justify-center">
           Committees
         </h3>{' '}
         <h2 className="text-4xl md:text-5xl text-[#104179] mt-2 font-semibold">

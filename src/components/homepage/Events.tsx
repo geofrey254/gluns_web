@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { VscActivateBreakpoints } from 'react-icons/vsc'
+
 
 export default function Events() {
 
@@ -38,7 +39,7 @@ export default function Events() {
     {
       title: "Closing Awards",
       desc: "Honoring outstanding delegates and celebrating the success of the symposium.",
-      img: "https://images.unsplash.com/photo-1515165562835-c4c7b5de7f77?auto=format&fit=crop&w=1200&q=80",
+      img: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
       link: "#closing-awards"
     },
   ]

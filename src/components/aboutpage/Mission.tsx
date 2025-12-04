@@ -2,13 +2,13 @@ import React from 'react'
 
 export default function Mission() {
   return (
-    <section className="relative bg-[#ffffff] w-full min-h-screen md:min-h-[60vh] rounded-t-3xl -mt-7 z-30 px-6 md:px-16 2xl:px-18 py-12 overflow-hidden">
+    <section className="relative bg-[#ffffff] w-full min-h-[70vh] md:min-h-[60vh] rounded-t-3xl -mt-7 z-30 px-8 md:px-16 2xl:px-18 py-12 overflow-hidden">
       <div className="grid grid-cols-12 gap-4 md:gap-0">
-        <div className="col-span-1 md:col-span-4">
+        <div className="col-span-12 md:col-span-4 mb-12 md:mb-0">
           <h2 className="text-5xl md:text-7xl text-[#104179]">Inside GLUNS</h2>
         </div>
-        <div className="col-span-1 md:col-span-8 flex flex-col justify-end items-end gap-8 text-[#104179]">
-          <div className="w-[600px] h-[0.5px] bg-[#104179]"></div>
+        <div className="col-span-12 md:col-span-8 flex flex-col md:justify-end md:items-end gap-8 text-[#104179]">
+          <div className="w-[100px] md:w-[600px] h-[0.5px] bg-[#104179] -mb-6 md:mb-0"></div>
           <div className="mission flex flex-col md:flex-row md:gap-16 md:justify-end">
             <h4>01</h4>
             <h3 className="text-3xl">Our Mission</h3>
@@ -19,7 +19,7 @@ export default function Mission() {
             </p>
           </div>
 
-          <div className="w-[600px] h-[0.5px] bg-[#104179]"></div>
+          <div className="w-[100px] md:w-[600px] h-[0.5px] bg-[#104179] mt-8 md:mt-0 -mb-6 md:mb-0"></div>
 
           <div className="vision flex flex-col md:flex-row md:gap-16 md:justify-end">
             <h4>02</h4>

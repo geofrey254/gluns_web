@@ -1,5 +1,4 @@
 import React from 'react'
-import { FiArrowRight } from 'react-icons/fi'
 import { IoLocationSharp } from "react-icons/io5";
 import Image from 'next/image'
 import Link from 'next/link';

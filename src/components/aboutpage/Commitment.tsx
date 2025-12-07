@@ -14,7 +14,7 @@ export default function Commitment() {
       </div>
 
       {/* Creative Image Layout */}
-      <div className="md:mt-16 grid grid-cols-12 gap-4 md:gap-6">
+      <div className="md:mt-16  mb-8 grid grid-cols-12 gap-4 md:gap-6">
         {/* Large featured image */}
         <div className="col-span-12 md:col-span-7 h-64 md:h-96 rounded-2xl overflow-hidden shadow-lg">
           <Image width={400} height={200} 

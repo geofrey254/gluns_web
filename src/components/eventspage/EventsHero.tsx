@@ -10,7 +10,7 @@ export default function EventsHero() {
           Our Events
         </span>
       </div>
-      <h2 className="text-white text-7xl md:text-8xl">Explore upcoming events and workshops</h2>
+      <h2 className="text-white text-7xl md:text-8xl">Explore upcoming <span className='text-[#85c226]'>events</span> and workshops</h2>
     </section>
   )
 }

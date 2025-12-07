@@ -40,8 +40,8 @@ export default function AboutHero() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Empowering Future Global Leaders
+            <h1 className="text-5xl lg:text-7xl font-semibold text-white leading-tight">
+              Empowering Future <span className='text-[#85c226]'>Global</span> Leaders
             </h1>
 
             <p className="text-white leading-relaxed text-xl md:text-2xl">

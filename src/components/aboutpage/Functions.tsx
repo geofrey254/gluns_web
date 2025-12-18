@@ -58,7 +58,7 @@ A Journey That Builds Skills, Perspective, and Purpose        </p>
                 <div
                   className={`pt-4 ${index % 2 === 0 ? '' : 'pb-2 md:pb-4 pt-0 flex flex-col-reverse'}`}
                 >
-                  <div className="bg-white/10 h-[45vh] backdrop-blur-sm border border-white/20 rounded-xl p-5 hover:bg-white/15 transition-all duration-300">
+                  <div className="bg-white/10 h-[45vh] 2xl:h-auto backdrop-blur-sm border border-white/20 rounded-xl p-5 hover:bg-white/15 transition-all duration-300">
                     {/* Number */}
                     <div className="text-3xl font-bold text-white/30 mb-2">{event.number}</div>
 

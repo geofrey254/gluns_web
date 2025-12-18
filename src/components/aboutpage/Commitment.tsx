@@ -9,7 +9,7 @@ export default function Commitment() {
           <h2 className="text-5xl md:text-7xl text-[rgb(16,65,121)]">Our Commitment</h2>
         </div>
         <div className="col-span-12 md:col-span-8 flex flex-col md:justify-end md:items-end gap-8 text-[#104179] mb-12 md:mb-0">
-         <p className='text-xl font-light md:font-normal'>GLUNS is committed to creating a safe, inclusive, and intellectually stimulating environment where every student{"'"}s voice matters. We provide high-quality programming delivered by experienced facilitators, mentors, and international relations professionals.</p>
+         <p className='text-xl 2xl:text-2xl font-light md:font-normal'>GLUNS is committed to creating a safe, inclusive, and intellectually stimulating environment where every student{"'"}s voice matters. We provide high-quality programming delivered by experienced facilitators, mentors, and international relations professionals.</p>
         </div>
       </div>
 

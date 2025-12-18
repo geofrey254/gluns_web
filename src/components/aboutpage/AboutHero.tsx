@@ -24,7 +24,7 @@ export default function AboutHero() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="py-20 md:py-16 px-8 md:px-12 bg-[#104179] dark:border-t dark:border-white relative z-30 shadow-2xl overflow-hidden flex flex-col items-center justify-center gap-12 md:gap-8"
+      className="py-20 md:py-16 px-8 w-full md:px-12 2xl:px-16 bg-[#104179] dark:border-t dark:border-white relative z-30 shadow-2xl overflow-hidden flex flex-col items-center justify-center gap-12 md:gap-8"
     >
       <div className="w-full h-full flex flex-col md:flex-row justify-center items-center">
         {/* left */}

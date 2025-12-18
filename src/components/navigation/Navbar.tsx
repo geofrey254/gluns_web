@@ -50,17 +50,17 @@ export default function Navbar() {
               alt="GLUNS Logo"
               width={500}
               height={500}
-              className="w-32 md:w-32 2xl:w-40"
+              className="w-32 md:w-32 2xl:w-36"
             />
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex mx-4 gap-6 2xl:gap-24 items-center">
+          <div className="hidden md:flex mx-4 gap-6 2xl:gap-8 items-center">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.link}
-                className="mx-2 font-semibold text-[#104179] tracking-wide text-lg 2xl:text-2xl hover:text-[#85c226] transition-colors duration-300"
+                className="mx-2 font-semibold text-[#104179] tracking-wide text-lg 2xl:text-xl hover:text-[#85c226] transition-colors duration-300"
               >
                 {item.name}
               </Link>
@@ -82,7 +82,7 @@ export default function Navbar() {
     hover:text-[#fffff6]
   "
             >
-              <span className="relative z-10 2xl:text-2xl">Registration</span>
+              <span className="relative z-10 2xl:text-xl">Registration</span>
             </Link>
 
             {/* Mobile Menu Button */}

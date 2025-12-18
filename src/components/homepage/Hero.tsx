@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className="relative bg-[#051220] md:min-h-[60vh] lg:min-h-screen 2xl:min-h-[120vh] flex px-6 md:px-8 2xl:px-16 items-center overflow-hidden">
       {/* gradient overlay */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920')] bg-cover bg-center" />
+      <div className="absolute inset-0 bg-[url(/images/background.jpg)] bg-cover bg-center" />
 
       <div className="absolute inset-0 bg-linear-to-br from-[#051220]/95 via-[#051220]/85 to-transparent" />
 

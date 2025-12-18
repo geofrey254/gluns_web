@@ -11,7 +11,7 @@ export default function About() {
           <div className="absolute inset-0">
             <Image
               fill
-              src="/images/about.jpg"
+              src="/images/aboutus.jpg"
               alt="About GLUNS"
               className="object-cover object-bottom lg:rounded-tr-none lg:rounded-tl-3xl"
               priority

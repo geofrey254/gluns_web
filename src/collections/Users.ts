@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { canUpdateUser } from './hooks/AccessHooks'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -6,9 +7,24 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: true,
+  access: {
+    read: canUpdateUser,
+    create: canUpdateUser,
+    delete: canUpdateUser,
+    update: canUpdateUser,
+  },
   fields: [
-    // Email added by default
-    // Add more fields as needed
-    
+    {
+      name: 'roles',
+      type: 'select',
+      required: true,
+      saveToJWT: true,
+      options: [
+        { label: 'Admin', value: 'admin' },
+        { label: 'Teacher', value: 'teacher' },
+      ],
+      defaultValue: 'teacher',
+    },
   ],
+  hooks: {},
 }

@@ -71,6 +71,9 @@ export interface Config {
     media: Media;
     documents: Document;
     portraits: Portrait;
+    'delegation-applications': DelegationApplication;
+    delegations: Delegation;
+    delegates: Delegate;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +85,9 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     portraits: PortraitsSelect<false> | PortraitsSelect<true>;
+    'delegation-applications': DelegationApplicationsSelect<false> | DelegationApplicationsSelect<true>;
+    delegations: DelegationsSelect<false> | DelegationsSelect<true>;
+    delegates: DelegatesSelect<false> | DelegatesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -126,6 +132,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  roles: 'admin' | 'teacher';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -145,6 +152,8 @@ export interface User {
   password?: string | null;
 }
 /**
+ * Media
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -164,6 +173,8 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Media
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "documents".
  */
@@ -184,6 +195,8 @@ export interface Document {
   focalY?: number | null;
 }
 /**
+ * Media
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "portraits".
  */
@@ -201,6 +214,56 @@ export interface Portrait {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delegation-applications".
+ */
+export interface DelegationApplication {
+  id: number;
+  user: number | User;
+  delegationName: string;
+  countryOfOrigin: string;
+  numberOfDelegates: number;
+  numberOfFacultyAdvisors: number;
+  previousExperience: string;
+  hmunExperience: string;
+  preferredRegions?: string | null;
+  prefersDoubleDelegations: 'yes' | 'no';
+  crisisCommitteeRequests?: string | null;
+  committeeInterests: 'advanced' | 'press' | 'novice' | 'spanish';
+  status?: ('pending' | 'approved' | 'rejected') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delegations".
+ */
+export interface Delegation {
+  id: number;
+  teacher: number | User;
+  application: number | DelegationApplication;
+  name: string;
+  maxDelegates: number;
+  year: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delegates".
+ */
+export interface Delegate {
+  id: number;
+  teacher: number | User;
+  delegation: number | Delegation;
+  firstName: string;
+  lastName: string;
+  email: string;
+  paymentStatus?: ('unpaid' | 'paid') | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -241,6 +304,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'portraits';
         value: number | Portrait;
+      } | null)
+    | ({
+        relationTo: 'delegation-applications';
+        value: number | DelegationApplication;
+      } | null)
+    | ({
+        relationTo: 'delegations';
+        value: number | Delegation;
+      } | null)
+    | ({
+        relationTo: 'delegates';
+        value: number | Delegate;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -289,6 +364,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -360,6 +436,53 @@ export interface PortraitsSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delegation-applications_select".
+ */
+export interface DelegationApplicationsSelect<T extends boolean = true> {
+  user?: T;
+  delegationName?: T;
+  countryOfOrigin?: T;
+  numberOfDelegates?: T;
+  numberOfFacultyAdvisors?: T;
+  previousExperience?: T;
+  hmunExperience?: T;
+  preferredRegions?: T;
+  prefersDoubleDelegations?: T;
+  crisisCommitteeRequests?: T;
+  committeeInterests?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delegations_select".
+ */
+export interface DelegationsSelect<T extends boolean = true> {
+  teacher?: T;
+  application?: T;
+  name?: T;
+  maxDelegates?: T;
+  year?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delegates_select".
+ */
+export interface DelegatesSelect<T extends boolean = true> {
+  teacher?: T;
+  delegation?: T;
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  paymentStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

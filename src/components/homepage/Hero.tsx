@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import { IoIosArrowForward } from "react-icons/io";
 import { SiUnitednations } from "react-icons/si";
-import Image from 'next/image';
 
 export default function Hero() {
   return (

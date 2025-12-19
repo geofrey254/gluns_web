@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { IoIosArrowForward } from "react-icons/io";
-import { SiUnitednations } from "react-icons/si";
+import { IoIosArrowForward } from 'react-icons/io'
+import { SiUnitednations } from 'react-icons/si'
 
 export default function Hero() {
   return (
@@ -13,9 +13,11 @@ export default function Hero() {
 
       <div className="relative z-10 w-full md:max-w-2xl lg:max-w-3xl 2xl:max-w-5xl py-20">
         <h3 className="text-[#ffffff] font-semibold text-xl 2xl:text-3xl flex items-center">
-            <span>
-                <SiUnitednations className="inline-block mr-2 text-3xl 2xl:text-4xl mb-1" />
-            </span>Welcome to GLUNS</h3>
+          <span>
+            <SiUnitednations className="inline-block mr-2 text-3xl 2xl:text-4xl mb-1" />
+          </span>
+          Welcome to GLUNS
+        </h3>
         <h1 className="text-5xl md:text-6xl lg:text-7xl 2xl:text-[8rem] font-bold text-white text-left z-10">
           Empowering the Next Generation of <span className="text-[#ffffff]">Global Leaders</span>
         </h1>
@@ -42,22 +44,23 @@ export default function Hero() {
         </div>
 
         {/* cta buttons */}
-        <div className='flex items-center gap-8'>
+        <div className="flex items-center gap-8">
           <Link
-            href="/registration"
-            className="mt-8 inline-block relative overflow-hidden border border-[#ffffff] text-[#ffffff] px-6 md:px-8 py-3 font-semibold rounded-md transition-colors duration-300 before:absolute before:inset-0 before:bg-[#ffffff] before:translate-y-full before:transition-transform before:duration-300 hover:before:translate-y-0 hover:text-[#104179]">
+            href="/delegation-portal"
+            className="mt-8 inline-block relative overflow-hidden border border-[#ffffff] text-[#ffffff] px-6 md:px-8 py-3 font-semibold rounded-md transition-colors duration-300 before:absolute before:inset-0 before:bg-[#ffffff] before:translate-y-full before:transition-transform before:duration-300 hover:before:translate-y-0 hover:text-[#104179]"
+          >
             <span className="relative z-10 text-lg md:text-xl 2xl:text-2xl">Delegation Portal</span>
           </Link>
 
           <Link
             href="/about"
-            className='text-white inline-block mt-8 font-semibold border-b-2 border-white pb-1 hover:scale-105 transition-all duration-300'>
+            className="text-white inline-block mt-8 font-semibold border-b-2 border-white pb-1 hover:scale-105 transition-all duration-300"
+          >
             <span className="relative z-10 text-lg md:text-xl 2xl:text-2xl">Learn More</span>
             <IoIosArrowForward className="inline-block ml-2 relative z-10 text-lg md:text-xl" />
           </Link>
         </div>
       </div>
-
     </section>
   )
 }

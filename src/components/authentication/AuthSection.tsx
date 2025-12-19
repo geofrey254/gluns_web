@@ -34,6 +34,9 @@ export default function AuthSection() {
         {/* Right side - Auth form */}
         <div className="bg-[#104179] relative md:min-h-screen flex flex-col justify-center items-center py-12 sm:p-8 lg:p-12">
           <div className="w-full max-w-md">
+            <div className="w-28 h-28 flex md:hidden items-center justify-center mx-auto mb-4">
+              <Image src="/logos/4.png" alt="GLUNS logo" width={500} height={500} />
+            </div>
             {/* Toggle buttons */}
             <div className="flex gap-2 mb-8 bg-white/10 p-1 rounded-lg">
               <button

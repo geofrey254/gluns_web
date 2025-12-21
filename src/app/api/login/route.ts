@@ -16,5 +16,12 @@ export async function POST(req: Request) {
     return NextResponse.json(data, { status: 401 })
   }
 
-  return NextResponse.json(data)
+  const cookie = payloadRes.headers.get('set-cookie')
+
+  const response = NextResponse.json(data)
+  if (cookie) {
+    response.headers.set('set-cookie', cookie)
+  }
+
+  return response
 }

@@ -162,7 +162,7 @@ export default function DelegationPortal() {
   }
 
   return (
-    <section className="bg-linear-to-br from-gray-50 to-gray-100 p-8">
+    <section className="h-[80vh] md:min-h-[140vh] bg-linear-to-br from-gray-50 to-gray-100 p-8">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold">Delegation Portal</h2>

@@ -2,15 +2,24 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useAuthStore } from '@/app/store/authStore'
+import { useEffect } from 'react'
 
 export default function AuthSection() {
   const router = useRouter()
+  const user = useAuthStore((s) => s.user) // get current user
+
   const [loading, setLoading] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [delegationName, setDelegationName] = useState('')
+  const setUser = useAuthStore((s) => s.setUser)
+
+  useEffect(() => {
+    if (user) router.push('/delegation-portal')
+  }, [user, router])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -23,6 +32,8 @@ export default function AuthSection() {
       if (!isLogin) {
         if (password !== confirmPassword) {
           alert('Passwords do not match')
+          setLoading(false)
+
           return
         }
 
@@ -38,6 +49,9 @@ export default function AuthSection() {
           return
         }
 
+        const data = await res.json()
+        setUser(data.user)
+
         router.push('/delegation-portal')
         return
       }
@@ -52,6 +66,9 @@ export default function AuthSection() {
         alert('Invalid credentials')
         return
       }
+
+      const data = await res.json()
+      setUser(data.user)
 
       router.push('/delegation-portal')
     } finally {

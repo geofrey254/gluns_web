@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { enforceDelegateOwnership } from './hooks/DelegateOwnership'
 
 export const Delegates: CollectionConfig = {
   slug: 'delegates',
@@ -8,7 +9,10 @@ export const Delegates: CollectionConfig = {
   access: {
     read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
     create: ({ req }) => req.user?.roles === 'teacher',
-    update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data.teacher,
+    update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
+  },
+  hooks: {
+    beforeChange: [enforceDelegateOwnership],
   },
   fields: [
     {
@@ -21,6 +25,7 @@ export const Delegates: CollectionConfig = {
       name: 'delegation',
       type: 'relationship',
       relationTo: 'delegations',
+
       required: true,
     },
     {

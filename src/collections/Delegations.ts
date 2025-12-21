@@ -6,10 +6,14 @@ export const Delegations: CollectionConfig = {
     useAsTitle: 'name',
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    create: ({ req }) => req.user?.roles === 'admin',
-    update: ({ req }) => req.user?.roles === 'admin',
+    read: ({ req }) =>
+      !!(req.user?.roles?.includes('admin') || req.user?.roles?.includes('teacher')),
+
+    create: ({ req }) => !!req.user?.roles?.includes('admin'),
+
+    update: ({ req }) => !!req.user?.roles?.includes('admin'),
   },
+
   fields: [
     {
       name: 'teacher',
@@ -22,6 +26,7 @@ export const Delegations: CollectionConfig = {
       type: 'relationship',
       relationTo: 'delegation-applications',
       required: true,
+      unique: true,
     },
     {
       name: 'name',

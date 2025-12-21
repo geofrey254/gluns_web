@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { createDelegationOnApproval } from './hooks/DelegationCreate'
 
 export const DelegationApplications: CollectionConfig = {
   slug: 'delegation-applications',
@@ -8,7 +9,10 @@ export const DelegationApplications: CollectionConfig = {
   access: {
     create: ({ req }) => req.user?.roles === 'teacher',
     read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data.user,
+    update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.user,
+  },
+  hooks: {
+    afterChange: [createDelegationOnApproval],
   },
   fields: [
     {

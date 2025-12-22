@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaUsers } from 'react-icons/fa6'
-import { HiArrowRight } from "react-icons/hi2";
+import { HiArrowRight } from 'react-icons/hi2'
 
 const committees = [
   {
@@ -12,7 +12,7 @@ const committees = [
       'Oversees international peace and security, addressing conflicts, sanctions, and resolutions to maintain global stability.',
     image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80',
     link: '/committees/security-council',
-    color: 'from-blue-600 to-blue-400',
+    color: 'from-[#104179] to-blue-400',
   },
   {
     id: 2,
@@ -50,12 +50,11 @@ const committees = [
     link: '/committees/environment',
     color: 'from-green-600 to-green-400',
   },
-];
+]
 
 export default function CommitteeList() {
   return (
     <section className="relative bg-white min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 lg:px-16 py-8 md:py-12 overflow-hidden">
-      
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#104179]/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -70,13 +69,13 @@ export default function CommitteeList() {
           >
             {/* Image Container with Overlay */}
             <div className="relative w-full h-56 overflow-hidden">
-              <Image 
-                src={committee.image} 
-                alt={committee.name} 
-                fill 
-                className="object-cover group-hover:scale-110 transition-transform duration-700" 
+              <Image
+                src={committee.image}
+                alt={committee.name}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              
+
               {/* Icon Badge */}
               <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                 <FaUsers className="text-[#104179] text-xl" />
@@ -88,7 +87,7 @@ export default function CommitteeList() {
               <h3 className="text-2xl md:text-3xl font-bold text-[#104179] leading-tight">
                 {committee.name}
               </h3>
-              
+
               <p className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3">
                 {committee.description}
               </p>
@@ -102,7 +101,6 @@ export default function CommitteeList() {
                 <HiArrowRight className="text-xl group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </div>
-
           </div>
         ))}
       </div>
@@ -110,16 +108,17 @@ export default function CommitteeList() {
       {/* Call to Action Section */}
       <div className="max-w-4xl mx-auto mt-20 text-center bg-[#104179] rounded-3xl p-10 md:p-16 shadow-2xl relative overflow-hidden">
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        
+
         <div className="relative z-10">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Join a Committee?
           </h3>
           <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-            Take the first step towards becoming a global leader. Register for our upcoming conference and choose your committee.
+            Take the first step towards becoming a global leader. Register for our upcoming
+            conference and choose your committee.
           </p>
-          <Link 
-            href="/register" 
+          <Link
+            href="/register"
             className="inline-flex items-center gap-3 bg-white text-[#104179] px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-xl"
           >
             Register Now

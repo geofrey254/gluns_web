@@ -16,10 +16,13 @@ import {
   Briefcase,
   Upload,
   Menu,
+  Pencil,
+  Trash2,
 } from 'lucide-react'
 import { Sidebar } from './Sidebar'
 import DelegateForm from './DelegateForm'
 import FacultyForm from './FacultyForm'
+import { FacultyAdvisor } from '@/app/types/types'
 
 type Delegation = {
   id?: string
@@ -63,12 +66,33 @@ export default function DelegationPortal() {
 
   const [delegation, setDelegation] = useState<Delegation | null>(null)
   const [formData, setFormData] = useState<Delegation>(EMPTY_DELEGATION)
+  const [facultyAdvisors, setFacultyAdvisors] = useState<FacultyAdvisor[]>([])
 
   const steps = [
     { title: 'Basic Info', icon: Users },
     { title: 'Experience', icon: FileText },
     { title: 'Preferences', icon: Globe },
   ]
+
+  useEffect(() => {
+    const hydrate = async () => {
+      try {
+        const res = await fetch('/api/me', { cache: 'no-store' })
+
+        if (!res.ok) {
+          setUser(null)
+          return
+        }
+
+        const { user } = await res.json()
+        setUser(user)
+      } finally {
+        setFetching(false)
+      }
+    }
+
+    hydrate()
+  }, [setUser])
 
   useEffect(() => {
     if (!fetching && !user) {
@@ -174,6 +198,27 @@ export default function DelegationPortal() {
     }
   }
 
+  const handleDelete = async (advisorId: string) => {
+    try {
+      const res = await fetch(`/api/faculty-advisors/${advisorId}`, {
+        method: 'DELETE',
+      })
+
+      if (res.status === 200) {
+        // Remove the deleted advisor from the state
+        setFacultyAdvisors((prevAdvisors) =>
+          prevAdvisors.filter((advisor) => advisor.id?.toString() !== advisorId),
+        )
+      } else if (res.status === 401) {
+        console.error('Unauthorized to delete faculty advisor')
+      } else {
+        console.error('Failed to delete faculty advisor')
+      }
+    } catch (error) {
+      console.error('Error deleting faculty advisor:', error)
+    }
+  }
+
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1)
@@ -185,6 +230,36 @@ export default function DelegationPortal() {
       setCurrentStep(currentStep - 1)
     }
   }
+
+  // get faculty advisors list from delegation id
+
+  useEffect(() => {
+    if (!user || !delegation?.id) {
+      setFacultyAdvisors([])
+      return
+    }
+
+    const fetchFacultyAdvisors = async () => {
+      try {
+        const res = await fetch(`/api/faculty-advisors`)
+
+        if (res.status === 401) {
+          setUser(null)
+          return
+        }
+
+        const data = await res.json()
+
+        if (data.facultyAdvisor) {
+          setFacultyAdvisors([data.facultyAdvisor])
+        }
+      } catch (error) {
+        console.error('Failed to fetch faculty advisors', error)
+      }
+    }
+
+    fetchFacultyAdvisors()
+  }, [user, delegation?.id, setUser])
 
   if (fetching) {
     return (
@@ -590,9 +665,57 @@ export default function DelegationPortal() {
               <div className="text-center py-12">
                 <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Faculty Advisors</h3>
-                <p className="text-gray-600 mb-6">
-                  Add information about your faculty advisors accompanying the delegation.
-                </p>
+                {/* list of faculty advisors  */}
+                {facultyAdvisors.length > 0 ? (
+                  <div className="mb-6">
+                    <p className="text-gray-600 mb-4">
+                      You have added the following faculty advisors:
+                    </p>
+                    <ul className="divide-y">
+                      {facultyAdvisors.map((advisor) => (
+                        <li
+                          key={advisor.id}
+                          className="flex items-center justify-between px-4 py-3 text-sm"
+                        >
+                          {/* Left side: info in one line */}
+                          <div className="flex items-center gap-6 min-w-0">
+                            <span className="font-medium text-lg text-gray-900 whitespace-nowrap">
+                              {advisor.firstName} {advisor.lastName}
+                            </span>
+
+                            <span className="text-gray-600 text-lg truncate max-w-[220px]">
+                              {advisor.email}
+                            </span>
+
+                            <span className="text-gray-600 text-lg whitespace-nowrap">
+                              {advisor.phoneNumber}
+                            </span>
+                          </div>
+
+                          {/* Right side: actions */}
+                          <div className="flex gap-2 shrink-0">
+                            <button
+                              className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                              aria-label="Edit advisor"
+                            >
+                              <Pencil className="w-4 h-4" />
+                            </button>
+
+                            <button
+                              onClick={() => handleDelete(advisor.id!.toString())}
+                              className="p-2 text-red-600 hover:bg-red-50 rounded"
+                              aria-label="Delete advisor"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <p className="text-gray-600 mb-6">You have not added any faculty advisors yet.</p>
+                )}
                 <FacultyForm />
               </div>
             </div>

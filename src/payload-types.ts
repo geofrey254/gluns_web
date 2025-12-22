@@ -74,6 +74,7 @@ export interface Config {
     'delegation-applications': DelegationApplication;
     delegations: Delegation;
     delegates: Delegate;
+    'faculty-advisors': FacultyAdvisor;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     'delegation-applications': DelegationApplicationsSelect<false> | DelegationApplicationsSelect<true>;
     delegations: DelegationsSelect<false> | DelegationsSelect<true>;
     delegates: DelegatesSelect<false> | DelegatesSelect<true>;
+    'faculty-advisors': FacultyAdvisorsSelect<false> | FacultyAdvisorsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -269,6 +271,20 @@ export interface Delegate {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faculty-advisors".
+ */
+export interface FacultyAdvisor {
+  id: number;
+  teacher?: (number | null) | User;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -318,6 +334,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'delegates';
         value: number | Delegate;
+      } | null)
+    | ({
+        relationTo: 'faculty-advisors';
+        value: number | FacultyAdvisor;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -485,6 +505,19 @@ export interface DelegatesSelect<T extends boolean = true> {
   email?: T;
   phoneNumber?: T;
   paymentStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faculty-advisors_select".
+ */
+export interface FacultyAdvisorsSelect<T extends boolean = true> {
+  teacher?: T;
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  phoneNumber?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -14,6 +14,8 @@ import { DelegationApplications } from './collections/DelegationApplication'
 import { Delegations } from './collections/Delegations'
 import { Delegates } from './collections/Delegates'
 
+import { Faculty } from './collections/Faculty'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -24,7 +26,16 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Documents, Portraits, DelegationApplications, Delegations, Delegates],
+  collections: [
+    Users,
+    Media,
+    Documents,
+    Portraits,
+    DelegationApplications,
+    Delegations,
+    Delegates,
+    Faculty,
+  ],
   serverURL: 'http://localhost:3000',
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -9,7 +9,7 @@ export const Users: CollectionConfig = {
   auth: true,
   access: {
     create: () => true,
-    read: canUpdateUser,
+    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
     delete: canUpdateUser,
   },
   fields: [
@@ -33,5 +33,4 @@ export const Users: CollectionConfig = {
       },
     },
   ],
-  hooks: {},
 }

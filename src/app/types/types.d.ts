@@ -16,3 +16,11 @@ export interface FacultyAdvisor {
   email: string
   phoneNumber: string
 }
+
+export interface Delegation {
+  id?: number
+  country: string
+  school: string
+  delegates: Delegate[]
+  facultyAdvisors: FacultyAdvisor[]
+}

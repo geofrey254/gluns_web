@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuthStore } from '@/app/store/authStore'
 import {
   ChevronRight,
   LogOut,
@@ -26,6 +25,12 @@ import FacultyForm from './FacultyForm'
 import { Delegate, FacultyAdvisor } from '@/app/types/types'
 import PaymentForm from '../payment/PaymentForm'
 import { Button } from '@/components/ui/button'
+
+// hooks
+import { useAuthGate } from '../hooks/useAuthGate'
+import { useFacultyAdvisors } from '../hooks/useFacultyAdvisors'
+import { apiFetch } from '@/app/utils/apiFetch'
+import { usePaymentAndDelegate } from '../hooks/usePaymentAndDelegate'
 
 type Delegation = {
   id?: string
@@ -58,7 +63,6 @@ const EMPTY_DELEGATION: Delegation = {
 
 export default function DelegationPortal() {
   const router = useRouter()
-  const { user, logout, setUser } = useAuthStore()
 
   const [fetching, setFetching] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -66,20 +70,21 @@ export default function DelegationPortal() {
   const [currentStep, setCurrentStep] = useState(0)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('application')
-  const [authReady, setAuthReady] = useState(false)
 
   const [editingAdvisor, setEditingAdvisor] = useState<FacultyAdvisor | null>(null)
   const [showFacultyForm, setShowFacultyForm] = useState(false)
 
   const [delegation, setDelegation] = useState<Delegation | null>(null)
   const [formData, setFormData] = useState<Delegation>(EMPTY_DELEGATION)
-  const [facultyAdvisors, setFacultyAdvisors] = useState<FacultyAdvisor[]>([])
   const maxAdvisors = formData.numberOfFacultyAdvisors
-  const advisorCount = facultyAdvisors.length
-  const canAddAdvisor = advisorCount < maxAdvisors
 
   const [editingDelegate, setEditingDelegate] = useState<Delegate | null>(null)
   const [showDelegateForm, setShowDelegateForm] = useState(false)
+
+  // check payment status
+
+  // hooks
+  const { user, checkingAuth, logout: authLogout } = useAuthGate()
 
   const steps = [
     { title: 'Basic Info', icon: Users },
@@ -88,42 +93,17 @@ export default function DelegationPortal() {
   ]
 
   useEffect(() => {
-    const hydrate = async () => {
-      try {
-        const res = await fetch('/api/me', { cache: 'no-store' })
-        if (!res.ok) {
-          setUser(null)
-          return
-        }
-        const { user } = await res.json()
-        setUser(user)
-      } finally {
-        setAuthReady(true)
-      }
-    }
-
-    hydrate()
-  }, [])
-
-  useEffect(() => {
-    if (authReady && !user) {
+    if (!checkingAuth && !user) {
       router.replace('/signup')
     }
-  }, [authReady, user])
+  }, [checkingAuth, user, router])
 
   useEffect(() => {
-    if (!user) {
-      setFetching(false)
-      return
-    }
+    if (!user) return
 
     const fetchDelegation = async () => {
       try {
-        const res = await fetch('/api/delegation')
-
-        if (res.status === 401) {
-          return
-        }
+        const res = await apiFetch('/api/delegation')
 
         const data = await res.json()
 
@@ -142,14 +122,37 @@ export default function DelegationPortal() {
     }
 
     fetchDelegation()
-  }, [user, setUser])
+  }, [user])
 
+  // --------------------------
+  // FETCH FACULTY ADVISORS
+  // --------------------------
+
+  const {
+    facultyAdvisors,
+    setFacultyAdvisors,
+    fetching: fetchingAdvisors,
+  } = useFacultyAdvisors(user, delegation)
+
+  const advisorCount = facultyAdvisors.length
+  const canAddAdvisor = advisorCount < maxAdvisors
+  const loading = fetching || fetchingAdvisors
+
+  // --------------------------
+  // FETCH PAYMENT & DELEGATES
+  // --------------------------
+
+  const { paymentStatus, delegates, setDelegates, setPaymentStatus } = usePaymentAndDelegate(
+    user,
+    delegation,
+  )
+  // --------------------------
+  // HANDLERS
+  // --------------------------
   const handleLogout = async () => {
     setLoggingOut(true)
     try {
-      await logout()
-      setDelegation(null)
-      setFormData(EMPTY_DELEGATION)
+      await authLogout()
       router.replace('/signup')
     } finally {
       setLoggingOut(false)
@@ -175,32 +178,25 @@ export default function DelegationPortal() {
     }
 
     setSaving(true)
-
     try {
       const method = delegation?.id ? 'PATCH' : 'POST'
       const url = delegation?.id ? `/api/delegation/${delegation.id}` : '/api/delegation'
 
-      const res = await fetch(url, {
+      const res = await apiFetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
 
-      if (res.status === 401) {
-        setUser(null)
-        return
-      }
-
-      const data = await res.json()
-
       if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
         throw new Error(data.message || 'Failed to save delegation')
       }
 
+      const data = await res.json()
       setDelegation(data)
       setFormData(data)
       alert('Delegation saved successfully')
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.message)
     } finally {
@@ -210,130 +206,54 @@ export default function DelegationPortal() {
 
   const handleDelete = async (advisorId: string) => {
     try {
-      const res = await fetch(`/api/faculty-advisors/${advisorId}`, {
-        method: 'DELETE',
-      })
+      await apiFetch(`/api/faculty-advisors/${advisorId}`, { method: 'DELETE' })
+      setFacultyAdvisors((prev) => prev.filter((a) => a.id?.toString() !== advisorId))
+    } catch (err) {
+      console.error('Failed to delete faculty advisor', err)
+    }
+  }
 
-      if (res.status === 200) {
-        // Remove the deleted advisor from the state
-        setFacultyAdvisors((prevAdvisors) =>
-          prevAdvisors.filter((advisor) => advisor.id?.toString() !== advisorId),
-        )
-      } else if (res.status === 401) {
-        console.error('Unauthorized to delete faculty advisor')
-      } else {
-        console.error('Failed to delete faculty advisor')
-      }
-    } catch (error) {
-      console.error('Error deleting faculty advisor:', error)
+  const handleDeleteDelegate = async (delegateId: string) => {
+    try {
+      await apiFetch(`/api/delegates/${delegateId}`, { method: 'DELETE' })
+      setDelegates((prev) => prev.filter((d) => d.id?.toString() !== delegateId))
+    } catch (err) {
+      console.error('Failed to delete delegate', err)
     }
   }
 
   const nextStep = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1)
-    }
+    if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1)
   }
 
   const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1)
-    }
+    if (currentStep > 0) setCurrentStep(currentStep - 1)
   }
 
-  // check payment status
-  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'paid' | 'failed'>('pending')
-  const [delegates, setDelegates] = useState<Delegate[]>([]) // replace any with your delegate type
-
-  // Fetch payment status and delegates
-  // Fetch payment status and delegates
-  useEffect(() => {
-    if (!delegation?.id || !user) return
-
-    const fetchPaymentAndDelegates = async () => {
-      try {
-        // 1. Fetch total paid slots
-        const paymentRes = await fetch(`/api/payments?teacherId=${user.id}`)
-        const paymentData = await paymentRes.json()
-
-        const totalPaidSlots = paymentData.totalPaidSlots || 0
-        setPaymentStatus(totalPaidSlots > 0 ? 'paid' : 'pending')
-
-        // 2. Fetch delegates only if at least 1 slot is paid
-        if (totalPaidSlots > 0) {
-          const delegatesRes = await fetch(`/api/delegates?delegationId=${delegation.id}`)
-          const delegatesData = await delegatesRes.json()
-          setDelegates(delegatesData.delegates || [])
-        }
-      } catch (err) {
-        console.error('Failed to fetch payment or delegates', err)
-      }
-    }
-
-    fetchPaymentAndDelegates()
-  }, [delegation?.id, user])
-
-  // delete delegate
-  const handleDeleteDelegate = async (delegateId: string) => {
-    try {
-      const res = await fetch(`/api/delegates/${delegateId}`, {
-        method: 'DELETE',
-      })
-      if (res.status === 200) {
-        setDelegates((prev) => prev.filter((d) => d.id?.toString() !== delegateId))
-      } else if (res.status === 401) {
-        console.error('Unauthorized to delete delegate')
-      } else {
-        console.error('Failed to delete delegate')
-      }
-    } catch (error) {
-      console.error('Error deleting delegate:', error)
-    }
-  }
-
-  // get faculty advisors list from delegation id
-
-  useEffect(() => {
-    if (!user || !delegation?.id) {
-      setFacultyAdvisors([])
-      return
-    }
-
-    const fetchFacultyAdvisors = async () => {
-      try {
-        const res = await fetch('/api/faculty-advisors')
-
-        if (res.status === 401) {
-          setUser(null)
-          return
-        }
-
-        const data = await res.json()
-
-        if (Array.isArray(data.facultyAdvisors)) {
-          setFacultyAdvisors(data.facultyAdvisors)
-        }
-      } catch (error) {
-        console.error('Failed to fetch faculty advisors', error)
-      }
-    }
-
-    fetchFacultyAdvisors()
-  }, [user, delegation?.id, setUser])
-
-  if (fetching) {
+  if (checkingAuth || loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#104179] mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading your delegation...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#104179]" />
       </div>
     )
   }
 
   if (!user) {
     return null
+  }
+
+  // --------------------------
+  // LOADING GATE
+  // --------------------------
+  if (fetching) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#104179] mb-4"></div>
+          <p className="text-gray-600 text-lg">Loading your delegation...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -725,7 +645,11 @@ export default function DelegationPortal() {
                     numberOfDelegates={formData.numberOfDelegates}
                     teacherId={user.id}
                     delegationId={delegation.id}
-                    onPaymentSuccess={() => setPaymentStatus('paid')}
+                    onPaymentSuccess={async () => {
+                      const res = await apiFetch(`/api/payments?delegationId=${delegation.id}`)
+                      const data = await res.json()
+                      setPaymentStatus(data.paymentStatus)
+                    }}
                   />
                 ) : (
                   <>

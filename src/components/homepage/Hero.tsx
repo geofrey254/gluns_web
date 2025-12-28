@@ -38,7 +38,7 @@ export default function Hero() {
             <div className="text-sm md:text-base 2xl:text-xl text-white/70">Schools</div>
           </div>
           <div className="space-y-2">
-            <div className="text-4xl md:text-5xl font-bold text-white">20+</div>
+            <div className="text-4xl md:text-5xl font-bold text-white">5+</div>
             <div className="text-sm md:text-base 2xl:text-xl text-white/70">Committees</div>
           </div>
         </div>

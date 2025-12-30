@@ -1,12 +1,9 @@
 'use client'
 import React from 'react'
-import { MdHealthAndSafety } from 'react-icons/md'
-import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { GrLinkNext } from 'react-icons/gr'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaUsers } from 'react-icons/fa6'
-import { HiArrowRight } from 'react-icons/hi'
 
 export default function Committee() {
   const committees = [

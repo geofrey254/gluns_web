@@ -39,7 +39,7 @@ export default buildConfig({
     Faculty,
     Payments,
   ],
-  serverURL: 'http://localhost:3000',
+  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

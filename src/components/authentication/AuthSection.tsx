@@ -77,7 +77,7 @@ export default function AuthSection() {
   }
 
   return (
-    <section className="h-[86vh] md:min-h-[140vh] 2xl:min-h-screen bg-[#104179]">
+    <section className="h-auto md:min-h-[140vh] 2xl:min-h-screen bg-[#104179]">
       <div className="grid grid-cols-1 lg:grid-cols-2 md:min-h-[140vh] 2xl:min-h-screen">
         {/* Left side - Logo and branding */}
         <div className="relative hidden lg:flex flex-col justify-center items-center p-8 bg-[url('/images/hero.jpg')] bg-bottom bg-cover">
@@ -220,7 +220,7 @@ export default function AuthSection() {
             </form>
 
             {/* Additional info */}
-            <p className="text-center text-white/50 text-sm mt-6">
+            <p className="text-center text-white/50 text-sm mt-6 mb-12">
               {isLogin ? (
                 <>
                   Don{"'"}t have an account?{' '}

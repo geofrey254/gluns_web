@@ -6,13 +6,13 @@ import ContactCTA from '@/components/contactpage/ContactCTA'
 
 export default function page() {
   return (
-   <>
-   <ContactHero/>
+    <>
+      <ContactHero />
 
-    {/* Main Content */}
+      {/* Main Content */}
       <div className="py-10 md:py-12 -mt-6 md:-mt-7 bg-white rounded-t-4xl relative z-30 overflow-hidden">
         <section className="relative">
-          <div className="max-w-7xl mx-auto px-10 md:px-12 lg:px-12">
+          <div className="max-w-7xl 2xl:max-w-full mx-auto px-10 md:px-12 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
               <ContactForm />
               <ContactInfo />
@@ -21,7 +21,7 @@ export default function page() {
         </section>
       </div>
 
-      <ContactCTA/>
-   </>
+      <ContactCTA />
+    </>
   )
 }

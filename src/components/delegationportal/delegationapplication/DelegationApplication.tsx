@@ -269,7 +269,7 @@ export default function DelegationPortal() {
 
       {/* Main Content */}
       <div className="flex-1 py-6 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl 2xl:max-w-full mx-auto">
           {/* Header */}
           <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

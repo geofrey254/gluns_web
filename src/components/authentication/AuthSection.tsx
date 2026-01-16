@@ -99,7 +99,7 @@ export default function AuthSection() {
 
         {/* Right side - Auth form */}
         <div className="bg-[#104179] relative md:min-h-screen flex flex-col justify-center items-center py-6 px-8 md:px-12 md:py-12">
-          <div className="w-full max-w-md">
+          <div className="w-full max-w-md 2xl:max-w-3xl">
             <div className="w-28 h-28 flex md:hidden items-center justify-center mx-auto mb-4">
               <Image src="/logos/4.png" alt="GLUNS logo" width={500} height={500} />
             </div>

@@ -41,10 +41,15 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const payload = await getPayload({ config })
 
-  // 1️⃣ Authenticate user
+  // Authenticate user
   const { user } = await payload.auth({ headers: req.headers })
   if (!user) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
+  if (user.collection !== 'users') {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+  }
+
+  // Now TypeScript knows `roles` exists
   if (user.roles !== 'teacher') {
     return NextResponse.json({ message: 'Only teachers can add delegates' }, { status: 403 })
   }

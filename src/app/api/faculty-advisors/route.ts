@@ -52,6 +52,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
+  if (user.collection !== 'users') {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+  }
+
   if (user.roles !== 'teacher') {
     return NextResponse.json(
       { message: 'Only teachers can create faculty advisors' },

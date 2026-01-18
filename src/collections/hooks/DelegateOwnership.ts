@@ -23,7 +23,7 @@ export const enforceDelegateOwnership: CollectionBeforeChangeHook = async ({
   })
 
   // Ownership check first
-  if (delegation.teacher !== req.user.id && !req.user.roles?.includes('admin')) {
+  if (delegation.teacher !== req.user.id) {
     throw new Error('You do not own this delegation')
   }
 

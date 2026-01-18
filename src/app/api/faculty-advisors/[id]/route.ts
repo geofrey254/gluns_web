@@ -30,7 +30,12 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     }
 
     // Extract teacher ID (handle both populated and non-populated relationship)
+
     const teacherId = typeof existing.teacher === 'object' ? existing.teacher?.id : existing.teacher
+
+    if (user.collection !== 'users') {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+    }
 
     // Check authorization: admin or owner
     if (user.roles !== 'admin' && teacherId !== user.id) {
@@ -88,6 +93,10 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     }
 
     const teacherId = typeof existing.teacher === 'object' ? existing.teacher?.id : existing.teacher
+
+    if (user.collection !== 'users') {
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+    }
 
     if (user.roles !== 'admin' && teacherId !== user.id) {
       return NextResponse.json({ message: 'Forbidden' }, { status: 403 })

@@ -33,7 +33,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     const teacherId = typeof existing.teacher === 'object' ? existing.teacher?.id : existing.teacher
 
     // Check authorization: admin or owner
-    if (user.roles !== 'admin' && teacherId !== user.id) {
+    if (teacherId !== user.id) {
       return NextResponse.json(
         { message: 'Forbidden: You can only update your own delegate' },
         { status: 403 },
@@ -89,7 +89,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
 
     const teacherId = typeof existing.teacher === 'object' ? existing.teacher?.id : existing.teacher
 
-    if (user.roles !== 'admin' && teacherId !== user.id) {
+    if (teacherId !== user.id) {
       return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
     }
 

@@ -1,5 +1,7 @@
 // collections/Faculty.ts
 import { CollectionConfig } from 'payload'
+import { isTeacher } from './access/isTeacher'
+import { adminOrOwnTeacher } from './access/isAdminOrOwnTeacher'
 
 export const Faculty: CollectionConfig = {
   slug: 'faculty-advisors',
@@ -11,19 +13,10 @@ export const Faculty: CollectionConfig = {
     useAsTitle: 'email',
   },
   access: {
-    read: ({ req }) => {
-      if (!req.user) return false
-      return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
-    },
-    create: ({ req }) => req.user?.roles === 'teacher',
-    update: ({ req }) => {
-      if (!req.user) return false
-      return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
-    },
-    delete: ({ req }) => {
-      if (!req.user) return false
-      return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
-    },
+    read: adminOrOwnTeacher,
+    update: adminOrOwnTeacher,
+    delete: adminOrOwnTeacher,
+    create: isTeacher,
   },
 
   fields: [

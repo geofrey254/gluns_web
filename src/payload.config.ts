@@ -6,6 +6,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { Admins } from './collections/Admins'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Documents } from './collections/Documents'
@@ -25,12 +26,14 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: 'admins',
+
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
   collections: [
+    Admins,
     Users,
     Media,
     Documents,
@@ -42,7 +45,7 @@ export default buildConfig({
     Payments,
     Blog,
   ],
-  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
+  serverURL: process.env.NEXT_PUBLIC_BASE_URL,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -54,7 +57,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [
-    // storage-adapter-placeholder
-  ],
+  plugins: [],
 })

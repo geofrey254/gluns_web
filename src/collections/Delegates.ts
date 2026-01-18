@@ -1,6 +1,9 @@
 import { CollectionConfig } from 'payload'
 import { enforceDelegateOwnership } from './hooks/DelegateOwnership'
 import { ensurePaidSlots } from './hooks/EnsurePaidSlots'
+import { isAdmin } from './access/isAdmin'
+import { isTeacher } from './access/isTeacher'
+import { adminOrOwnTeacher } from './access/isAdminOrOwnTeacher'
 
 export const Delegates: CollectionConfig = {
   slug: 'delegates',
@@ -8,9 +11,11 @@ export const Delegates: CollectionConfig = {
     useAsTitle: 'email',
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    create: ({ req }) => req.user?.roles === 'teacher',
-    update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
+    read: (args) => isAdmin(args) || isTeacher(args),
+
+    create: isTeacher,
+
+    update: adminOrOwnTeacher,
   },
   hooks: {
     beforeChange: [enforceDelegateOwnership, ensurePaidSlots],

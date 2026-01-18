@@ -1,4 +1,6 @@
 import { CollectionConfig } from 'payload'
+import { isAdmin } from './access/isAdmin'
+import { isTeacher } from './access/isTeacher'
 
 export const Delegations: CollectionConfig = {
   slug: 'delegations',
@@ -6,14 +8,10 @@ export const Delegations: CollectionConfig = {
     useAsTitle: 'name',
   },
   access: {
-    read: ({ req }) =>
-      !!(req.user?.roles?.includes('admin') || req.user?.roles?.includes('teacher')),
-
-    create: ({ req }) => !!req.user?.roles?.includes('admin'),
-
-    update: ({ req }) => !!req.user?.roles?.includes('admin'),
+    read: (args) => isAdmin(args) || isTeacher(args),
+    create: isAdmin,
+    update: isAdmin,
   },
-
   fields: [
     {
       name: 'teacher',

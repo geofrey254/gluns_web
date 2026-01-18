@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { canUpdateUser } from './hooks/AccessHooks'
+import { isAdmin } from './access/isAdmin'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -9,8 +9,8 @@ export const Users: CollectionConfig = {
   auth: true,
   access: {
     create: () => true,
-    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    delete: canUpdateUser,
+    read: () => true,
+    delete: isAdmin,
   },
   fields: [
     {

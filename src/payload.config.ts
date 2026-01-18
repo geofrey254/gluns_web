@@ -18,6 +18,8 @@ import { Faculty } from './collections/Faculty'
 
 import { Payments } from './collections/Payments'
 
+import Blog from './collections/Blog'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -38,6 +40,7 @@ export default buildConfig({
     Delegates,
     Faculty,
     Payments,
+    Blog,
   ],
   serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
   editor: lexicalEditor(),

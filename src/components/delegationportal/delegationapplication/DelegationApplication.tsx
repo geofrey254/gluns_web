@@ -25,6 +25,7 @@ import FacultyForm from './FacultyForm'
 import { Delegate, FacultyAdvisor } from '@/app/types/types'
 import PaymentForm from '../payment/PaymentForm'
 import { Button } from '@/components/ui/button'
+import Loading from '@/app/(frontend)/loading'
 
 // hooks
 import { useAuthGate } from '../hooks/useAuthGate'
@@ -231,11 +232,7 @@ export default function DelegationPortal() {
   }
 
   if (checkingAuth || loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#104179]" />
-      </div>
-    )
+    return <Loading />
   }
 
   if (!user) {

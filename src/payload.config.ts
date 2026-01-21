@@ -14,6 +14,8 @@ import { DelegationApplications } from './collections/DelegationApplication'
 import { Delegations } from './collections/Delegations'
 import { Delegates } from './collections/Delegates'
 
+import Blog from './collections/Blog'
+
 import { Faculty } from './collections/Faculty'
 
 import { Payments } from './collections/Payments'
@@ -38,6 +40,7 @@ export default buildConfig({
     Delegates,
     Faculty,
     Payments,
+    Blog,
   ],
   serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
   editor: lexicalEditor(),

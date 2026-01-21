@@ -34,6 +34,7 @@ export default function Navbar() {
     { name: 'The Secretariat', link: '/the-secretariat' },
     { name: 'Events', link: '/events' },
     { name: 'Committees', link: '/committees' },
+    { name: 'Blog', link: '/blog' },
     { name: 'Contact', link: '/contact' },
   ]
 

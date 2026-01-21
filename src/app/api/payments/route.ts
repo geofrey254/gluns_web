@@ -10,6 +10,10 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
+  if (user.collection !== 'users') {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+  }
+
   const url = new URL(req.url)
   const delegationId = url.searchParams.get('delegationId')
 

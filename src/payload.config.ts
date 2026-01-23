@@ -50,7 +50,7 @@ export default buildConfig({
     CommitteeCategories,
     CommitteeTeam,
   ],
-  serverURL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000',
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

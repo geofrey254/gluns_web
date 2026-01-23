@@ -18,10 +18,5 @@ export const CommitteeCategories: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'description',
-      type: 'textarea',
-      required: false,
-    },
   ],
 }

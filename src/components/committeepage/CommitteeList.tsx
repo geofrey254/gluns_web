@@ -3,56 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaUsers } from 'react-icons/fa6'
 import { HiArrowRight } from 'react-icons/hi2'
+import { fetchCommittee } from '@/data/committeeFetch'
 
-const committees = [
-  {
-    id: 1,
-    name: 'Security Council',
-    description:
-      'Oversees international peace and security, addressing conflicts, sanctions, and resolutions to maintain global stability.',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80',
-    link: '/committees/security-council',
-    color: 'from-[#104179] to-blue-400',
-  },
-  {
-    id: 2,
-    name: 'Economic and Social Council',
-    description:
-      'Focuses on economic development, social progress, and global partnerships to improve living standards worldwide.',
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80',
-    link: '/committees/ecosoc',
-    color: 'from-emerald-600 to-emerald-400',
-  },
-  {
-    id: 3,
-    name: 'Human Rights Council',
-    description:
-      'Works to protect and promote human rights globally, addressing violations and setting international standards.',
-    image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80',
-    link: '/committees/hrc',
-    color: 'from-purple-600 to-purple-400',
-  },
-  {
-    id: 4,
-    name: 'General Assembly',
-    description:
-      'Provides a platform for all member states to discuss global issues, pass resolutions, and collaborate on international policy.',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80',
-    link: '/committees/general-assembly',
-    color: 'from-amber-600 to-amber-400',
-  },
-  {
-    id: 5,
-    name: 'Environmental Committee',
-    description:
-      'Addresses climate change, sustainability, and global environmental policies to create a greener, more sustainable future.',
-    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80',
-    link: '/committees/environment',
-    color: 'from-green-600 to-green-400',
-  },
-]
+export default async function CommitteeList() {
+  const { committee } = await fetchCommittee()
 
-export default function CommitteeList() {
   return (
     <section className="relative bg-white min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 lg:px-16 py-8 md:py-12 overflow-hidden">
       {/* Decorative Background Elements */}
@@ -61,7 +16,7 @@ export default function CommitteeList() {
 
       {/* Cards Grid */}
       <div className="max-w-7xl 2xl:max-w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {committees.map((committee, index) => (
+        {committee.map((committee, index) => (
           <div
             key={committee.id}
             className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
@@ -69,12 +24,18 @@ export default function CommitteeList() {
           >
             {/* Image Container with Overlay */}
             <div className="relative w-full h-56 overflow-hidden">
-              <Image
-                src={committee.image}
-                alt={committee.name}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
-              />
+              {typeof committee.photo === 'object' && committee.photo ? (
+                <Image
+                  src={committee.photo?.url || '/images/committee-placeholder.jpg'}
+                  alt={committee.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full w-full bg-gray-300">
+                  <span className="text-gray-500">No Image Available</span>
+                </div>
+              )}
 
               {/* Icon Badge */}
               <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -84,9 +45,11 @@ export default function CommitteeList() {
 
             {/* Content */}
             <div className="p-6 md:p-8 flex flex-col gap-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-[#104179] leading-tight">
-                {committee.name}
-              </h3>
+              <Link href={`/committees/${committee.slug}`}>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#104179] leading-tight">
+                  {committee.name}
+                </h3>
+              </Link>
 
               <p className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3">
                 {committee.description}
@@ -94,7 +57,7 @@ export default function CommitteeList() {
 
               {/* CTA Link */}
               <Link
-                href={committee.link}
+                href={`/committees/${committee.slug}`}
                 className="inline-flex items-center gap-2 text-[#104179] font-semibold mt-2 group-hover:gap-4 transition-all duration-300"
               >
                 <span>Learn More</span>

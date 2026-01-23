@@ -37,6 +37,8 @@ export const Committees: CollectionConfig = {
       type: 'text',
       admin: {
         position: 'sidebar',
+        description:
+          'This field is auto-generated from the Title field. Please do not edit manually.',
       },
       hooks: {
         beforeValidate: [
@@ -49,14 +51,8 @@ export const Committees: CollectionConfig = {
     {
       name: 'committee_category',
       label: 'Committee Category',
-      type: 'select',
-      options: [
-        { label: 'Politics', value: 'politics' },
-        { label: 'Economics', value: 'economics' },
-        { label: 'Social', value: 'social' },
-        { label: 'Environment', value: 'environment' },
-        { label: 'Specialized', value: 'specialized' },
-      ],
+      type: 'relationship',
+      relationTo: 'committee-categories',
       required: true,
     },
     {

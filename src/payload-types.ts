@@ -358,8 +358,11 @@ export interface Committee {
   title: string;
   description: string;
   committee_photo?: (number | null) | Media;
+  /**
+   * This field is auto-generated from the Title field. Please do not edit manually.
+   */
   slug?: string | null;
-  committee_category: 'politics' | 'economics' | 'social' | 'environment' | 'specialized';
+  committee_category: number | CommitteeCategory;
   committee_code: string;
   summary: {
     root: {
@@ -386,7 +389,6 @@ export interface Committee {
 export interface CommitteeCategory {
   id: number;
   name: string;
-  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -714,7 +716,6 @@ export interface CommitteesSelect<T extends boolean = true> {
  */
 export interface CommitteeCategoriesSelect<T extends boolean = true> {
   name?: T;
-  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

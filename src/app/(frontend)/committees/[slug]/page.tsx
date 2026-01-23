@@ -92,6 +92,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
             src={committee.committee_photo.url || ''}
             alt={committee.title}
             fill
+            unoptimized
             className="object-cover"
             priority
           />

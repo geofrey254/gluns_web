@@ -33,6 +33,7 @@ export default function CommitteeMembers({ members }: { members: any[] }) {
                     }
                     alt={member.name}
                     fill
+                    unoptimized
                     className="object-cover"
                   />
                 </div>

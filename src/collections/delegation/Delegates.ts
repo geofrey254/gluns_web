@@ -7,10 +7,14 @@ export const Delegates: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     group: 'Delegation Management',
+    components: {
+      beforeList: ['./admin/AssignCountriesButton'],
+    },
+    defaultColumns: ['firstName', 'lastName', 'email', 'delegation', 'country'],
   },
   access: {
     read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    create: ({ req }) => req.user?.roles === 'teacher',
+    create: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
     update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
   },
   hooks: {
@@ -57,6 +61,19 @@ export const Delegates: CollectionConfig = {
       name: 'phoneNumber',
       type: 'number',
       required: true,
+    },
+    {
+      name: 'country',
+      type: 'relationship',
+      relationTo: 'countries',
+      required: false,
+      unique: true, // ensures one country per delegate
+    },
+    {
+      name: 'positionPaper',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
     },
   ],
 }

@@ -16,17 +16,25 @@ import { Delegates } from './collections/delegation/Delegates'
 
 import Blog from './collections/Blog'
 
+// assignments
+import { Countries } from './collections/administration/Countries'
+import { PositionPapers } from './collections/administration/PositionPapers'
+import { CommitteeAssignments } from './collections/administration/CommitteeAssignments'
+
 // committees
 import { Committees } from './collections/committee/Committees'
 import { CommitteeCategories } from './collections/committee/CommitteeCategories'
 import { CommitteeTeam } from './collections/committee/CommitteeTeam'
 
 // secretariat
-import { Secretariat } from './collections/Secretariat'
+import { Secretariat } from './collections/administration/Secretariat'
 
 import { Faculty } from './collections/delegation/Faculty'
 
-import { Payments } from './collections/Payments'
+import { Payments } from './collections/administration/Payments'
+
+// endpoints
+import { assignCountriesEndpoint } from './endpoints/assignCountries'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -61,6 +69,7 @@ export default buildConfig({
       robots: 'noindex, nofollow',
     },
   },
+  endpoints: [assignCountriesEndpoint],
 
   collections: [
     Users,
@@ -77,6 +86,9 @@ export default buildConfig({
     CommitteeCategories,
     CommitteeTeam,
     Secretariat,
+    Countries,
+    PositionPapers,
+    CommitteeAssignments,
   ],
   serverURL: process.env.NEXT_PUBLIC_BASE_URL,
   editor: lexicalEditor(),

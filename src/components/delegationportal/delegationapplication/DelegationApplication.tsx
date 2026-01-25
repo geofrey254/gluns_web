@@ -76,6 +76,7 @@ export default function DelegationPortal() {
   const [showFacultyForm, setShowFacultyForm] = useState(false)
 
   const [delegation, setDelegation] = useState<Delegation | null>(null)
+
   const [formData, setFormData] = useState<Delegation>(EMPTY_DELEGATION)
   const maxAdvisors = formData.numberOfFacultyAdvisors
 

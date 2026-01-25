@@ -9,7 +9,7 @@ export const DelegationApplications: CollectionConfig = {
   },
   access: {
     create: ({ req }) => req.user?.roles === 'teacher',
-    read: ({ req }) => req.user?.roles === 'admin',
+    read: () => true,
     update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.user,
   },
   hooks: {

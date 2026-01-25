@@ -42,7 +42,6 @@
 
 
 @layer components {
-  input,
   textarea,
   select {
     background-color: #ffffff;
@@ -115,6 +114,10 @@
 
   tbody tr:hover {
     background-color: var(--brand-bg-muted);
+  }
+
+  hr{
+    margin-bottom: 1rem;
   }
 }
 

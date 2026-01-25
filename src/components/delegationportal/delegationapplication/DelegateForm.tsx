@@ -29,9 +29,11 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    gradeLevel: '',
     email: '',
     phoneNumber: '',
   })
+  const gradeOptions = Array.from({ length: 12 }, (_, i) => `Grade ${i + 1}`)
 
   // Populate form when editing
   useEffect(() => {
@@ -39,6 +41,7 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
       setFormData({
         firstName: delegate.firstName,
         lastName: delegate.lastName,
+        gradeLevel: delegate.gradeLevel,
         email: delegate.email,
         phoneNumber: delegate.phoneNumber,
       })
@@ -46,6 +49,7 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
       setFormData({
         firstName: '',
         lastName: '',
+        gradeLevel: '',
         email: '',
         phoneNumber: '',
       })
@@ -105,16 +109,37 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
-            {['firstName', 'lastName', 'email', 'phoneNumber'].map((field) => (
+            {['firstName', 'lastName', 'gradeLevel', 'email', 'phoneNumber'].map((field) => (
               <div key={field} className="grid gap-2">
                 <Label htmlFor={field}>{field.replace(/([A-Z])/g, ' $1')}</Label>
-                <Input
-                  id={field}
-                  name={field}
-                  value={(formData as any)[field]}
-                  onChange={handleChange}
-                  required
-                />
+
+                {field === 'gradeLevel' ? (
+                  <select
+                    id={field}
+                    name={field}
+                    value={(formData as any)[field]}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, [field]: e.target.value }))}
+                    required
+                    className="border rounded p-2"
+                  >
+                    <option value="" disabled>
+                      Select grade
+                    </option>
+                    {gradeOptions.map((grade) => (
+                      <option key={grade} value={grade}>
+                        {grade}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <Input
+                    id={field}
+                    name={field}
+                    value={(formData as any)[field]}
+                    onChange={handleChange}
+                    required
+                  />
+                )}
               </div>
             ))}
           </div>

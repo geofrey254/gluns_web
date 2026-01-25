@@ -2,6 +2,7 @@ export interface Delegate {
   id?: number
   firstName: string
   lastName: string
+  gradeLevel: string
   email: string
   phoneNumber: string
   paymentStatus: 'paid' | 'unpaid'

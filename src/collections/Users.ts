@@ -8,10 +8,9 @@ export const Users: CollectionConfig = {
     group: 'Administration',
   },
   auth: true,
-
   access: {
     create: () => true,
-    read: ({ req }) => req.user?.roles === 'admin',
+    read: () => true,
     delete: canUpdateUser,
   },
   fields: [
@@ -32,6 +31,7 @@ export const Users: CollectionConfig = {
       name: 'delegationName',
       type: 'text',
       required: true,
+      saveToJWT: true,
       admin: {
         condition: (data, { user }) => !!user && user.roles === 'teacher',
       },

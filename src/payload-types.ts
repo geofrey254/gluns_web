@@ -81,6 +81,9 @@ export interface Config {
     'committee-categories': CommitteeCategory;
     'committee-team': CommitteeTeam;
     secretariat: Secretariat;
+    countries: Country;
+    'position-papers': PositionPaper;
+    'committee-assignments': CommitteeAssignment;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -102,6 +105,9 @@ export interface Config {
     'committee-categories': CommitteeCategoriesSelect<false> | CommitteeCategoriesSelect<true>;
     'committee-team': CommitteeTeamSelect<false> | CommitteeTeamSelect<true>;
     secretariat: SecretariatSelect<false> | SecretariatSelect<true>;
+    countries: CountriesSelect<false> | CountriesSelect<true>;
+    'position-papers': PositionPapersSelect<false> | PositionPapersSelect<true>;
+    'committee-assignments': CommitteeAssignmentsSelect<false> | CommitteeAssignmentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -290,6 +296,22 @@ export interface Delegate {
     | 'Grade 11'
     | 'Grade 12';
   phoneNumber: number;
+  country?: (number | null) | Country;
+  positionPaper?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: number;
+  name: string;
+  /**
+   * ISO 3166-1 alpha-2 country code (e.g., US, GB, FR)
+   */
+  code: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -429,6 +451,33 @@ export interface Secretariat {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "position-papers".
+ */
+export interface PositionPaper {
+  id: number;
+  delegate: number | Delegate;
+  committeeAssignment: number | CommitteeAssignment;
+  file: number | Media;
+  submittedAt?: string | null;
+  status?: ('submitted' | 'reviewed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "committee-assignments".
+ */
+export interface CommitteeAssignment {
+  id: number;
+  delegate: number | Delegate;
+  committee: number | Committee;
+  country: number | Country;
+  assignedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -506,6 +555,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'secretariat';
         value: number | Secretariat;
+      } | null)
+    | ({
+        relationTo: 'countries';
+        value: number | Country;
+      } | null)
+    | ({
+        relationTo: 'position-papers';
+        value: number | PositionPaper;
+      } | null)
+    | ({
+        relationTo: 'committee-assignments';
+        value: number | CommitteeAssignment;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -673,6 +734,8 @@ export interface DelegatesSelect<T extends boolean = true> {
   email?: T;
   gradeLevel?: T;
   phoneNumber?: T;
+  country?: T;
+  positionPaper?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -764,6 +827,41 @@ export interface SecretariatSelect<T extends boolean = true> {
   photo?: T;
   email?: T;
   bio?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries_select".
+ */
+export interface CountriesSelect<T extends boolean = true> {
+  name?: T;
+  code?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "position-papers_select".
+ */
+export interface PositionPapersSelect<T extends boolean = true> {
+  delegate?: T;
+  committeeAssignment?: T;
+  file?: T;
+  submittedAt?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "committee-assignments_select".
+ */
+export interface CommitteeAssignmentsSelect<T extends boolean = true> {
+  delegate?: T;
+  committee?: T;
+  country?: T;
+  assignedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -4,6 +4,7 @@ export const CommitteeAssignments: CollectionConfig = {
   slug: 'committee-assignments',
   admin: {
     useAsTitle: 'id',
+    group: 'Delegation Management',
   },
 
   fields: [

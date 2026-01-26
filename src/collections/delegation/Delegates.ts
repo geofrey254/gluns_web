@@ -11,7 +11,7 @@ export const Delegates: CollectionConfig = {
   },
   access: {
     read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    create: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
+    create: ({ req }) => req.user?.roles === 'teacher',
     update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
     delete: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
   },
@@ -65,7 +65,6 @@ export const Delegates: CollectionConfig = {
       type: 'relationship',
       relationTo: 'countries',
       required: false,
-      unique: true, // ensures one country per delegate
     },
     {
       name: 'committee',

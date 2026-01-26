@@ -5,7 +5,6 @@ export interface Delegate {
   gradeLevel: string
   email: string
   phoneNumber: string
-  paymentStatus: 'paid' | 'unpaid'
 }
 
 export interface FacultyAdvisor {

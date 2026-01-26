@@ -4,6 +4,7 @@ export const Countries: CollectionConfig = {
   slug: 'countries',
   admin: {
     useAsTitle: 'name',
+    group: 'Delegation Management',
   },
   access: {
     read: () => true,

@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload'
 
 export const PositionPapers: CollectionConfig = {
   slug: 'position-papers',
+  admin: {
+    useAsTitle: 'id',
+    group: 'Delegation Management',
+  },
 
   fields: [
     {

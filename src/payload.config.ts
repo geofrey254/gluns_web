@@ -17,10 +17,9 @@ import { Delegates } from './collections/delegation/Delegates'
 import Blog from './collections/Blog'
 
 // assignments
-import { Countries } from './collections/administration/Countries'
-import { PositionPapers } from './collections/administration/PositionPapers'
-import { CommitteeAssignments } from './collections/administration/CommitteeAssignments'
-
+import { PositionPapers } from './collections/delegation/PositionPapers'
+import { Countries } from './collections/delegation/Countries'
+import { CommitteeAssignments } from './collections/delegation/CommitteeAssignments'
 // committees
 import { Committees } from './collections/committee/Committees'
 import { CommitteeCategories } from './collections/committee/CommitteeCategories'

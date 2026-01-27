@@ -14,7 +14,6 @@ export function Sidebar({ status, isOpen, onClose, activeSection, onSectionChang
     { id: 'delegates', label: 'Add Delegates', icon: UserPlus, requiresApproval: true },
     { id: 'advisors', label: 'Faculty Advisors', icon: Briefcase, requiresApproval: true },
     { id: 'assignments', label: 'Country Assignments', icon: Globe, requiresApproval: true },
-    { id: 'papers', label: 'Position Papers', icon: Upload, requiresApproval: true },
   ]
 
   const isApproved = status === 'approved'
@@ -42,7 +41,7 @@ export function Sidebar({ status, isOpen, onClose, activeSection, onSectionChang
 
         {/* Navigation Items */}
         <nav className="flex-1 overflow-y-auto p-4">
-          <div className="space-y-2">
+          <div className="space-y-4">
             {menuItems.map((item) => {
               const Icon = item.icon
               const isDisabled = item.requiresApproval && !isApproved

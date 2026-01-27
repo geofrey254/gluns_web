@@ -3,6 +3,7 @@ import type { CollectionBeforeChangeHook } from 'payload'
 
 export const ensurePaidSlots: CollectionBeforeChangeHook = async ({ data, req, operation }) => {
   if (operation !== 'create') return data // Only check on create
+  if (req.user?.roles === 'admin') return data // ✅
 
   const teacherId = data.teacher
   const delegationId = data.delegation

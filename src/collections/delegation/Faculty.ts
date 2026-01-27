@@ -16,7 +16,7 @@ export const Faculty: CollectionConfig = {
       if (!req.user) return false
       return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
     },
-    create: ({ req }) => req.user?.roles === 'teacher',
+    create: ({ req }) => req.user?.roles === 'teacher' || req.user?.roles === 'admin',
     update: ({ req }) => {
       if (!req.user) return false
       return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }

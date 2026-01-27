@@ -70,7 +70,7 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
 
     try {
       const method = delegate?.id ? 'PATCH' : 'POST'
-      const url = delegate?.id ? `/api/delegates/${delegate.id}` : '/api/delegates'
+      const url = delegate?.id ? `/api/teacher/delegates/${delegate.id}` : '/api/teacher/delegates'
 
       const res = await fetch(url, {
         method,
@@ -86,7 +86,7 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
       const data = await res.json()
 
       if (!res.ok) {
-        throw new Error(data.message || 'Failed to save faculty advisor')
+        throw new Error(data.message || 'Failed to save delegate')
       }
 
       onSaved(data)

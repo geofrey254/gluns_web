@@ -25,7 +25,9 @@ export function usePaymentAndDelegate(user: any | null, delegation: any | null) 
         setPaymentStatus(paymentStatus)
 
         if (paymentStatus === 'paid') {
-          const delegatesRes = await apiFetch(`/api/delegates?delegationId=${delegation.id}`)
+          const delegatesRes = await apiFetch(
+            `/api/teacher/delegates?delegationId=${delegation.id}`,
+          )
           const delegatesData = await delegatesRes.json()
           setDelegates(delegatesData.delegates || [])
         } else {

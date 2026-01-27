@@ -7,11 +7,12 @@ export const Delegates: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     group: 'Delegation Management',
-    defaultColumns: ['firstName', 'lastName', 'email', 'delegation', 'country'],
+    defaultColumns: ['firstName', 'lastName', 'email', 'delegation'],
+    enableRichTextLink: false,
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    create: ({ req }) => req.user?.roles === 'teacher',
+    read: ({ req }) => !!req.user,
+    create: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
     update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
     delete: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
   },
@@ -45,6 +46,7 @@ export const Delegates: CollectionConfig = {
       name: 'email',
       type: 'email',
       required: true,
+      unique: true,
     },
     {
       name: 'gradeLevel',
@@ -59,25 +61,6 @@ export const Delegates: CollectionConfig = {
       name: 'phoneNumber',
       type: 'number',
       required: true,
-    },
-    {
-      name: 'country',
-      type: 'relationship',
-      relationTo: 'countries',
-      required: false,
-    },
-    {
-      name: 'committee',
-      type: 'relationship',
-      relationTo: 'committees',
-      required: false,
-      hasMany: true,
-    },
-    {
-      name: 'positionPaper',
-      type: 'upload',
-      relationTo: 'media',
-      required: false,
     },
   ],
 }

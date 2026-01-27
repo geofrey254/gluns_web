@@ -201,8 +201,8 @@ export interface Media {
  */
 export interface Document {
   id: number;
-  title: string;
-  alt: string;
+  title?: string | null;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -296,66 +296,6 @@ export interface Delegate {
     | 'Grade 11'
     | 'Grade 12';
   phoneNumber: number;
-  country?: (number | null) | Country;
-  committee?: (number | Committee)[] | null;
-  positionPaper?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "countries".
- */
-export interface Country {
-  id: number;
-  name: string;
-  /**
-   * ISO 3166-1 alpha-2 country code (e.g., US, GB, FR)
-   */
-  code: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "committees".
- */
-export interface Committee {
-  id: number;
-  title: string;
-  description: string;
-  committee_photo?: (number | null) | Media;
-  /**
-   * This field is auto-generated from the Title field. Please do not edit manually.
-   */
-  slug?: string | null;
-  committee_category: number | CommitteeCategory;
-  committee_code: string;
-  summary: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "committee-categories".
- */
-export interface CommitteeCategory {
-  id: number;
-  name: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -419,6 +359,49 @@ export interface Blog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "committees".
+ */
+export interface Committee {
+  id: number;
+  title: string;
+  description: string;
+  committee_photo?: (number | null) | Media;
+  /**
+   * This field is auto-generated from the Title field. Please do not edit manually.
+   */
+  slug?: string | null;
+  committee_category: number | CommitteeCategory;
+  committee_code: string;
+  summary: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "committee-categories".
+ */
+export interface CommitteeCategory {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "committee-team".
  */
 export interface CommitteeTeam {
@@ -452,6 +435,20 @@ export interface Secretariat {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: number;
+  name: string;
+  /**
+   * ISO 3166-1 alpha-2 country code (e.g., US, GB, FR)
+   */
+  code: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "position-papers".
  */
 export interface PositionPaper {
@@ -470,9 +467,12 @@ export interface PositionPaper {
  */
 export interface CommitteeAssignment {
   id: number;
-  delegate: number | Delegate;
+  delegation: number | DelegationApplication;
+  delegates: (number | Delegate)[];
   committee: number | Committee;
   country: number | Country;
+  seatType?: ('single' | 'double') | null;
+  positionPaper?: (number | null) | Media;
   assignedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -735,9 +735,6 @@ export interface DelegatesSelect<T extends boolean = true> {
   email?: T;
   gradeLevel?: T;
   phoneNumber?: T;
-  country?: T;
-  committee?: T;
-  positionPaper?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -860,9 +857,12 @@ export interface PositionPapersSelect<T extends boolean = true> {
  * via the `definition` "committee-assignments_select".
  */
 export interface CommitteeAssignmentsSelect<T extends boolean = true> {
-  delegate?: T;
+  delegation?: T;
+  delegates?: T;
   committee?: T;
   country?: T;
+  seatType?: T;
+  positionPaper?: T;
   assignedAt?: T;
   updatedAt?: T;
   createdAt?: T;

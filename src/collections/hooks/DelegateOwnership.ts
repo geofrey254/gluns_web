@@ -4,9 +4,19 @@ export const enforceDelegateOwnership: CollectionBeforeChangeHook = async ({
   req,
   data,
   originalDoc,
+  operation,
 }) => {
   if (!req.user) return data
 
+  // 🔒 Only enforce on writes
+  if (operation !== 'create' && operation !== 'update') {
+    return data
+  }
+
+  // Admin bypass
+  if (req.user.roles === 'admin') {
+    return data
+  }
   // Always enforce teacher ownership
   data.teacher = req.user.id
 

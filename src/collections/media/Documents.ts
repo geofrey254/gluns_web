@@ -6,15 +6,19 @@ export const Documents: CollectionConfig = {
     description: 'Media',
     group: 'Media & File Uploads',
   },
+
   access: {
     read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
+    { name: 'title', type: 'text', required: false },
     {
       name: 'alt',
       type: 'text',
-      required: true,
+      required: false,
     },
   ],
   upload: true,

@@ -5,10 +5,7 @@ import { FaFacebookF, FaInstagram, FaXTwitter, FaLinkedinIn } from 'react-icons/
 
 export default function Footer() {
   return (
-    <footer className="relative bg-white rounded-t-3xl -mt-7 z-30 overflow-hidden">
-      {/* Decorative Top Border */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#104179]/20 to-transparent"></div>
-
+    <footer className="relative bg-white rounded-t-3xl -mt-7 z-30 overflow-hidden border-t-6 border-[#85c226]">
       {/* Decorative Background Elements */}
       <div className="absolute top-20 right-0 w-96 h-96 bg-[#104179]/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#104179]/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -33,19 +30,14 @@ export default function Footer() {
               world-class Model UN experiences.
             </p>
 
-            {/* Newsletter Signup */}
-            <div className="space-y-3">
-              <h4 className="text-[#104179] font-semibold text-sm 2xl:text-2xl">Stay Updated</h4>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2.5 text-sm 2xl:text-2xl border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#104179]/20 focus:border-[#104179]"
-                />
-                <button className="px-5 py-2.5 bg-[#104179] text-white font-medium text-sm 2xl:text-2xl rounded-lg hover:bg-[#104179]/90 transition-colors duration-300">
-                  Subscribe
-                </button>
-              </div>
+            {/* Call to Action */}
+            <div className="mt-8 pt-6 border-t border-white/20">
+              <Link
+                href="/authentication"
+                className="inline-flex items-center justify-center px-6 py-3 2xl:px-8 2xl:py-4 bg-[#85c226] text-white font-bold text-sm 2xl:text-xl rounded-xl hover:bg-white hover:text-[#104179] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              >
+                Register Now
+              </Link>
             </div>
           </div>
 

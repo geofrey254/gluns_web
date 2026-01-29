@@ -1,34 +1,13 @@
-'use client'
 import React from 'react'
 import { GrLinkNext } from 'react-icons/gr'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaUsers } from 'react-icons/fa6'
+import { fetchCommittee } from '@/data/committeeFetch'
+import { HiArrowRight } from 'react-icons/hi2'
 
-export default function Committee() {
-  const committees = [
-    {
-      id: 1,
-      name: 'Economic and Social Council (ECOSOC)',
-      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80',
-      description:
-        'Focuses on economic development, social progress, and global partnerships to improve living standards worldwide.',
-    },
-    {
-      id: 2,
-      name: 'Regional & Specialized Bodies',
-      image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80',
-      description:
-        'Addresses regional issues and specialized topics through dedicated committees, fostering cooperation and targeted solutions.',
-    },
-    {
-      id: 3,
-      name: 'Crisis Committee',
-      image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80',
-      description:
-        'Simulates urgent international situations, challenging delegates to think quickly and collaboratively under pressure.',
-    },
-  ]
+export default async function Committee() {
+  const { committee } = await fetchCommittee()
 
   return (
     <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen 2xl:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-16 py-20 overflow-hidden">
@@ -48,7 +27,7 @@ export default function Committee() {
 
       {/* Committees Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-        {committees.map((committee, index) => (
+        {committee.slice(0, 3).map((committee, index) => (
           <div
             key={committee.id}
             className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
@@ -56,12 +35,18 @@ export default function Committee() {
           >
             {/* Image Container with Overlay */}
             <div className="relative w-full h-56 overflow-hidden">
-              <Image
-                src={committee.image}
-                alt={committee.name}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
-              />
+              {typeof committee.photo === 'object' && committee.photo ? (
+                <Image
+                  src={committee.photo?.url || '/images/committee-placeholder.jpg'}
+                  alt={committee.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full w-full bg-gray-300">
+                  <span className="text-gray-500">No Image Available</span>
+                </div>
+              )}
 
               {/* Icon Badge */}
               <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -78,6 +63,15 @@ export default function Committee() {
               <p className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3">
                 {committee.description}
               </p>
+
+              {/* CTA Link */}
+              <Link
+                href={`/committees/${committee.slug}`}
+                className="inline-flex items-center gap-2 text-[#104179] font-semibold mt-2 group-hover:gap-4 transition-all duration-300"
+              >
+                <span>Learn More</span>
+                <HiArrowRight className="text-xl group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
             </div>
           </div>
         ))}

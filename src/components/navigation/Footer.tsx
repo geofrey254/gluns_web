@@ -86,9 +86,8 @@ export default function Footer() {
               <ul className="space-y-3">
                 {[
                   { name: 'Register', href: '/authentication' },
-                  { name: 'Guidelines', href: '/guidelines' },
-                  { name: 'FAQs', href: '/faqs' },
                   { name: 'Sponsorship', href: '/sponsors' },
+                  { name: 'FAQs', href: '/faqs' },
                 ].map((link) => (
                   <li key={link.name}>
                     <Link

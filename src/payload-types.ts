@@ -78,6 +78,7 @@ export interface Config {
     payments: Payment;
     event: Event;
     blog: Blog;
+    sponsors: Sponsor;
     committees: Committee;
     'committee-categories': CommitteeCategory;
     'committee-team': CommitteeTeam;
@@ -105,6 +106,7 @@ export interface Config {
     payments: PaymentsSelect<false> | PaymentsSelect<true>;
     event: EventSelect<false> | EventSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
+    sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     committees: CommitteesSelect<false> | CommitteesSelect<true>;
     'committee-categories': CommitteeCategoriesSelect<false> | CommitteeCategoriesSelect<true>;
     'committee-team': CommitteeTeamSelect<false> | CommitteeTeamSelect<true>;
@@ -397,6 +399,19 @@ export interface Blog {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * Add Sponsor
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors".
+ */
+export interface Sponsor {
+  id: number;
+  name: string;
+  logo: number | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -778,6 +793,10 @@ export interface PayloadLockedDocument {
         value: number | Blog;
       } | null)
     | ({
+        relationTo: 'sponsors';
+        value: number | Sponsor;
+      } | null)
+    | ({
         relationTo: 'committees';
         value: number | Committee;
       } | null)
@@ -1040,6 +1059,16 @@ export interface BlogSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors_select".
+ */
+export interface SponsorsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

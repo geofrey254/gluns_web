@@ -36,6 +36,7 @@ import { Secretariat } from './collections/administration/Secretariat'
 import { Faculty } from './collections/delegation/Faculty'
 
 import { Payments } from './collections/administration/Payments'
+import { Sponsors } from './collections/administration/Sponsors'
 
 // endpoints
 
@@ -85,6 +86,7 @@ export default buildConfig({
     Payments,
     Events,
     Blog,
+    Sponsors,
     Committees,
     CommitteeCategories,
     CommitteeTeam,

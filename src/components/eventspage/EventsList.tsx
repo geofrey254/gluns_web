@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { GrLinkNext } from 'react-icons/gr'
 import { IoLocationSharp } from 'react-icons/io5'
 import { fetchEvents } from '@/data/eventFetch'
 import { HiArrowRight } from 'react-icons/hi2'

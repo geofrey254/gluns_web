@@ -95,7 +95,7 @@ export default buildConfig({
     PositionPapers,
     CommitteeAssignments,
   ],
-  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
+  serverURL: process.env.NEXT_PUBLIC_BASE_URL,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -124,6 +124,12 @@ export default buildConfig({
       collections: {
         media: {
           prefix: 'media',
+        },
+        documents: {
+          prefix: 'documents',
+        },
+        portraits: {
+          prefix: 'portraits',
         },
       },
       bucket: process.env.S3_BUCKET || '',

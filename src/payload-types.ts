@@ -212,6 +212,7 @@ export interface Document {
   id: number;
   title?: string | null;
   alt?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -233,6 +234,7 @@ export interface Document {
 export interface Portrait {
   id: number;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -528,7 +530,7 @@ export interface CommitteeAssignment {
   committee: number | Committee;
   country: number | Country;
   seatType?: ('single' | 'double') | null;
-  positionPaper?: (number | null) | Media;
+  positionPaper?: (number | null) | Document;
   assignedAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -924,6 +926,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface DocumentsSelect<T extends boolean = true> {
   title?: T;
   alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -942,6 +945,7 @@ export interface DocumentsSelect<T extends boolean = true> {
  */
 export interface PortraitsSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

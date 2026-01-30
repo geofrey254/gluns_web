@@ -3,7 +3,18 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Users, Globe, FileText, UserPlus, Briefcase, Pencil, Trash2 } from 'lucide-react'
+import {
+  Users,
+  Globe,
+  FileText,
+  UserPlus,
+  Briefcase,
+  Pencil,
+  Trash2,
+  Mail,
+  Phone,
+  GraduationCap,
+} from 'lucide-react'
 import { Sidebar } from './Sidebar'
 import DelegateForm from './DelegateForm'
 import FacultyForm from './FacultyForm'
@@ -21,6 +32,7 @@ import { useAuthGate } from '../hooks/useAuthGate'
 import { useFacultyAdvisors } from '../hooks/useFacultyAdvisors'
 import { apiFetch } from '@/app/utils/apiFetch'
 import { usePaymentAndDelegate } from '../hooks/usePaymentAndDelegate'
+import { AccountSettings } from './AccountSettings'
 
 const EMPTY_DELEGATION: Delegation = {
   delegationName: '',
@@ -286,8 +298,8 @@ export default function DelegationPortal() {
           {activeSection === 'delegates' && (
             <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-8">
               <div className="text-center py-12">
-                <UserPlus className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Add Delegates</h3>
+                <UserPlus className="w-16 h-16 text-[#85c226]/70 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-[#104179] mb-2">Add Delegates</h3>
                 <p className="text-gray-600 mb-6">
                   Register your delegation members here once your application is approved and
                   payment is complete.
@@ -317,7 +329,7 @@ export default function DelegationPortal() {
                           setEditingDelegate({} as Delegate)
                           setShowDelegateForm(true)
                         }}
-                        className="mb-4"
+                        className="mb-4 cursor-pointer bg-[#104179] hover:bg-[#0a2c52] text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
                       >
                         Add Delegate
                       </Button>
@@ -349,43 +361,222 @@ export default function DelegationPortal() {
                     )}
 
                     {/* Registered Delegates List */}
-                    <div className="mt-6">
-                      <h3 className="text-lg font-semibold mb-4">Registered Delegates</h3>
+                    <div className="mt-8">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-[#104179] rounded-lg flex items-center justify-center">
+                            <Users className="w-5 h-5 text-white" />
+                          </div>
+                          <h3 className="text-2xl font-bold text-[#104179]">
+                            Registered Delegates
+                          </h3>
+                        </div>
+                        <div className="h-1 flex-1 bg-[#85c226] ml-6 max-w-[200px]"></div>
+                      </div>
+
                       {delegates.length > 0 ? (
-                        <ul className="divide-y">
-                          {delegates.map((delegate) => (
-                            <li
-                              key={delegate.id}
-                              className="py-2 flex justify-between items-center"
-                            >
-                              <div>
-                                {delegate.firstName} {delegate.lastName} -{' '}
-                                <span className="text-gray-500">{delegate.email}</span>
+                        <div className="bg-white border-2 border-[#104179]/20 rounded-2xl overflow-hidden">
+                          {/* Desktop Table */}
+                          <div className="hidden lg:block overflow-x-auto">
+                            <table className="min-w-full">
+                              <thead className="bg-[#104179]">
+                                <tr>
+                                  <th className="px-6 py-4 text-left text-sm font-bold text-white border-r border-white/20">
+                                    #
+                                  </th>
+                                  <th className="px-6 py-4 text-left text-sm font-bold text-white border-r border-white/20">
+                                    Name
+                                  </th>
+                                  <th className="px-6 py-4 text-left text-sm font-bold text-white border-r border-white/20">
+                                    Email
+                                  </th>
+                                  <th className="px-6 py-4 text-left text-sm font-bold text-white border-r border-white/20">
+                                    Phone
+                                  </th>
+                                  <th className="px-6 py-4 text-left text-sm font-bold text-white border-r border-white/20">
+                                    Grade
+                                  </th>
+                                  <th className="px-6 py-4 text-left text-sm font-bold text-white">
+                                    Actions
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-[#104179]/10">
+                                {delegates.map((delegate, index) => (
+                                  <tr
+                                    key={delegate.id}
+                                    className="hover:bg-[#104179]/5 transition-colors"
+                                  >
+                                    <td className="px-6 py-4 border-r border-[#104179]/10">
+                                      <div className="w-8 h-8 bg-[#104179] rounded-lg flex items-center justify-center">
+                                        <span className="text-white font-bold text-sm">
+                                          {index + 1}
+                                        </span>
+                                      </div>
+                                    </td>
+                                    <td className="px-6 py-4 border-r border-[#104179]/10">
+                                      <div className="flex items-center gap-2">
+                                        <p className="font-bold text-[#104179]">
+                                          {delegate.firstName} {delegate.lastName}
+                                        </p>
+                                        <div className="w-2 h-2 bg-[#85c226] rounded-full"></div>
+                                      </div>
+                                    </td>
+                                    <td className="px-6 py-4 border-r border-[#104179]/10">
+                                      <div className="flex items-center gap-2 text-[#104179]/70">
+                                        <Mail className="w-4 h-4 text-[#85c226] shrink-0" />
+                                        <p className="text-sm">{delegate.email}</p>
+                                      </div>
+                                    </td>
+                                    <td className="px-6 py-4 border-r border-[#104179]/10">
+                                      {delegate.phoneNumber ? (
+                                        <div className="flex items-center gap-2 text-[#104179]/70">
+                                          <Phone className="w-4 h-4 text-[#85c226] shrink-0" />
+                                          <p className="text-sm">{delegate.phoneNumber}</p>
+                                        </div>
+                                      ) : (
+                                        <span className="text-[#104179]/40 text-sm">—</span>
+                                      )}
+                                    </td>
+                                    <td className="px-6 py-4 border-r border-[#104179]/10">
+                                      {delegate.gradeLevel ? (
+                                        <div className="flex items-center gap-2 text-[#104179]/70">
+                                          <GraduationCap className="w-4 h-4 text-[#85c226] shrink-0" />
+                                          <p className="text-sm">{delegate.gradeLevel}</p>
+                                        </div>
+                                      ) : (
+                                        <span className="text-[#104179]/40 text-sm">—</span>
+                                      )}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                      <div className="flex gap-2">
+                                        <Button
+                                          variant="outline"
+                                          size="sm"
+                                          onClick={() => {
+                                            setEditingDelegate(delegate)
+                                            setShowDelegateForm(true)
+                                          }}
+                                          className="border-2 border-[#104179]/20 cursor-pointer text-[#104179] hover:bg-[#104179] hover:text-white hover:border-[#104179] rounded-lg px-3 py-1.5 font-semibold transition-all duration-300"
+                                        >
+                                          <Pencil className="w-4 h-4" />
+                                        </Button>
+                                        <Button
+                                          variant="destructive"
+                                          size="sm"
+                                          onClick={() =>
+                                            handleDeleteDelegate(delegate.id!.toString())
+                                          }
+                                          className="bg-red-500 hover:bg-red-600 cursor-pointer text-white rounded-lg px-3 py-1.5 font-semibold transition-all duration-300"
+                                        >
+                                          <Trash2 className="w-4 h-4" />
+                                        </Button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+
+                          {/* Mobile/Tablet Cards */}
+                          <div className="lg:hidden divide-y divide-[#104179]/10">
+                            {delegates.map((delegate, index) => (
+                              <div
+                                key={delegate.id}
+                                className="p-4 hover:bg-[#104179]/5 transition-colors"
+                              >
+                                <div className="flex items-start gap-3">
+                                  {/* Number Badge */}
+                                  <div className="w-10 h-10 bg-[#104179] rounded-lg flex items-center justify-center shrink-0">
+                                    <span className="text-white font-bold">{index + 1}</span>
+                                  </div>
+
+                                  {/* Content */}
+                                  <div className="flex-1 min-w-0">
+                                    {/* Name */}
+                                    <div className="flex items-center gap-2 mb-2">
+                                      <h4 className="font-bold text-[#104179]">
+                                        {delegate.firstName} {delegate.lastName}
+                                      </h4>
+                                      <div className="w-2 h-2 bg-[#85c226] rounded-full"></div>
+                                    </div>
+
+                                    {/* Info Grid */}
+                                    <div className="grid grid-cols-1 gap-1.5 text-sm mb-3">
+                                      <div className="flex items-center gap-2 text-[#104179]/70">
+                                        <Mail className="w-3.5 h-3.5 text-[#85c226] shrink-0" />
+                                        <p className="truncate">{delegate.email}</p>
+                                      </div>
+                                      {delegate.phoneNumber && (
+                                        <div className="flex items-center gap-2 text-[#104179]/70">
+                                          <Phone className="w-3.5 h-3.5 text-[#85c226] shrink-0" />
+                                          <p>{delegate.phoneNumber}</p>
+                                        </div>
+                                      )}
+                                      {delegate.gradeLevel && (
+                                        <div className="flex items-center gap-2 text-[#104179]/70">
+                                          <GraduationCap className="w-3.5 h-3.5 text-[#85c226] shrink-0" />
+                                          <p>{delegate.gradeLevel}</p>
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    {/* Actions */}
+                                    <div className="flex gap-2">
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => {
+                                          setEditingDelegate(delegate)
+                                          setShowDelegateForm(true)
+                                        }}
+                                        className="flex items-center cursor-pointer gap-1.5 border-2 border-[#104179]/20 text-[#104179] hover:bg-[#104179] hover:text-white rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-300"
+                                      >
+                                        <Pencil className="w-3.5 h-3.5" />
+                                        Edit
+                                      </Button>
+                                      <Button
+                                        variant="destructive"
+                                        size="sm"
+                                        onClick={() =>
+                                          handleDeleteDelegate(delegate.id!.toString())
+                                        }
+                                        className="flex items-center gap-1.5 cursor-pointer bg-red-500 hover:bg-red-600 text-white rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-300"
+                                      >
+                                        <Trash2 className="w-3.5 h-3.5" />
+                                        Delete
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="flex gap-2">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => {
-                                    setEditingDelegate(delegate)
-                                    setShowDelegateForm(true)
-                                  }}
-                                >
-                                  Edit
-                                </Button>
-                                <Button
-                                  variant="destructive"
-                                  size="sm"
-                                  onClick={() => handleDeleteDelegate(delegate.id!.toString())}
-                                >
-                                  Delete
-                                </Button>
-                              </div>
-                            </li>
-                          ))}
-                        </ul>
+                            ))}
+                          </div>
+                        </div>
                       ) : (
-                        <p className="text-gray-600">No delegates registered yet.</p>
+                        <div className="bg-white border-2 border-[#104179]/20 rounded-2xl p-12 text-center">
+                          <div className="flex flex-col items-center gap-4">
+                            <div className="w-20 h-20 bg-[#104179]/10 rounded-full flex items-center justify-center">
+                              <Users className="w-10 h-10 text-[#104179]/50" />
+                            </div>
+                            <div>
+                              <h4 className="text-xl font-bold text-[#104179] mb-2">
+                                No Delegates Yet
+                              </h4>
+                              <p className="text-[#104179]/70 text-base">
+                                Get started by adding your first delegate to the delegation.
+                              </p>
+                            </div>
+                            <Button
+                              onClick={() => setShowDelegateForm(true)}
+                              className="mt-4 bg-[#85c226] hover:bg-[#104179] text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+                            >
+                              <UserPlus className="w-5 h-5 mr-2" />
+                              Add First Delegate
+                            </Button>
+                          </div>
+                        </div>
                       )}
                     </div>
                   </>
@@ -398,7 +589,7 @@ export default function DelegationPortal() {
           {activeSection === 'advisors' && (
             <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-8">
               <div className="text-center py-12">
-                <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <Briefcase className="w-16 h-16 text-[#85c226]/70 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Faculty Advisors</h3>
                 {/* list of faculty advisors  */}
                 {facultyAdvisors.length > 0 ? (
@@ -488,7 +679,7 @@ export default function DelegationPortal() {
                       setEditingAdvisor(null)
                       setShowFacultyForm(true)
                     }}
-                    className="mt-4 px-4 py-2 bg-[#104179] text-white rounded-lg"
+                    className="mb-4 cursor-pointer bg-[#104179] hover:bg-[#0a2c52] text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
                   >
                     Add Faculty Advisor
                   </button>
@@ -501,6 +692,9 @@ export default function DelegationPortal() {
           {activeSection === 'assignments' && (
             <CountryAssignmentsForm delegationId={Number(delegation?.id)} />
           )}
+
+          {/* account settings */}
+          {activeSection === 'account' && <AccountSettings />}
         </div>
       </div>
     </div>

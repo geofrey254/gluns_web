@@ -7,7 +7,7 @@ export const Payments: CollectionConfig = {
     group: 'Administration',
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin',
+    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
     create: () => false,
     update: () => false,
     delete: () => true,

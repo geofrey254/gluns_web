@@ -31,12 +31,14 @@ export default function DelegationHeader({
               {activeSection === 'delegates' && 'Add Delegates'}
               {activeSection === 'advisors' && 'Faculty Advisors'}
               {activeSection === 'assignments' && 'Country Assignments'}
+              {activeSection === 'account' && 'Account Settings'}
             </h1>
             <p className="text-gray-600">
               {activeSection === 'application' && 'Complete your delegation application'}
               {activeSection === 'delegates' && 'Register your delegation members'}
               {activeSection === 'advisors' && 'Add faculty advisor information'}
               {activeSection === 'assignments' && 'View your country assignments'}
+              {activeSection === 'account' && 'Manage your account settings'}
             </p>
           </div>
         </div>

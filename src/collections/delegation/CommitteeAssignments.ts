@@ -15,7 +15,10 @@ export const CommitteeAssignments: CollectionConfig = {
 
     create: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
 
-    update: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'secretariat',
+    update: ({ req }) =>
+      req.user?.roles === 'admin' ||
+      req.user?.roles === 'secretariat' ||
+      req.user?.roles === 'teacher',
 
     delete: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
   },
@@ -80,20 +83,21 @@ export const CommitteeAssignments: CollectionConfig = {
       minRows: 1,
       maxRows: 2,
 
-      filterOptions: ({ siblingData, user }) => {
-        const delegationId = (siblingData as any)?.delegation
+      filterOptions: ({ siblingData, user, req }) => {
+        const originalDoc = (req as any)?.originalDoc
+
+        const delegationId = (siblingData as any)?.delegation ?? originalDoc?.delegation
+
         if (!delegationId) return false
 
         const baseFilter = {
           delegation: { equals: delegationId },
         }
 
-        // Admin & Secretariat: all delegates in delegation
         if (user?.roles === 'admin' || user?.roles === 'secretariat') {
           return baseFilter
         }
 
-        // Teachers: only their own delegates
         return {
           ...baseFilter,
           ...(user?.id && { teacher: { equals: user.id } }),
@@ -145,7 +149,7 @@ export const CommitteeAssignments: CollectionConfig = {
     {
       name: 'positionPaper',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'documents',
     },
 
     /**

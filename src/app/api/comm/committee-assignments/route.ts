@@ -108,7 +108,7 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!user.roles.includes('admin') && !user.roles.includes('secretariat')) {
+  if (!user.roles.includes('admin') && !user.roles.includes('teacher')) {
     return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
   }
 
@@ -121,11 +121,12 @@ export async function PATCH(req: Request) {
 
   const { assignmentId, positionPaper } = body
 
-  if (!assignmentId || !positionPaper) {
-    return NextResponse.json(
-      { message: 'assignmentId and positionPaper are required' },
-      { status: 400 },
-    )
+  if (!assignmentId) {
+    return NextResponse.json({ message: 'assignmentId is required' }, { status: 400 })
+  }
+
+  if (!positionPaper) {
+    return NextResponse.json({ message: 'positionPaper is required' }, { status: 400 })
   }
 
   try {

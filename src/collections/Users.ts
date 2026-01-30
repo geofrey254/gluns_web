@@ -12,6 +12,7 @@ export const Users: CollectionConfig = {
     create: () => true,
     read: () => true,
     delete: canUpdateUser,
+    update: canUpdateUser,
   },
   fields: [
     {

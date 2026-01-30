@@ -8,13 +8,13 @@ import {
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { FacultyAdvisor } from '@/app/types/types'
 import { useAuthStore } from '@/app/store/authStore'
+import { AlertCircle, CheckCircle2, Mail, Phone, Save, User, UserPlus } from 'lucide-react'
 
 type Props = {
   open: boolean
@@ -26,6 +26,7 @@ type Props = {
 export default function FacultyForm({ open, advisor, onClose, onSaved }: Props) {
   const { setUser } = useAuthStore()
   const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -87,8 +88,9 @@ export default function FacultyForm({ open, advisor, onClose, onSaved }: Props) 
       }
 
       onSaved(data)
+      onClose()
     } catch (err: any) {
-      alert(err.message)
+      setError(err.message || 'Failed to save faculty advisor')
     } finally {
       setSaving(false)
     }
@@ -96,38 +98,173 @@ export default function FacultyForm({ open, advisor, onClose, onSaved }: Props) 
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-2xl p-0 gap-0 rounded-2xl border-2 border-[#104179]/20 overflow-hidden">
         <form onSubmit={handleSave}>
-          <DialogHeader>
-            <DialogTitle>{advisor ? 'Edit Faculty Advisor' : 'Add Faculty Advisor'}</DialogTitle>
-            <DialogDescription>
-              {advisor
-                ? "Update your faculty advisor's information."
-                : 'Add a new faculty advisor.'}
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="grid gap-4 py-4">
-            {['firstName', 'lastName', 'email', 'phoneNumber'].map((field) => (
-              <div key={field} className="grid gap-2">
-                <Label htmlFor={field}>{field.replace(/([A-Z])/g, ' $1')}</Label>
-                <Input
-                  id={field}
-                  name={field}
-                  value={(formData as any)[field]}
-                  onChange={handleChange}
-                  required
-                />
+          {/* Header */}
+          <div className="bg-[#104179] px-6 py-5 border-b-4 border-[#85c226]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-[#85c226] rounded-xl flex items-center justify-center">
+                  {advisor ? (
+                    <User className="w-6 h-6 text-white" />
+                  ) : (
+                    <UserPlus className="w-6 h-6 text-white" />
+                  )}
+                </div>
+                <div>
+                  <DialogTitle className="text-xl font-bold text-white">
+                    {advisor ? 'Edit Faculty Advisor' : 'Add New Faculty Advisor'}
+                  </DialogTitle>
+                  <DialogDescription className="text-white/70 text-sm">
+                    {advisor
+                      ? "Update your faculty advisor's information below"
+                      : 'Fill in the details to add a new faculty advisor'}
+                  </DialogDescription>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
 
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>
+          <div className="gap-4 p-6 space-y-6">
+            {/* Error Alert */}
+            {error && (
+              <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4">
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-red-900 text-sm">Error</p>
+                    <p className="text-sm text-red-700">{error}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* Form Fields */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="firstName"
+                  className="flex items-center gap-2 text-sm font-bold text-[#104179]"
+                >
+                  <User className="w-4 h-4 text-[#85c226]" />
+                  First Name
+                </Label>
+                <Input
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Enter first name"
+                  required
+                  disabled={saving}
+                  className="border-2 border-[#104179]/20 focus:border-[#85c226] h-12 rounded-xl text-[#104179] placeholder:text-[#104179]/40"
+                />
+              </div>
+              {/* Last Name */}
+              <div className="space-y-2">
+                <Label
+                  htmlFor="lastName"
+                  className="flex items-center gap-2 text-sm font-bold text-[#104179]"
+                >
+                  <User className="w-4 h-4 text-[#85c226]" />
+                  Last Name
+                </Label>
+                <Input
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Enter last name"
+                  required
+                  disabled={saving}
+                  className="border-2 border-[#104179]/20 focus:border-[#85c226] h-12 rounded-xl text-[#104179] placeholder:text-[#104179]/40"
+                />
+              </div>
+
+              {/* Email */}
+              <div className="space-y-2">
+                <Label
+                  htmlFor="email"
+                  className="flex items-center gap-2 text-sm font-bold text-[#104179]"
+                >
+                  <Mail className="w-4 h-4 text-[#85c226]" />
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="example@email.com"
+                  required
+                  disabled={saving}
+                  className="border-2 border-[#104179]/20 focus:border-[#85c226] h-12 rounded-xl text-[#104179] placeholder:text-[#104179]/40"
+                />
+              </div>
+
+              {/* Phone Number */}
+              <div className="space-y-2">
+                <Label
+                  htmlFor="phoneNumber"
+                  className="flex items-center gap-2 text-sm font-bold text-[#104179]"
+                >
+                  <Phone className="w-4 h-4 text-[#85c226]" />
+                  Phone Number
+                </Label>
+                <Input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="tel"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  placeholder="+254 700 000 000"
+                  required
+                  disabled={saving}
+                  className="border-2 border-[#104179]/20 focus:border-[#85c226] h-12 rounded-xl text-[#104179] placeholder:text-[#104179]/40"
+                />
+              </div>
+            </div>
+            {/* Info Box */}
+            <div className="bg-[#104179]/5 border-2 border-[#104179]/20 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#85c226] shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-[#104179] text-sm mb-1">Required Information</p>
+                  <p className="text-xs text-[#104179]/70">
+                    All fields are required to complete the advisor registration. Ensure all
+                    information is accurate before saving.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter className="bg-[#104179]/5 px-6 py-4 border-t-2 border-[#104179]/10 flex-row justify-end gap-3 sm:gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              disabled={saving}
+              className="border-2 border-[#104179]/20 text-[#104179] hover:bg-[#104179]/5 rounded-xl h-11 px-6 font-semibold"
+            >
               Cancel
             </Button>
-            <Button type="submit" disabled={saving}>
-              {saving ? 'Saving...' : 'Save'}
+            <Button
+              type="submit"
+              disabled={saving}
+              className="bg-[#85c226] hover:bg-[#104179] text-white rounded-xl h-11 px-6 font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {saving ? (
+                <span className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Saving...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <Save className="w-4 h-4" />
+                  {advisor ? 'Update Advisor' : 'Add Advisor'}
+                </span>
+              )}
             </Button>
           </DialogFooter>
         </form>

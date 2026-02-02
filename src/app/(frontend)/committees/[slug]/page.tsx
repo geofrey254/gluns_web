@@ -61,7 +61,7 @@ export async function generateMetadata({
       ? committee.committee_photo.url
       : '/seo/committee.jpg'
 
-  const url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committee/${slug}`
+  const url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committees/${slug}`
 
   return {
     title,

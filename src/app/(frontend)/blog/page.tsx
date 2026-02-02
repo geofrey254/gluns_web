@@ -22,7 +22,7 @@ export const metadata = {
     title: 'GLUNS Publications & Blog – Global MUN Insights',
     description:
       'Read expert insights from GLUNS on Model United Nations, international diplomacy, global leadership, and youth engagement across Kenya, Africa, and the world.',
-    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/publications`,
+    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/blog`,
     images: [
       {
         url: '/seo/publications.jpg',

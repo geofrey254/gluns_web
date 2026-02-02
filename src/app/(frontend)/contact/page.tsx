@@ -14,7 +14,7 @@ export const metadata = {
     title: 'Contact GLUNS - Global Model United Nations in Kenya, Africa & Worldwide',
     description:
       'Get in touch with GLUNS, a leading global Model United Nations (MUN) organization operating in Kenya, across Africa, and internationally. Contact us for conferences, student participation, school collaborations, and global leadership programs.',
-    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contact-us`,
+    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contact`,
     images: [
       {
         url: '/seo/contactus.jpg',
@@ -28,7 +28,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contact-us`,
+    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contact`,
   },
 
   keywords: [

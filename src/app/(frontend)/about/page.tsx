@@ -15,7 +15,7 @@ export const metadata = {
     title: 'About GLUNS - A Global Model United Nations Organization',
     description:
       'GLUNS (Global Leaders United Nations Symposium) is a globally oriented Model United Nations organization headquartered in Kenya, empowering students across Africa and the world through diplomacy, leadership, and international collaboration.',
-    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about-us`,
+    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about`,
     images: [
       {
         url: '/seo/aboutus.jpg',
@@ -29,7 +29,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about-us`,
+    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about`,
   },
 
   keywords: [

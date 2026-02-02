@@ -12,7 +12,7 @@ export const metadata = {
     title: 'GLUNS Committees – Model United Nations in Kenya, Africa & Worldwide',
     description:
       'Browse all GLUNS committees and learn about student leadership, diplomacy, and Model United Nations programs across Kenya, Africa, and internationally.',
-    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committee`,
+    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committees`,
     siteName: 'GLUNS',
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committee`,
+    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committees`,
   },
 
   keywords: [

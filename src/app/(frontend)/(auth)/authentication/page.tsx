@@ -11,7 +11,7 @@ export const metadata = {
     title: 'GLUNS Authentication – Sign Up or Log In to Model United Nations Portal',
     description:
       'Sign up or log in to the GLUNS portal to register your school or student delegation for Model United Nations conferences and youth leadership programs across Kenya, Africa, and globally.',
-    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/auth`,
+    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/authentication`,
     siteName: 'GLUNS',
     images: [
       {
@@ -26,7 +26,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/auth`,
+    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/authentication`,
   },
 
   keywords: [

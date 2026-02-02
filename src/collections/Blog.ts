@@ -14,10 +14,10 @@ const Blog: CollectionConfig = {
     group: 'Publications',
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin',
-    delete: () => true,
-    create: () => true,
-    update: () => true,
+    read: () => true,
+    create: ({ req }) => req.user?.roles === 'admin',
+    update: ({ req }) => req.user?.roles === 'admin',
+    delete: ({ req }) => req.user?.roles === 'admin',
   },
   versions: {
     drafts: true,

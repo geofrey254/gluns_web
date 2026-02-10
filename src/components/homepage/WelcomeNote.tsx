@@ -129,7 +129,7 @@ export default function WelcomeNote() {
                   <div className="flex items-center gap-3">
                     <div className="text-right mr-4">
                       <p className="text-xs text-gray-500 uppercase tracking-wide">Dated</p>
-                      <p className="text-sm font-semibold text-gray-700">December 2026</p>
+                      <p className="text-sm font-semibold text-gray-700">2026</p>
                     </div>
                     <div className="w-20 h-20 border-2 border-[#104179] rounded-lg flex items-center justify-center">
                       <div className="text-center">

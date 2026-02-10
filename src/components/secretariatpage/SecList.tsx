@@ -45,8 +45,8 @@ export default function SecList({ secretariat }: { secretariat: SecretariatMembe
                 <div className="absolute inset-0">
                   {sec.photoUrl && (
                     <Image
-                      width={400}
-                      height={200}
+                      width={1024}
+                      height={1024}
                       src={sec.photoUrl}
                       alt={sec.name}
                       className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
@@ -135,7 +135,7 @@ export default function SecList({ secretariat }: { secretariat: SecretariatMembe
                   height={200}
                   src={selectedMember.photoUrl}
                   alt={selectedMember.name}
-                  className="w-44 h-44 md:w-72 md:h-72 object-cover object-center absolute left-4 top-4 md:right-28 md:bottom-8 rounded-3xl border border-white"
+                  className="w-44 h-44 md:w-72 md:h-72 object-cover object-top absolute left-4 top-4 md:right-28 md:bottom-8 rounded-3xl border border-white"
                 />
               )}
 

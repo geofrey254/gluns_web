@@ -11,14 +11,14 @@ export default function About() {
           <div className="absolute inset-0">
             <Image
               fill
-              src="/images/aboutus.jpg"
+              src="/images/un.jpg"
               alt="About GLUNS"
               className="object-cover object-bottom lg:rounded-tr-none lg:rounded-tl-3xl"
               priority
             />
 
             {/* Enhanced Gradient Overlay */}
-            <div className="absolute inset-0 bg-linear-to-b lg:bg-linear-to-r from-black/70 via-black/40 to-transparent lg:rounded-tr-none lg:rounded-tl-3xl"></div>
+            <div className="absolute inset-0 bg-linear-to-b lg:bg-linear-to-r from-black/70 via-black/40 to-black/70 lg:rounded-tr-none lg:rounded-tl-3xl"></div>
           </div>
 
           {/* Enhanced Floating Highlight Card */}

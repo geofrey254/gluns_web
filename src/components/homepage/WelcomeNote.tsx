@@ -20,7 +20,7 @@ export default function WelcomeNote() {
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
               </svg>
-              Message from Leadership
+              Message from the Administration
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               A Word from the{' '}
@@ -52,7 +52,7 @@ export default function WelcomeNote() {
                       <Image
                         width={600}
                         height={750}
-                        src="/images/anisa.JPG"
+                        src="/images/Noosha.jpeg"
                         alt="Secretary General"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
@@ -66,10 +66,8 @@ export default function WelcomeNote() {
 
                     {/* Info Card */}
                     <div className="p-6 bg-white">
-                      <h3 className="text-2xl font-bold text-[#104179] mb-2">Anisa Ali</h3>
-                      <p className="text-[#104179] font-semibold mb-1">
-                        Director of Administration
-                      </p>
+                      <h3 className="text-2xl font-bold text-[#104179] mb-2">Noosha Aval</h3>
+                      <p className="text-[#104179] font-semibold mb-1">Chief Advisor</p>
                       <p className="text-gray-500 text-sm mb-4">
                         Global Leaders United Nations Symposium
                       </p>
@@ -120,9 +118,9 @@ export default function WelcomeNote() {
                       className="text-3xl md:text-4xl font-bold text-[#104179] italic"
                       style={{ fontFamily: 'Georgia, serif' }}
                     >
-                      Anisa Ali
+                      Noosha Aval
                     </div>
-                    <p className="text-sm text-gray-600 font-medium">Director of Adminstration</p>
+                    <p className="text-sm text-gray-600 font-medium">Chief Advisor</p>
                     <p className="text-xs text-gray-500">Global Leaders United Nations Symposium</p>
                   </div>
 

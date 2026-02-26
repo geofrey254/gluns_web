@@ -38,21 +38,21 @@ export default function ContactInfo() {
     {
       icon: Mail,
       title: 'Delegations & Registration',
-      value: 'delegations@gluns.org',
+      value: 'admin@gluns.org',
       description: 'For schools, delegations, and registrations.',
       href: 'mailto:delegations@gluns.org',
     },
     {
       icon: Mail,
       title: 'Partnerships & Sponsorships',
-      value: 'partnerships@gluns.org',
+      value: 'info@gluns.org',
       description: 'Collaborate or sponsor our programs.',
       href: 'mailto:partnerships@gluns.org',
     },
     {
       icon: Mail,
       title: 'Media & Press',
-      value: 'media@gluns.org',
+      value: 'admin@gluns.org',
       description: 'Press, interviews, and media requests.',
       href: 'mailto:media@gluns.org',
     },
@@ -76,12 +76,10 @@ export default function ContactInfo() {
     >
       {/* Header */}
       <motion.div variants={itemVariants}>
-        <h2 className="text-4xl lg:text-5xl font-bold text-[#104179] mb-4">
-          Get In Touch
-        </h2>
+        <h2 className="text-4xl lg:text-5xl font-bold text-[#104179] mb-4">Get In Touch</h2>
         <p className="text-gray-600 text-lg leading-relaxed">
-          We’re here to support delegates, schools, partners, and media teams. 
-          Choose the right contact and we’ll respond shortly.
+          We’re here to support delegates, schools, partners, and media teams. Choose the right
+          contact and we’ll respond shortly.
         </p>
       </motion.div>
 
@@ -103,9 +101,7 @@ export default function ContactInfo() {
                 <h3 className="font-semibold text-[#104179] mb-1 transition-colors">
                   {method.title}
                 </h3>
-                <p className="text-[#85c226] md:font-medium mb-1">
-                  {method.value}
-                </p>
+                <p className="text-[#85c226] md:font-medium mb-1">{method.value}</p>
                 <p className="text-sm text-gray-500">{method.description}</p>
               </div>
             </div>
@@ -125,7 +121,9 @@ export default function ContactInfo() {
           <div>
             <h3 className="text-2xl font-bold text-[#104179] mb-3">Our Office</h3>
             <div className="space-y-2 text-gray-600">
-              <p>Gardens Arcade, 1<sup>st</sup> Floor</p>
+              <p>
+                Gardens Arcade, 1<sup>st</sup> Floor
+              </p>
               <p>Gardens, Kikuyu, Kenya</p>
             </div>
             <motion.div whileHover={{ scale: 1.05 }} className="inline-block mt-4">
@@ -148,9 +146,7 @@ export default function ContactInfo() {
 
       {/* Social Links */}
       <motion.div variants={itemVariants}>
-        <h3 className="text-xl font-semibold text-[#104179] mb-4">
-          Follow Us
-        </h3>
+        <h3 className="text-xl font-semibold text-[#104179] mb-4">Follow Us</h3>
         <div className="flex gap-4">
           {socialLinks.map((social, index) => (
             <motion.a

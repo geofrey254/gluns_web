@@ -17,7 +17,7 @@ export default function SecHero() {
             >
               <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#104179' }}></div>
               <span className="text-sm font-bold tracking-wider" style={{ color: '#104179' }}>
-                SECRETARIAT 2025
+                SECRETARIAT 2026
               </span>
             </div>
 
@@ -84,13 +84,13 @@ export default function SecHero() {
                 <Image
                   width={400}
                   height={200}
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800"
+                  src="/images/gluns.jpg"
                   alt="GLUNS Leadership"
                   className="w-full h-[500px] object-cover rounded-xl"
                 />
 
                 {/* Overlay Box */}
-                <div className="absolute inset-0 bg-black opacity-40 rounded-xl"></div>
+                <div className="absolute inset-0 bg-black opacity-10 rounded-xl"></div>
               </div>
 
               {/* Floating Card */}
@@ -104,7 +104,7 @@ export default function SecHero() {
                   </div>
                   <div>
                     <div className="text-2xl font-black mb-1" style={{ color: '#104179' }}>
-                      2025
+                      2026
                     </div>
                     <p className="text-sm text-gray-700 font-medium leading-snug">
                       Building the next generation of global leaders

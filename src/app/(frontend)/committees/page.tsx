@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import React from 'react'
 import CommitteeHero from '@/components/committeepage/CommitteeHero'
 import CommitteeList from '@/components/committeepage/CommitteeList'

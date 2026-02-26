@@ -18,5 +18,6 @@ export const Progress: CollectionConfig = {
     { name: 'lastInteraction', type: 'date' },
     { name: 'flaggedWeak', type: 'checkbox' },
     { name: 'recommendedReview', type: 'checkbox' },
+    
   ],
 }

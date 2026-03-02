@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    pages: Page;
     documents: Document;
     portraits: Portrait;
     'delegation-applications': DelegationApplication;
@@ -97,6 +98,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     portraits: PortraitsSelect<false> | PortraitsSelect<true>;
     'delegation-applications': DelegationApplicationsSelect<false> | DelegationApplicationsSelect<true>;
@@ -203,15 +205,49 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  layout?:
+    | {
+        team_profiles?: (number | Secretariat)[] | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'ourTeam';
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Add Secretariat Member
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "secretariat".
+ */
+export interface Secretariat {
+  id: number;
+  full_name: string;
+  role: string;
+  photo?: (number | null) | Portrait;
+  email: string;
+  bio: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Media
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "documents".
+ * via the `definition` "portraits".
  */
-export interface Document {
+export interface Portrait {
   id: number;
-  title?: string | null;
-  alt?: string | null;
+  alt: string;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -229,11 +265,12 @@ export interface Document {
  * Media
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "portraits".
+ * via the `definition` "documents".
  */
-export interface Portrait {
+export interface Document {
   id: number;
-  alt: string;
+  title?: string | null;
+  alt?: string | null;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -472,22 +509,6 @@ export interface CommitteeTeam {
   rank: number;
   photo?: (number | null) | Portrait;
   committee: number | Committee;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Add Secretariat Member
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "secretariat".
- */
-export interface Secretariat {
-  id: number;
-  full_name: string;
-  role: string;
-  photo?: (number | null) | Portrait;
-  email: string;
-  bio: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -759,6 +780,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -918,6 +943,27 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        ourTeam?:
+          | T
+          | {
+              team_profiles?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

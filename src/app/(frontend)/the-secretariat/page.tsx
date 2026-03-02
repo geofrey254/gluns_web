@@ -1,8 +1,10 @@
 export const dynamic = 'force-dynamic'
 
 import React from 'react'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 import SecHero from '@/components/secretariatpage/SecHero'
-import SecListServer from '@/components/secretariatpage/SecList.server'
+import SecList from '@/components/secretariatpage/SecList'
 
 export const metadata = {
   title: 'The Secretariat | GLUNS Leadership – Model United Nations Kenya, Africa & Global',
@@ -57,11 +59,37 @@ export const metadata = {
   ],
 }
 
-export default function page() {
+export default async function page() {
+  const payloadConfig = await config
+  const payload = await getPayload({ config: payloadConfig })
+  const {
+    docs: [page],
+  } = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: { equals: 'the-secretariat' },
+    },
+  })
+
+  if (!page) {
+    return <div>Page not found</div>
+  }
+
+  // Render the page layout dynamically
   return (
     <>
       <SecHero />
-      <SecListServer />
+      {page.layout?.map((block, index) => renderBlock(block, index))}
     </>
   )
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function renderBlock(block: any, index: number) {
+  switch (block.blockType) {
+    case 'ourTeam':
+      return <SecList key={index} block={block} />
+    default:
+      return null
+  }
 }

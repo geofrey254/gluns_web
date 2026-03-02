@@ -43,12 +43,14 @@ export interface Delegation {
 // app/types/types.ts
 export interface SecretariatMember {
   id: number
-  name: string
+  full_name: string
   role: string
   email: string
   bio: string
-  photoUrl: string
-  photoAlt?: string
+  photo: {
+    url: string
+    alt: string
+  }
 }
 
 export interface CommitteeAssignment {

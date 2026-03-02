@@ -12,6 +12,7 @@ import nodemailer from 'nodemailer'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/media/Media'
+import { Pages } from './collections/Pages'
 import { Documents } from './collections/media/Documents'
 import { Portraits } from './collections/media/Portraits'
 import { DelegationApplications } from './collections/delegation/DelegationApplication'
@@ -77,6 +78,7 @@ export default buildConfig({
   collections: [
     Users,
     Media,
+    Pages,
     Documents,
     Portraits,
     DelegationApplications,

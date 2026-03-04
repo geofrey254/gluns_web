@@ -2,20 +2,47 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card } from '@/components/ui/card'
-import { AlertCircle, Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Loader2, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { RiAtLine, RiLockPasswordLine, RiArrowRightLine, RiLoginCircleLine } from 'react-icons/ri'
 import { useAcademyStore } from '@/app/store/academyStore'
+
+const inputCls = [
+  'w-full px-4 py-3 rounded-2xl border-2 border-slate-200 bg-slate-50',
+  'text-sm font-semibold text-slate-800 placeholder:text-slate-300 placeholder:font-medium',
+  'outline-none transition-all duration-200',
+  'focus:border-[#104179] focus:bg-white focus:ring-4 focus:ring-[#104179]/20',
+  'disabled:opacity-50 disabled:cursor-not-allowed',
+].join(' ')
+
+function Field({
+  label,
+  icon: Icon,
+  children,
+}: {
+  label: string
+  icon: React.ElementType
+  children: React.ReactNode
+}) {
+  return (
+    <div className="mb-5">
+      <label className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
+        <Icon className="w-3.5 h-3.5" />
+        {label}
+      </label>
+      {children}
+    </div>
+  )
+}
 
 export default function Login() {
   const router = useRouter()
+  const setUser = useAcademyStore((state) => state.setUser)
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const setUser = useAcademyStore((state) => state.setUser)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -27,27 +54,20 @@ export default function Login() {
     }
 
     setLoading(true)
-
     try {
       const response = await fetch('/api/academy/student-login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: username.trim(), password }),
       })
 
       const data = await response.json()
-
       if (!response.ok) {
         setError(data.error || 'Login failed')
         return
       }
 
       setUser(data.user)
-
-      // Redirect to academy on success
-
       router.replace('/academy')
     } catch (err) {
       console.error('Error logging in:', err)
@@ -57,101 +77,110 @@ export default function Login() {
     }
   }
 
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-md shadow-lg">
-        <div className="p-8">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">Student Login</h1>
-            <p className="text-slate-600">Sign in to your GLUNS Academy account</p>
-          </div>
+  const canSubmit = username.trim().length > 0 && password.trim().length > 0 && !loading
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Error Message */}
+  return (
+    <>
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ fontFamily: "'Nunito', sans-serif" }}
+      >
+        {/* Decorative blobs */}
+        <div className="fixed top-0 right-0 w-96 h-96 bg-blue-100 rounded-full -translate-y-1/2 translate-x-1/3 opacity-50 pointer-events-none -z-10" />
+        <div className="fixed bottom-0 left-0 w-80 h-80 bg-sky-100 rounded-full translate-y-1/3 -translate-x-1/4 opacity-50 pointer-events-none -z-10" />
+
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-3xl shadow-xl shadow-blue-100/60 border border-blue-100 p-8 sm:p-10">
+            {/* Header */}
+            <div className="flex flex-col items-center text-center mb-8">
+              <div className="w-16 h-16 rounded-3xl bg-linear-to-br from-blue-50 to-blue-100 flex items-center justify-center mb-4 shadow-md shadow-blue-100">
+                <RiLoginCircleLine className="w-8 h-8 text-[#85c226]" />
+              </div>
+              <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-tight mb-1">
+                Welcome back!
+              </h1>
+              <p className="text-slate-500 text-sm font-semibold">
+                Sign in to your GLUNS Academy account
+              </p>
+            </div>
+
+            {/* Error */}
             {error && (
-              <div className="flex items-center gap-3 p-4 bg-red-50 rounded-lg border border-red-200">
-                <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
-                <p className="text-sm text-red-700">{error}</p>
+              <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-2xl mb-6">
+                <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
+                <p className="text-sm text-red-600 font-semibold">{error}</p>
               </div>
             )}
 
-            {/* Username Field */}
-            <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-medium text-slate-900">
-                Username
-              </label>
-              <Input
-                id="username"
-                type="text"
-                placeholder="Enter your username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                disabled={loading}
-                autoComplete="username"
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-50"
-              />
-            </div>
-
-            {/* Password Field */}
-            <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium text-slate-900">
-                Password
-              </label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+            <form onSubmit={handleSubmit}>
+              {/* Username */}
+              <Field label="Username" icon={RiAtLine}>
+                <input
+                  className={inputCls}
+                  type="text"
+                  placeholder="Enter your username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   disabled={loading}
-                  autoComplete="current-password"
-                  className="w-full px-4 py-2 pr-10 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-50"
+                  autoComplete="username"
+                  autoFocus
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
+              </Field>
 
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={loading || !username.trim() || !password.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                'Sign In'
-              )}
-            </Button>
+              {/* Password */}
+              <Field label="Password" icon={RiLockPasswordLine}>
+                <div className="relative">
+                  <input
+                    className={[inputCls, 'pr-11'].join(' ')}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
+                    autoComplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#85c226] transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </Field>
 
-            {/* Sign Up Link */}
-            <div className="text-center pt-2">
-              <p className="text-sm text-slate-600">
-                Don{"'"}t have an account?{' '}
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                className="w-full mt-2 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#104179] hover:bg-[#0e3562] cursor-pointer active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:scale-100"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" /> Signing in…
+                  </>
+                ) : (
+                  <>
+                    Sign In <RiArrowRightLine className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+
+              {/* Sign up link */}
+              <p className="text-center text-sm text-slate-500 font-semibold mt-6">
+                Don&apos;t have an account?{' '}
                 <button
                   type="button"
                   onClick={() => router.push('/academy/auth')}
-                  className="text-[#85c226] hover:text-blue-700 font-medium"
+                  className="text-[#85c226] hover:text-[#0e3562] cursor-pointer font-black underline-offset-2 hover:underline transition-colors"
                 >
                   Sign up with access code
                 </button>
               </p>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </Card>
-    </div>
+      </div>
+    </>
   )
 }

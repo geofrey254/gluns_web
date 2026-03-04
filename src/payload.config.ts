@@ -48,6 +48,8 @@ import { Modules } from './collections/academy/Modules'
 import { Sections } from './collections/academy/Sections'
 import { ContentBlocks } from './collections/academy/ContentBlocks'
 import { Exercises } from './collections/academy/Exercises'
+import { Achievements } from './collections/academy/Achievements'
+import { Badges } from './collections/academy/Badges'
 
 // endpoints
 
@@ -99,6 +101,8 @@ export default buildConfig({
     Sections,
     ContentBlocks,
     Exercises,
+    Achievements,
+    Badges,
     // #####################
 
     Documents,

@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import slugify from 'slugify'
+import { AccessArgs } from 'payload'
 
 const Blog: CollectionConfig = {
   slug: 'blog',
@@ -15,9 +16,15 @@ const Blog: CollectionConfig = {
   },
   access: {
     read: () => true,
-    create: ({ req }) => req.user?.roles === 'admin',
-    update: ({ req }) => req.user?.roles === 'admin',
-    delete: ({ req }) => req.user?.roles === 'admin',
+    create: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+    update: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+    delete: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
   },
   versions: {
     drafts: true,

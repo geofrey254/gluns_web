@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { enforceDelegateOwnership } from '../hooks/DelegateOwnership'
 import { ensurePaidSlots } from '../hooks/EnsurePaidSlots'
+import { AccessArgs } from 'payload'
 
 export const Delegates: CollectionConfig = {
   slug: 'delegates',
@@ -11,10 +12,28 @@ export const Delegates: CollectionConfig = {
     enableRichTextLink: false,
   },
   access: {
-    read: ({ req }) => !!req.user,
-    create: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
-    update: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
-    delete: ({ req, data }) => req.user?.roles === 'admin' || req.user?.id === data?.teacher,
+    read: ({ req }: AccessArgs) => !!req.user,
+    create: ({ req }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.roles.includes('teacher'))
+      )
+    },
+    update: ({ req, data }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.id === data?.teacher)
+      )
+    },
+    delete: ({ req, data }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.id === data?.teacher)
+      )
+    },
   },
   hooks: {
     beforeChange: [enforceDelegateOwnership, ensurePaidSlots],

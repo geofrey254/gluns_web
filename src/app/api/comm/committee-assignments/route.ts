@@ -24,7 +24,8 @@ export async function GET(req: Request) {
     }
 
     // Teachers only see their own delegates’ assignments
-    if (user.roles.includes('teacher')) {
+
+    if ('roles' in user && user.roles.includes('teacher')) {
       where['delegates.teacher'] = { equals: Number(user.id) }
     }
 
@@ -54,7 +55,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!user.roles.includes('admin') && !user.roles.includes('teacher')) {
+  if (!('roles' in user) || (!user.roles.includes('admin') && !user.roles.includes('teacher'))) {
     return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
   }
 
@@ -108,7 +109,7 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!user.roles.includes('admin') && !user.roles.includes('teacher')) {
+  if (!('roles' in user) || (!user.roles.includes('admin') && !user.roles.includes('teacher'))) {
     return NextResponse.json({ message: 'Forbidden' }, { status: 403 })
   }
 

@@ -6,7 +6,7 @@ export const canUpdateUser: Access<User> = ({ req: { user }, id }) => {
 
   // 2. If user is admin, allow full access
   // We check for both array and string to be safe
-  const isAdmin = user.roles?.includes('admin')
+  const isAdmin = user && 'roles' in user && user.roles.includes('admin')
   if (isAdmin) return true
 
   // 3. For 'read' or 'update', allow users to access their own record

@@ -14,7 +14,7 @@ export const enforceDelegateOwnership: CollectionBeforeChangeHook = async ({
   }
 
   // Admin bypass
-  if (req.user.roles === 'admin') {
+  if (req.user && 'roles' in req.user && req.user.roles.includes('admin')) {
     return data
   }
   // Always enforce teacher ownership
@@ -33,7 +33,12 @@ export const enforceDelegateOwnership: CollectionBeforeChangeHook = async ({
   })
 
   // Ownership check first
-  if (delegation.teacher !== req.user.id && !req.user.roles?.includes('admin')) {
+  if (
+    req.user &&
+    'roles' in req.user &&
+    delegation.teacher !== req.user.id &&
+    !req.user.roles.includes('admin')
+  ) {
     throw new Error('You do not own this delegation')
   }
 

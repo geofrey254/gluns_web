@@ -79,6 +79,8 @@ export interface Config {
     sections: Section;
     'content-blocks': ContentBlock;
     exercises: Exercise;
+    achievements: Achievement;
+    badges: Badge;
     documents: Document;
     portraits: Portrait;
     'delegation-applications': DelegationApplication;
@@ -116,6 +118,8 @@ export interface Config {
     sections: SectionsSelect<false> | SectionsSelect<true>;
     'content-blocks': ContentBlocksSelect<false> | ContentBlocksSelect<true>;
     exercises: ExercisesSelect<false> | ExercisesSelect<true>;
+    achievements: AchievementsSelect<false> | AchievementsSelect<true>;
+    badges: BadgesSelect<false> | BadgesSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     portraits: PortraitsSelect<false> | PortraitsSelect<true>;
     'delegation-applications': DelegationApplicationsSelect<false> | DelegationApplicationsSelect<true>;
@@ -526,6 +530,37 @@ export interface Exercise {
   penaltyPerAttempt?: number | null;
   ageVariants?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
   difficulty?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "achievements".
+ */
+export interface Achievement {
+  id: number;
+  student?: (number | null) | Student;
+  badge?: (number | null) | Badge;
+  earnedDate?: string | null;
+  triggerSource?: string | null;
+  courseContext?: (number | null) | Course;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "badges".
+ */
+export interface Badge {
+  id: number;
+  name?: string | null;
+  description?: string | null;
+  icon?: (number | null) | Media;
+  criteriaType?: string | null;
+  criteriaValue?: string | null;
+  pointsReward?: number | null;
+  rarity?: string | null;
+  visible?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1084,6 +1119,14 @@ export interface PayloadLockedDocument {
         value: number | Exercise;
       } | null)
     | ({
+        relationTo: 'achievements';
+        value: number | Achievement;
+      } | null)
+    | ({
+        relationTo: 'badges';
+        value: number | Badge;
+      } | null)
+    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -1445,6 +1488,35 @@ export interface ExercisesSelect<T extends boolean = true> {
   penaltyPerAttempt?: T;
   ageVariants?: T;
   difficulty?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "achievements_select".
+ */
+export interface AchievementsSelect<T extends boolean = true> {
+  student?: T;
+  badge?: T;
+  earnedDate?: T;
+  triggerSource?: T;
+  courseContext?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "badges_select".
+ */
+export interface BadgesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  criteriaType?: T;
+  criteriaValue?: T;
+  pointsReward?: T;
+  rarity?: T;
+  visible?: T;
   updatedAt?: T;
   createdAt?: T;
 }

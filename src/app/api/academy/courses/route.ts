@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import { getPayload } from 'payload'
 import { NextResponse } from 'next/server'
+import config from '@payload-config'
 
 export async function GET() {
   try {
@@ -11,7 +12,7 @@ export async function GET() {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
-    const payload = await getPayload()
+    const payload = await getPayload({ config })
 
     // Fetch all courses
     const coursesResult = await payload.find({

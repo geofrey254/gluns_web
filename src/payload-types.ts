@@ -363,6 +363,9 @@ export interface Student {
 export interface Course {
   id: number;
   title: string;
+  /**
+   * Auto-generated from title if left blank
+   */
   slug: string;
   description?: string | null;
   thumbnail?: (number | null) | Media;

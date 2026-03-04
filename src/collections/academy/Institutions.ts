@@ -1,8 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { randomBytes } from 'crypto'
 
-function generateInstitutionCode() {
-  return 'GL-' + randomBytes(4).toString('hex').toUpperCase()
+function generateInstitutionCode(institutionName: string) {
+  const namePart = institutionName.slice(0, 3).toUpperCase()
+  const randomPart = randomBytes(4).toString('hex').toUpperCase() // 8-digit numeric code
+  return `GLNS-${namePart}-${randomPart}`
 }
 
 export const Institutions: CollectionConfig = {
@@ -12,7 +14,7 @@ export const Institutions: CollectionConfig = {
     beforeChange: [
       async ({ data, operation }) => {
         if (operation === 'create') {
-          data.enrollmentCode = generateInstitutionCode()
+          data.enrollmentCode = generateInstitutionCode(data.name)
         }
         return data
       },

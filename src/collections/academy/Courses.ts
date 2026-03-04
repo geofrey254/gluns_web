@@ -1,10 +1,28 @@
 import { CollectionConfig } from 'payload'
+import slugify from 'slugify'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
   fields: [
     { name: 'title', type: 'text', required: true },
-    { name: 'slug', type: 'text', required: true, unique: true },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      admin: {
+        description: 'Auto-generated from title if left blank',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ data }) => {
+            if (data?.title && !data.slug) {
+              return slugify(data.title, { lower: true, strict: true })
+            }
+          },
+        ],
+      },
+    },
     { name: 'description', type: 'textarea' },
     { name: 'thumbnail', type: 'upload', relationTo: 'media' },
     {

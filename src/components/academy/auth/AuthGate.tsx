@@ -1,6 +1,6 @@
 'use client'
 
-import AcademyDashboard from '../AcademyDashboard'
+import AcademyDashboard from '../dashboard/AcademyDashboard'
 import AcademyLandingPage from '../AcademyLandingPage'
 import { useAcademyGate } from '../hooks/useAuthAcademy'
 

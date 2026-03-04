@@ -357,6 +357,8 @@ export interface Student {
   password?: string | null;
 }
 /**
+ * Add Course
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
  */

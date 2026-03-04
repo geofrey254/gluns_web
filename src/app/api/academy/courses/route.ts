@@ -1,17 +1,9 @@
-import { cookies } from 'next/headers'
 import { getPayload } from 'payload'
 import { NextResponse } from 'next/server'
 import config from '@payload-config'
 
 export async function GET() {
   try {
-    const cookieStore = await cookies()
-    const studentId = cookieStore.get('academy_student_id')?.value
-
-    if (!studentId) {
-      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
-    }
-
     const payload = await getPayload({ config })
 
     // Fetch all courses

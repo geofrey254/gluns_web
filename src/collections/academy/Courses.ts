@@ -3,6 +3,17 @@ import slugify from 'slugify'
 
 export const Courses: CollectionConfig = {
   slug: 'courses',
+  admin: {
+    useAsTitle: 'title',
+    description: 'Add Course',
+    group: 'GLUNS Academy',
+  },
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     {

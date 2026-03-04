@@ -86,6 +86,7 @@ export default function SecHero() {
                   height={200}
                   src="/images/gluns.jpg"
                   alt="GLUNS Leadership"
+                  priority
                   className="w-full h-[500px] object-cover rounded-xl"
                 />
 

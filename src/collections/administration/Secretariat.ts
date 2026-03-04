@@ -7,6 +7,10 @@ export const Secretariat: CollectionConfig = {
     description: 'Add Secretariat Member',
     group: 'Administration',
   },
+  labels: {
+    singular: 'Secretariat',
+    plural: 'Secretariat',
+  },
   fields: [
     {
       name: 'full_name',

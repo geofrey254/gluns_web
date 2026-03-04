@@ -2,14 +2,16 @@ import { CollectionConfig } from 'payload'
 
 export const Students: CollectionConfig = {
   slug: 'students',
+  auth: true,
   admin: {
-    useAsTitle: 'reference',
+    useAsTitle: 'fullName',
     group: 'GLUNS Academy',
   },
   fields: [
     { name: 'fullName', type: 'text', required: true },
+    { name: 'email', type: 'email', required: false },
     { name: 'username', type: 'text' },
-    { name: 'accessCode', type: 'text', required: true },
+    { name: 'institution', type: 'relationship', relationTo: 'institutions' },
     { name: 'age', type: 'number' },
     {
       name: 'ageGroup',
@@ -28,7 +30,6 @@ export const Students: CollectionConfig = {
     { name: 'currentCourse', type: 'relationship', relationTo: 'courses' },
     { name: 'currentModule', type: 'relationship', relationTo: 'modules' },
     { name: 'currentLesson', type: 'relationship', relationTo: 'lessons' },
-    { name: 'codeExpiresAt', type: 'date' },
     { name: 'locked', type: 'checkbox', defaultValue: false },
   ],
 }

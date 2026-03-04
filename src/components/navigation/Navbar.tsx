@@ -51,6 +51,7 @@ export default function Navbar() {
               alt="GLUNS Logo"
               width={500}
               height={500}
+              priority
               className="w-32 md:w-32 2xl:w-36"
             />
           </Link>

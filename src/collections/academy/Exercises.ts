@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload'
 
 export const Exercises: CollectionConfig = {
   slug: 'exercises',
+  admin: {
+    useAsTitle: 'question',
+    group: 'GLUNS Academy',
+  },
   fields: [
     { name: 'question', type: 'textarea' },
     { name: 'instructions', type: 'textarea' },

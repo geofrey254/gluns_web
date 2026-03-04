@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload'
 
 export const ContentBlocks: CollectionConfig = {
   slug: 'content-blocks',
+  admin: {
+    useAsTitle: 'title',
+    group: 'GLUNS Academy',
+  },
   fields: [
     {
       name: 'blockType',

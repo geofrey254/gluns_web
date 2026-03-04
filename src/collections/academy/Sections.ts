@@ -2,6 +2,10 @@ import { CollectionConfig } from 'payload'
 
 export const Sections: CollectionConfig = {
   slug: 'sections',
+  admin: {
+    useAsTitle: 'title',
+    group: 'GLUNS Academy',
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     { name: 'lesson', type: 'relationship', relationTo: 'lessons', required: true },

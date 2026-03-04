@@ -3,6 +3,10 @@ import slugify from 'slugify'
 
 export const Modules: CollectionConfig = {
   slug: 'modules',
+  admin: {
+    useAsTitle: 'title',
+    group: 'GLUNS Academy',
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     {

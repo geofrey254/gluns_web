@@ -12,6 +12,7 @@ import nodemailer from 'nodemailer'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/media/Media'
+import { Pages } from './collections/Pages'
 import { Documents } from './collections/media/Documents'
 import { Portraits } from './collections/media/Portraits'
 import { DelegationApplications } from './collections/delegation/DelegationApplication'
@@ -37,6 +38,16 @@ import { Faculty } from './collections/delegation/Faculty'
 
 import { Payments } from './collections/administration/Payments'
 import { Sponsors } from './collections/administration/Sponsors'
+
+// Academy collections
+import { Institutions } from './collections/academy/Institutions'
+import { Students } from './collections/academy/Students'
+import { Courses } from './collections/academy/Courses'
+import { Lessons } from './collections/academy/Lessons'
+import { Modules } from './collections/academy/Modules'
+import { Sections } from './collections/academy/Sections'
+import { ContentBlocks } from './collections/academy/ContentBlocks'
+import { Exercises } from './collections/academy/Exercises'
 
 // endpoints
 
@@ -77,6 +88,19 @@ export default buildConfig({
   collections: [
     Users,
     Media,
+    Pages,
+
+    // Academy collections
+    Institutions,
+    Students,
+    Courses,
+    Lessons,
+    Modules,
+    Sections,
+    ContentBlocks,
+    Exercises,
+    // #####################
+
     Documents,
     Portraits,
     DelegationApplications,
@@ -95,7 +119,7 @@ export default buildConfig({
     PositionPapers,
     CommitteeAssignments,
   ],
-  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
+  serverURL: process.env.PAYLOAD_URL,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

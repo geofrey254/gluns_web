@@ -64,11 +64,21 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    students: StudentAuthOperations;
   };
   blocks: {};
   collections: {
     users: User;
     media: Media;
+    pages: Page;
+    institutions: Institution;
+    students: Student;
+    courses: Course;
+    lessons: Lesson;
+    modules: Module;
+    sections: Section;
+    'content-blocks': ContentBlock;
+    exercises: Exercise;
     documents: Document;
     portraits: Portrait;
     'delegation-applications': DelegationApplication;
@@ -97,6 +107,15 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    institutions: InstitutionsSelect<false> | InstitutionsSelect<true>;
+    students: StudentsSelect<false> | StudentsSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
+    lessons: LessonsSelect<false> | LessonsSelect<true>;
+    modules: ModulesSelect<false> | ModulesSelect<true>;
+    sections: SectionsSelect<false> | SectionsSelect<true>;
+    'content-blocks': ContentBlocksSelect<false> | ContentBlocksSelect<true>;
+    exercises: ExercisesSelect<false> | ExercisesSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     portraits: PortraitsSelect<false> | PortraitsSelect<true>;
     'delegation-applications': DelegationApplicationsSelect<false> | DelegationApplicationsSelect<true>;
@@ -128,15 +147,37 @@ export interface Config {
   globals: {};
   globalsSelect: {};
   locale: null;
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (Student & {
+        collection: 'students';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface StudentAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -203,15 +244,49 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  layout?:
+    | {
+        team_profiles?: (number | Secretariat)[] | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'ourTeam';
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Add Secretariat Member
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "secretariat".
+ */
+export interface Secretariat {
+  id: number;
+  full_name: string;
+  role: string;
+  photo?: (number | null) | Portrait;
+  email: string;
+  bio: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Media
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "documents".
+ * via the `definition` "portraits".
  */
-export interface Document {
+export interface Portrait {
   id: number;
-  title?: string | null;
-  alt?: string | null;
+  alt: string;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -226,14 +301,244 @@ export interface Document {
   focalY?: number | null;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "institutions".
+ */
+export interface Institution {
+  id: number;
+  name: string;
+  contactEmail?: string | null;
+  enrollmentCode: string;
+  maxStudents: number;
+  currentStudents?: number | null;
+  expiresAt?: string | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "students".
+ */
+export interface Student {
+  id: number;
+  fullName: string;
+  username?: string | null;
+  institution?: (number | null) | Institution;
+  age?: number | null;
+  ageGroup?: ('8-10' | '11-13' | '14-17' | '18+') | null;
+  enrolledCourses?: (number | Course)[] | null;
+  active?: boolean | null;
+  lastLogin?: string | null;
+  currentCourse?: (number | null) | Course;
+  currentModule?: (number | null) | Module;
+  currentLesson?: (number | null) | Lesson;
+  locked?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  email?: string | null;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses".
+ */
+export interface Course {
+  id: number;
+  title: string;
+  slug: string;
+  description?: string | null;
+  thumbnail?: (number | null) | Media;
+  difficultyLevel?: ('beginner' | 'intermediate' | 'advanced') | null;
+  estimatedDuration?: string | null;
+  ageGroupsAllowed?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
+  modules?: (number | Module)[] | null;
+  isPublished?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "modules".
+ */
+export interface Module {
+  id: number;
+  title: string;
+  slug: string;
+  description?: string | null;
+  course: number | Course;
+  orderIndex?: number | null;
+  lessons?: (number | Lesson)[] | null;
+  unlockCondition?: ('sequential' | 'allPreviousComplete' | 'instructorUnlock' | 'dateUnlock') | null;
+  unlockDate?: string | null;
+  isPublished?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lessons".
+ */
+export interface Lesson {
+  id: number;
+  title: string;
+  module: number | Module;
+  objective?: string | null;
+  orderIndex?: number | null;
+  duration?: string | null;
+  sections?: (number | Section)[] | null;
+  passingScore?: number | null;
+  isPreviewable?: boolean | null;
+  requiredToComplete?: boolean | null;
+  isPublished?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sections".
+ */
+export interface Section {
+  id: number;
+  title: string;
+  lesson: number | Lesson;
+  orderIndex?: number | null;
+  contentBlocks?: (number | ContentBlock)[] | null;
+  exercise?: (number | null) | Exercise;
+  estimatedDuration?: string | null;
+  required?: boolean | null;
+  completionRule?: string | null;
+  isPublished?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-blocks".
+ */
+export interface ContentBlock {
+  id: number;
+  blockType?:
+    | (
+        | 'text'
+        | 'video'
+        | 'image'
+        | 'scenario'
+        | 'simulation'
+        | 'dialogue'
+        | 'timeline'
+        | 'roleplay'
+        | 'example'
+        | 'infographic'
+      )
+    | null;
+  title?: string | null;
+  bodyContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  media?: (number | null) | Media;
+  orderIndex?: number | null;
+  visibleForAgeGroups?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
+  difficulty?: string | null;
+  language?: string | null;
+  requiresCompletionAction?: boolean | null;
+  completionType?: string | null;
+  interactionConfig?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  estimatedReadTime?: number | null;
+  pointsAwarded?: number | null;
+  isOptional?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exercises".
+ */
+export interface Exercise {
+  id: number;
+  question?: string | null;
+  instructions?: string | null;
+  type?:
+    | (
+        | 'multipleChoice'
+        | 'trueFalse'
+        | 'shortAnswer'
+        | 'matching'
+        | 'ordering'
+        | 'scenarioDecision'
+        | 'dragDrop'
+        | 'roleplayResponse'
+        | 'caseAnalysis'
+      )
+    | null;
+  options?:
+    | {
+        option?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  correctAnswer?: string | null;
+  acceptableAnswers?:
+    | {
+        value?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  explanation?: string | null;
+  hint?: string | null;
+  retryAllowed?: boolean | null;
+  maxAttempts?: number | null;
+  points?: number | null;
+  passingScore?: number | null;
+  penaltyPerAttempt?: number | null;
+  ageVariants?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
+  difficulty?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Media
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "portraits".
+ * via the `definition` "documents".
  */
-export interface Portrait {
+export interface Document {
   id: number;
-  alt: string;
+  title?: string | null;
+  alt?: string | null;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -472,22 +777,6 @@ export interface CommitteeTeam {
   rank: number;
   photo?: (number | null) | Portrait;
   committee: number | Committee;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Add Secretariat Member
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "secretariat".
- */
-export interface Secretariat {
-  id: number;
-  full_name: string;
-  role: string;
-  photo?: (number | null) | Portrait;
-  email: string;
-  bio: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -759,6 +1048,42 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'institutions';
+        value: number | Institution;
+      } | null)
+    | ({
+        relationTo: 'students';
+        value: number | Student;
+      } | null)
+    | ({
+        relationTo: 'courses';
+        value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'lessons';
+        value: number | Lesson;
+      } | null)
+    | ({
+        relationTo: 'modules';
+        value: number | Module;
+      } | null)
+    | ({
+        relationTo: 'sections';
+        value: number | Section;
+      } | null)
+    | ({
+        relationTo: 'content-blocks';
+        value: number | ContentBlock;
+      } | null)
+    | ({
+        relationTo: 'exercises';
+        value: number | Exercise;
+      } | null)
+    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -835,10 +1160,15 @@ export interface PayloadLockedDocument {
         value: number | FormSubmission;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'students';
+        value: number | Student;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -848,10 +1178,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: number | User;
+      }
+    | {
+        relationTo: 'students';
+        value: number | Student;
+      };
   key?: string | null;
   value?:
     | {
@@ -918,6 +1253,200 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        ourTeam?:
+          | T
+          | {
+              team_profiles?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "institutions_select".
+ */
+export interface InstitutionsSelect<T extends boolean = true> {
+  name?: T;
+  contactEmail?: T;
+  enrollmentCode?: T;
+  maxStudents?: T;
+  currentStudents?: T;
+  expiresAt?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "students_select".
+ */
+export interface StudentsSelect<T extends boolean = true> {
+  fullName?: T;
+  username?: T;
+  institution?: T;
+  age?: T;
+  ageGroup?: T;
+  enrolledCourses?: T;
+  active?: T;
+  lastLogin?: T;
+  currentCourse?: T;
+  currentModule?: T;
+  currentLesson?: T;
+  locked?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  thumbnail?: T;
+  difficultyLevel?: T;
+  estimatedDuration?: T;
+  ageGroupsAllowed?: T;
+  modules?: T;
+  isPublished?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lessons_select".
+ */
+export interface LessonsSelect<T extends boolean = true> {
+  title?: T;
+  module?: T;
+  objective?: T;
+  orderIndex?: T;
+  duration?: T;
+  sections?: T;
+  passingScore?: T;
+  isPreviewable?: T;
+  requiredToComplete?: T;
+  isPublished?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "modules_select".
+ */
+export interface ModulesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  course?: T;
+  orderIndex?: T;
+  lessons?: T;
+  unlockCondition?: T;
+  unlockDate?: T;
+  isPublished?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sections_select".
+ */
+export interface SectionsSelect<T extends boolean = true> {
+  title?: T;
+  lesson?: T;
+  orderIndex?: T;
+  contentBlocks?: T;
+  exercise?: T;
+  estimatedDuration?: T;
+  required?: T;
+  completionRule?: T;
+  isPublished?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-blocks_select".
+ */
+export interface ContentBlocksSelect<T extends boolean = true> {
+  blockType?: T;
+  title?: T;
+  bodyContent?: T;
+  media?: T;
+  orderIndex?: T;
+  visibleForAgeGroups?: T;
+  difficulty?: T;
+  language?: T;
+  requiresCompletionAction?: T;
+  completionType?: T;
+  interactionConfig?: T;
+  estimatedReadTime?: T;
+  pointsAwarded?: T;
+  isOptional?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "exercises_select".
+ */
+export interface ExercisesSelect<T extends boolean = true> {
+  question?: T;
+  instructions?: T;
+  type?: T;
+  options?:
+    | T
+    | {
+        option?: T;
+        id?: T;
+      };
+  correctAnswer?: T;
+  acceptableAnswers?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  explanation?: T;
+  hint?: T;
+  retryAllowed?: T;
+  maxAttempts?: T;
+  points?: T;
+  passingScore?: T;
+  penaltyPerAttempt?: T;
+  ageVariants?: T;
+  difficulty?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

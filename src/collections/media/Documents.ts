@@ -9,9 +9,6 @@ export const Documents: CollectionConfig = {
 
   access: {
     read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
   },
   fields: [
     { name: 'title', type: 'text', required: false },

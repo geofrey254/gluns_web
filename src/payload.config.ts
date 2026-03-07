@@ -99,6 +99,7 @@ export default buildConfig({
   ],
   serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
   editor: lexicalEditor(),
+  cors: process.env.CORS_ORIGIN ? [process.env.CORS_ORIGIN] : undefined,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

@@ -15,10 +15,13 @@ export async function GET() {
     const payload = await getPayload({ config })
 
     const students = await payload.find({
-      collection: 'students',
+      collection: 'users',
       where: {
         id: {
           equals: studentId,
+        },
+        role: {
+          equals: 'student',
         },
       },
     })

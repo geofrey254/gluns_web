@@ -9,6 +9,12 @@ export const Progress: CollectionConfig = {
     { name: 'lesson', type: 'relationship', relationTo: 'lessons' },
     { name: 'section', type: 'relationship', relationTo: 'sections' },
     { name: 'completed', type: 'checkbox' },
+    {
+      name: 'completedLessons',
+      type: 'relationship',
+      relationTo: 'lessons',
+      hasMany: true,
+    },
     { name: 'completionDate', type: 'date' },
     { name: 'attempts', type: 'number' },
     { name: 'score', type: 'number' },
@@ -16,8 +22,5 @@ export const Progress: CollectionConfig = {
     { name: 'timeSpent', type: 'number' },
     { name: 'interactionsCount', type: 'number' },
     { name: 'lastInteraction', type: 'date' },
-    { name: 'flaggedWeak', type: 'checkbox' },
-    { name: 'recommendedReview', type: 'checkbox' },
-    
   ],
 }

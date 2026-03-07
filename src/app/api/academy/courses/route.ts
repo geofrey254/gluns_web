@@ -14,11 +14,12 @@ export async function GET() {
 
     return NextResponse.json(
       {
-        courses: coursesResult.docs.map((course: any) => ({
+        courses: coursesResult.docs.map((course) => ({
           id: course.id,
           title: course.title,
-          description: course.description,
-          modules: course.modules,
+          slug: course.slug,
+          description: course.description ?? undefined,
+          modules: course.modules || [],
         })),
       },
       { status: 200 },

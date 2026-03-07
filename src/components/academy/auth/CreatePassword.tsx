@@ -49,7 +49,7 @@ function calculatePasswordStrength(pwd: string): PasswordStrength {
   if (score === 4)
     return { score, label: 'Good', textColor: 'text-blue-500', barColor: 'bg-blue-400' }
   if (score === 5)
-    return { score, label: 'Strong', textColor: 'text-blue-600', barColor: 'bg-blue-500' }
+    return { score, label: 'Strong', textColor: 'text-[#104179]', barColor: 'bg-blue-500' }
   return { score, label: 'Super strong!', textColor: 'text-green-600', barColor: 'bg-green-500' }
 }
 
@@ -75,7 +75,7 @@ function StepHeader({
   return (
     <div className="flex flex-col items-center text-center mb-7">
       <div className="w-16 h-16 rounded-3xl bg-linear-to-br from-blue-50 to-blue-100 flex items-center justify-center mb-4 shadow-md shadow-blue-100">
-        <Icon className="w-8 h-8 text-blue-600" />
+        <Icon className="w-8 h-8 text-[#104179]" />
       </div>
       <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-tight mb-1">
         {title}
@@ -102,7 +102,7 @@ function NextButton({ disabled, onClick }: { disabled: boolean; onClick: () => v
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="w-full mt-7 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:scale-100"
+      className="w-full mt-7 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#104179] hover:bg-[#0d3a66] active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:scale-100"
     >
       Next
       <RiArrowRightLine className="w-4 h-4" />
@@ -124,7 +124,7 @@ function NavButtons({
       <button
         type="button"
         onClick={onBack}
-        className="flex items-center gap-1.5 px-5 py-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-500 font-black text-sm hover:border-blue-400 hover:text-blue-600 transition-all"
+        className="flex items-center gap-1.5 px-5 py-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-500 font-black text-sm hover:border-blue-400 hover:text-[#104179] transition-all"
       >
         <RiArrowLeftLine className="w-4 h-4" />
         Back
@@ -133,7 +133,7 @@ function NavButtons({
         type="button"
         onClick={onNext}
         disabled={disabled}
-        className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
+        className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#104179] hover:bg-[#0d3a66] active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
       >
         Next
         <RiArrowRightLine className="w-4 h-4" />
@@ -269,9 +269,9 @@ export default function CreateStudent() {
                           className={[
                             'w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-300',
                             i < currentStep
-                              ? 'bg-blue-600 text-white shadow-md shadow-blue-200'
+                              ? 'bg-[#104179] text-white shadow-md shadow-blue-200'
                               : i === currentStep
-                                ? 'bg-blue-50 text-blue-600 ring-2 ring-blue-500 ring-offset-2'
+                                ? 'bg-blue-50 text-[#104179] ring-2 ring-blue-500 ring-offset-2'
                                 : 'bg-slate-100 text-slate-400',
                           ].join(' ')}
                         >
@@ -285,7 +285,7 @@ export default function CreateStudent() {
                           className={[
                             'text-[0.62rem] font-black uppercase tracking-widest',
                             i === currentStep
-                              ? 'text-blue-600'
+                              ? 'text-[#104179]'
                               : i < currentStep
                                 ? 'text-blue-400'
                                 : 'text-slate-300',
@@ -531,7 +531,7 @@ export default function CreateStudent() {
                           type="button"
                           onClick={handleBack}
                           disabled={loading}
-                          className="flex items-center gap-1.5 px-5 py-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-500 font-black text-sm hover:border-blue-400 hover:text-blue-600 transition-all disabled:opacity-40"
+                          className="flex items-center gap-1.5 px-5 py-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-500 font-black text-sm hover:border-blue-400 hover:text-[#104179] transition-all disabled:opacity-40"
                         >
                           <RiArrowLeftLine className="w-4 h-4" />
                           Back
@@ -539,7 +539,7 @@ export default function CreateStudent() {
                         <button
                           type="submit"
                           disabled={!canProceed() || loading}
-                          className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:scale-100"
+                          className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#104179] hover:bg-[#0d3a66] active:scale-[0.98] text-white font-black text-sm shadow-lg shadow-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:scale-100"
                         >
                           {loading ? (
                             <>

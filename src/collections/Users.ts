@@ -25,9 +25,41 @@ export const Users: CollectionConfig = {
         { label: 'Secretariat', value: 'secretariat' },
         { label: 'Editor', value: 'editor' },
         { label: 'Teacher', value: 'teacher' },
+        { label: 'Student', value: 'student' },
       ],
-      defaultValue: 'teacher',
+      defaultValue: 'student',
     },
+    {
+      name: 'fullName',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'institution',
+      type: 'relationship',
+      relationTo: 'institutions',
+      admin: {
+        condition: (data) => data.role === 'student',
+      },
+    },
+
+    {
+      name: 'age',
+      type: 'number',
+      admin: {
+        condition: (data) => data.role === 'student',
+      },
+    },
+
+    {
+      name: 'ageGroup',
+      type: 'select',
+      options: ['8-10', '11-13', '14-17', '18+'],
+      admin: {
+        condition: (data) => data.role === 'student',
+      },
+    },
+
     {
       name: 'delegationName',
       type: 'text',

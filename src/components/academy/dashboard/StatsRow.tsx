@@ -52,7 +52,7 @@ export default function StatsRow({ enrolledCount, streak, achievements }: StatsR
         value={enrolledCount}
         icon={RiBookOpenLine}
         iconBg="bg-blue-50"
-        iconColor="text-blue-600"
+        iconColor="text-[#104179]"
       />
       <StatCard
         label="Day Streak"

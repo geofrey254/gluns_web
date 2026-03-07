@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Loader2 } from 'lucide-react'
 import { useAcademyGate } from '../hooks/useAuthAcademy'
 
 import DashboardHeader from './DashboardHeader'
@@ -11,8 +10,9 @@ import StatsRow from './StatsRow'
 import CurrentCourseCard from './CurrentCourseCard'
 import CourseCard from './CourseCard'
 import EmptyCoursesState from './EmptyCoursesState'
+import Loading from '@/app/(frontend)/loading'
 
-interface Student {
+interface User {
   id: string
   fullName: string
   username: string
@@ -22,20 +22,18 @@ interface Student {
 }
 
 interface AcademyDashboardProps {
-  student?: Student
+  student?: User
 }
 
 export default function AcademyDashboard({ student: initialStudent }: AcademyDashboardProps) {
   const router = useRouter()
   const { logout: authLogout } = useAcademyGate()
 
-  const [student, setStudent] = useState<Student | null>(initialStudent || null)
+  const [student, setStudent] = useState<User | null>(initialStudent || null)
   const [courses, setCourses] = useState<any[]>([])
   const [loading, setLoading] = useState(!initialStudent)
   const [loggingOut, setLoggingOut] = useState(false)
   const [error, setError] = useState('')
-
-  console.log('AcademyDashboard rendered with student:', student)
 
   useEffect(() => {
     if (!initialStudent) {
@@ -88,16 +86,8 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
     router.push(`/academy/courses/${courseId}`)
   }
 
-  /* ── Loading ── */
   if (loading) {
-    return (
-      <div className="min-h-screen bg-blue-50 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-          <p className="text-sm font-black text-slate-400 uppercase tracking-widest">Loading…</p>
-        </div>
-      </div>
-    )
+    return <Loading />
   }
 
   /* ── Error ── */
@@ -108,7 +98,7 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
           <p className="text-red-500 font-black mb-5 text-sm">{error}</p>
           <button
             onClick={() => router.push('/academy')}
-            className="px-6 py-3 rounded-2xl bg-blue-600 text-white font-black text-sm hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 rounded-2xl bg-[#104179] text-white font-black text-sm hover:bg-[#0d3a66] transition-colors"
           >
             Go Back
           </button>

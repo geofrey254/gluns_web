@@ -37,9 +37,10 @@ export async function POST(req: Request) {
 
     // Compute current students dynamically to avoid race conditions
     const studentCount = await payload.find({
-      collection: 'students',
+      collection: 'users',
       where: {
         institution: { equals: institution.id },
+        role: { equals: 'student' },
       },
     })
 

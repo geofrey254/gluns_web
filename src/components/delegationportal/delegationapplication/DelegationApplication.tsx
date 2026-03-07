@@ -625,7 +625,7 @@ export default function DelegationPortal() {
                                 setEditingAdvisor(advisor)
                                 setShowFacultyForm(true)
                               }}
-                              className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+                              className="p-2 text-[#104179] hover:bg-blue-50 rounded"
                               aria-label="Edit advisor"
                             >
                               <Pencil className="w-4 h-4" />

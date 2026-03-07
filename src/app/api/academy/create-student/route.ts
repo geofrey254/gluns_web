@@ -34,8 +34,8 @@ export async function POST(req: Request) {
 
     // 3️⃣ Seat availability
     const studentCount = await payload.find({
-      collection: 'students',
-      where: { institution: { equals: institution.id } },
+      collection: 'users',
+      where: { institution: { equals: institution.id }, role: { equals: 'student' } },
       limit: 1,
     })
 
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
     // 4️⃣ Prevent duplicate email for same institution
     const existingStudent = await payload.find({
-      collection: 'students',
+      collection: 'users',
       where: { email: { equals: normalizedEmail }, institution: { equals: institution.id } },
       limit: 1,
     })
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
 
     // 5️⃣ Create student (Payload auth handles password hashing)
     const student = await payload.create({
-      collection: 'students', // must have auth: true
+      collection: 'users', // must have auth: true
       data: {
         fullName,
         age,

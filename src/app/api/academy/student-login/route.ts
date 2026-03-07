@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const payload = await getPayload({ config })
 
     const result = await payload.login({
-      collection: 'students',
+      collection: 'users',
       data: {
         email: email.trim().toLowerCase(),
         password: password.trim(),

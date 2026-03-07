@@ -40,8 +40,8 @@ import { Payments } from './collections/administration/Payments'
 import { Sponsors } from './collections/administration/Sponsors'
 
 // Academy collections
+import { Enrollments } from './collections/academy/Enrollments'
 import { Institutions } from './collections/academy/Institutions'
-import { Students } from './collections/academy/Students'
 import { Courses } from './collections/academy/Courses'
 import { Lessons } from './collections/academy/Lessons'
 import { Modules } from './collections/academy/Modules'
@@ -94,7 +94,7 @@ export default buildConfig({
 
     // Academy collections
     Institutions,
-    Students,
+    Enrollments,
     Courses,
     Lessons,
     Modules,

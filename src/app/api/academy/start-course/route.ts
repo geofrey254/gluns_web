@@ -13,13 +13,13 @@ export async function POST(req: Request) {
     const payload = await getPayload({ config })
     const { user } = await payload.auth({ headers: req.headers })
 
-    if (!user || !user.id || user.role !== 'student') {
+    if (!user || !user.id || user.roles !== 'student') {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
     const studentResult = await payload.find({
       collection: 'users',
-      where: { id: { equals: user.id }, role: { equals: 'student' } },
+      where: { id: { equals: user.id }, roles: { equals: 'student' } },
       limit: 1,
     })
 

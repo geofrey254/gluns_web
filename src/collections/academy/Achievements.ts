@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload'
 export const Achievements: CollectionConfig = {
   slug: 'achievements',
   fields: [
-    { name: 'student', type: 'relationship', relationTo: 'students' },
+    { name: 'student', type: 'relationship', relationTo: 'users' },
     { name: 'badge', type: 'relationship', relationTo: 'badges' },
     { name: 'earnedDate', type: 'date' },
     { name: 'triggerSource', type: 'text' },

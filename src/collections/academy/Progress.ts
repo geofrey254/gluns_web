@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload'
 export const Progress: CollectionConfig = {
   slug: 'progress',
   fields: [
-    { name: 'student', type: 'relationship', relationTo: 'students' },
+    { name: 'student', type: 'relationship', relationTo: 'users' },
     { name: 'course', type: 'relationship', relationTo: 'courses' },
     { name: 'module', type: 'relationship', relationTo: 'modules' },
     { name: 'lesson', type: 'relationship', relationTo: 'lessons' },

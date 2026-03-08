@@ -123,7 +123,8 @@ export default buildConfig({
     PositionPapers,
     CommitteeAssignments,
   ],
-  serverURL: process.env.PAYLOAD_URL,
+  serverURL: process.env.NEXT_PUBLIC_BASE_URL,
+  cors: [process.env.NEXT_PUBLIC_BASE_URL || '', 'http://localhost:3000'],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

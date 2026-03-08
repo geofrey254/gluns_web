@@ -219,7 +219,7 @@ export default function CreateStudent() {
       }
 
       setSuccess(true)
-      setTimeout(() => router.push('/academy/dashboard'), 2500)
+      setTimeout(() => router.push('/academy'), 2500)
     } catch (err) {
       console.error('Error creating student:', err)
       setError('An error occurred. Please try again.')

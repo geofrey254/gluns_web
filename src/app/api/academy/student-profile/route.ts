@@ -14,23 +14,23 @@ export async function GET() {
 
     const payload = await getPayload({ config })
 
-    const students = await payload.find({
+    const users = await payload.find({
       collection: 'users',
       where: {
         id: {
           equals: studentId,
         },
-        role: {
+        roles: {
           equals: 'student',
         },
       },
     })
 
-    if (!students.docs || students.docs.length === 0) {
+    if (!users.docs || users.docs.length === 0) {
       return NextResponse.json({ error: 'Student not found' }, { status: 404 })
     }
 
-    const student = students.docs[0]
+    const student = users.docs[0]
 
     return NextResponse.json(
       {
@@ -39,9 +39,7 @@ export async function GET() {
           fullName: student.fullName,
           username: student.username,
           ageGroup: student.ageGroup,
-          enrolledCourses: student.enrolledCourses,
-          currentCourse: student.currentCourse,
-          currentModule: student.currentModule,
+          institution: student.institution,
         },
       },
       { status: 200 },

@@ -35,11 +35,21 @@ export const Users: CollectionConfig = {
       required: true,
     },
     {
+      name: 'username',
+      type: 'text',
+      required: true,
+      unique: true,
+      saveToJWT: true,
+      admin: {
+        condition: (data) => data.roles === 'student',
+      },
+    },
+    {
       name: 'institution',
       type: 'relationship',
       relationTo: 'institutions',
       admin: {
-        condition: (data) => data.role === 'student',
+        condition: (data) => data.roles === 'student',
       },
     },
 
@@ -47,7 +57,7 @@ export const Users: CollectionConfig = {
       name: 'age',
       type: 'number',
       admin: {
-        condition: (data) => data.role === 'student',
+        condition: (data) => data.roles === 'student',
       },
     },
 
@@ -56,7 +66,7 @@ export const Users: CollectionConfig = {
       type: 'select',
       options: ['8-10', '11-13', '14-17', '18+'],
       admin: {
-        condition: (data) => data.role === 'student',
+        condition: (data) => data.roles === 'student',
       },
     },
 

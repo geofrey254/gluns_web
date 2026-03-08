@@ -3,8 +3,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAcademyGate } from '../hooks/useAuthAcademy'
-
+import { useAuthGate } from '@/components/delegationportal/hooks/useAuthGate'
 import DashboardHeader from './DashboardHeader'
 import StatsRow from './StatsRow'
 import CurrentCourseCard from './CurrentCourseCard'
@@ -27,13 +26,14 @@ interface AcademyDashboardProps {
 
 export default function AcademyDashboard({ student: initialStudent }: AcademyDashboardProps) {
   const router = useRouter()
-  const { logout: authLogout } = useAcademyGate()
+  const { logout: authLogout } = useAuthGate()
 
   const [student, setStudent] = useState<User | null>(initialStudent || null)
   const [courses, setCourses] = useState<any[]>([])
   const [loading, setLoading] = useState(!initialStudent)
   const [loggingOut, setLoggingOut] = useState(false)
   const [error, setError] = useState('')
+  console.log('AcademyDashboard rendered with student:', student)
 
   useEffect(() => {
     if (!initialStudent) {
@@ -46,10 +46,10 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
 
   const fetchStudentData = async () => {
     try {
-      const response = await fetch('/api/academy/student-profile')
+      const response = await fetch('/api/academy/student-profile', { credentials: 'include' })
       if (!response.ok) throw new Error('Failed to fetch student data')
       const data = await response.json()
-      setStudent(data.student)
+      setStudent(data.student.user)
       fetchCourses()
     } catch (err) {
       console.error('Error fetching student data:', err)

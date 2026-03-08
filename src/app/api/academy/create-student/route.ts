@@ -4,7 +4,7 @@ import config from '@payload-config'
 
 export async function POST(req: Request) {
   try {
-    const { fullName, email, username, password, age, enrollmentCode } = await req.json()
+    const { fullName, email, username, password, age, ageGroup, enrollmentCode } = await req.json()
 
     if (!fullName || !email || !password || !enrollmentCode) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     // 3️⃣ Seat availability
     const studentCount = await payload.find({
       collection: 'users',
-      where: { institution: { equals: institution.id }, role: { equals: 'student' } },
+      where: { institution: { equals: institution.id }, roles: { equals: 'student' } },
       limit: 1,
     })
 
@@ -61,20 +61,22 @@ export async function POST(req: Request) {
     }
 
     // 5️⃣ Create student (Payload auth handles password hashing)
-    const student = await payload.create({
-      collection: 'users', // must have auth: true
-      data: {
-        fullName,
-        age,
-        username: username?.trim() || undefined,
+    const response = await fetch(`${process.env.PAYLOAD_URL}/api/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         email: normalizedEmail,
-        institution: institution.id,
-        password: password.trim(),
-      },
-      user: {
         password,
-      },
+        fullName,
+        username,
+        roles: 'student',
+        age: age || null,
+        ageGroup: ageGroup,
+        institution: institution.id,
+      }),
     })
+
+    const student = await response.json()
 
     // 6️⃣ Increment currentStudents
     await payload.update({

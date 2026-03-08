@@ -64,7 +64,6 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
-    students: StudentAuthOperations;
   };
   blocks: {};
   collections: {
@@ -72,7 +71,7 @@ export interface Config {
     media: Media;
     pages: Page;
     institutions: Institution;
-    students: Student;
+    enrollments: Enrollment;
     courses: Course;
     lessons: Lesson;
     modules: Module;
@@ -111,7 +110,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     institutions: InstitutionsSelect<false> | InstitutionsSelect<true>;
-    students: StudentsSelect<false> | StudentsSelect<true>;
+    enrollments: EnrollmentsSelect<false> | EnrollmentsSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
     modules: ModulesSelect<false> | ModulesSelect<true>;
@@ -151,13 +150,9 @@ export interface Config {
   globals: {};
   globalsSelect: {};
   locale: null;
-  user:
-    | (User & {
-        collection: 'users';
-      })
-    | (Student & {
-        collection: 'students';
-      });
+  user: User & {
+    collection: 'users';
+  };
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -181,31 +176,18 @@ export interface UserAuthOperations {
     password: string;
   };
 }
-export interface StudentAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
-  registerFirstUser: {
-    email: string;
-    password: string;
-  };
-  unlock: {
-    email: string;
-    password: string;
-  };
-}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
-  roles: 'admin' | 'secretariat' | 'editor' | 'teacher';
+  roles: 'admin' | 'secretariat' | 'editor' | 'teacher' | 'student';
+  fullName: string;
+  username?: string | null;
+  institution?: (number | null) | Institution;
+  age?: number | null;
+  ageGroup?: ('8-10' | '11-13' | '14-17' | '18+') | null;
   delegationName?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -224,6 +206,22 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "institutions".
+ */
+export interface Institution {
+  id: number;
+  name: string;
+  contactEmail?: string | null;
+  enrollmentCode: string;
+  maxStudents: number;
+  currentStudents?: number | null;
+  expiresAt?: string | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Media
@@ -306,55 +304,15 @@ export interface Portrait {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "institutions".
+ * via the `definition` "enrollments".
  */
-export interface Institution {
+export interface Enrollment {
   id: number;
-  name: string;
-  contactEmail?: string | null;
-  enrollmentCode: string;
-  maxStudents: number;
-  currentStudents?: number | null;
-  expiresAt?: string | null;
-  active?: boolean | null;
+  student: number | User;
+  course: number | Course;
+  enrolledAt?: string | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "students".
- */
-export interface Student {
-  id: number;
-  fullName: string;
-  username?: string | null;
-  institution?: (number | null) | Institution;
-  age?: number | null;
-  ageGroup?: ('8-10' | '11-13' | '14-17' | '18+') | null;
-  enrolledCourses?: (number | Course)[] | null;
-  active?: boolean | null;
-  lastLogin?: string | null;
-  currentCourse?: (number | null) | Course;
-  currentModule?: (number | null) | Module;
-  currentLesson?: (number | null) | Lesson;
-  locked?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  email?: string | null;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
 }
 /**
  * Add Course
@@ -544,7 +502,7 @@ export interface Exercise {
  */
 export interface Achievement {
   id: number;
-  student?: (number | null) | Student;
+  student?: (number | null) | User;
   badge?: (number | null) | Badge;
   earnedDate?: string | null;
   triggerSource?: string | null;
@@ -1096,8 +1054,8 @@ export interface PayloadLockedDocument {
         value: number | Institution;
       } | null)
     | ({
-        relationTo: 'students';
-        value: number | Student;
+        relationTo: 'enrollments';
+        value: number | Enrollment;
       } | null)
     | ({
         relationTo: 'courses';
@@ -1208,15 +1166,10 @@ export interface PayloadLockedDocument {
         value: number | FormSubmission;
       } | null);
   globalSlug?: string | null;
-  user:
-    | {
-        relationTo: 'users';
-        value: number | User;
-      }
-    | {
-        relationTo: 'students';
-        value: number | Student;
-      };
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1226,15 +1179,10 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: number;
-  user:
-    | {
-        relationTo: 'users';
-        value: number | User;
-      }
-    | {
-        relationTo: 'students';
-        value: number | Student;
-      };
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
   key?: string | null;
   value?:
     | {
@@ -1265,6 +1213,11 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   roles?: T;
+  fullName?: T;
+  username?: T;
+  institution?: T;
+  age?: T;
+  ageGroup?: T;
   delegationName?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1340,37 +1293,14 @@ export interface InstitutionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "students_select".
+ * via the `definition` "enrollments_select".
  */
-export interface StudentsSelect<T extends boolean = true> {
-  fullName?: T;
-  username?: T;
-  institution?: T;
-  age?: T;
-  ageGroup?: T;
-  enrolledCourses?: T;
-  active?: T;
-  lastLogin?: T;
-  currentCourse?: T;
-  currentModule?: T;
-  currentLesson?: T;
-  locked?: T;
+export interface EnrollmentsSelect<T extends boolean = true> {
+  student?: T;
+  course?: T;
+  enrolledAt?: T;
   updatedAt?: T;
   createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

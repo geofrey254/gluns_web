@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload'
 export const Attempts: CollectionConfig = {
   slug: 'attempts',
   fields: [
-    { name: 'student', type: 'relationship', relationTo: 'students' },
+    { name: 'student', type: 'relationship', relationTo: 'users' },
     { name: 'exercise', type: 'relationship', relationTo: 'exercises' },
     { name: 'answerSubmitted', type: 'json' },
     { name: 'correct', type: 'checkbox' },

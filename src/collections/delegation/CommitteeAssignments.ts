@@ -74,20 +74,18 @@ export const CommitteeAssignments: CollectionConfig = {
   },
 
   fields: [
-    /**
-     * Delegation (anchor field)
-     */
     {
       name: 'delegation',
       type: 'relationship',
       relationTo: 'delegation-applications',
       required: true,
       index: true,
+      defaultValue: ({ req }) => {
+        const delegationId = req.query?.delegation as string
+        return delegationId || undefined
+      },
     },
 
-    /**
-     * Delegates (1–2 only)
-     */
     {
       name: 'delegates',
       type: 'relationship',

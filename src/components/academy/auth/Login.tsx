@@ -38,7 +38,7 @@ export default function Login() {
   const router = useRouter()
   const setUser = useAcademyStore((state) => state.setUser)
 
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -48,21 +48,21 @@ export default function Login() {
     e.preventDefault()
     setError('')
 
-    if (!username.trim() || !password.trim()) {
-      setError('Please enter both username and password')
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password')
       return
     }
 
     setLoading(true)
     try {
-      const response = await fetch('/api/login', {
+      const res = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username.trim(), password }),
+        body: JSON.stringify({ email, password }),
       })
 
-      const data = await response.json()
-      if (!response.ok) {
+      const data = await res.json()
+      if (!res.ok) {
         setError(data.error || 'Login failed')
         return
       }
@@ -77,7 +77,7 @@ export default function Login() {
     }
   }
 
-  const canSubmit = username.trim().length > 0 && password.trim().length > 0 && !loading
+  const canSubmit = email.trim().length > 0 && password.trim().length > 0 && !loading
 
   return (
     <>
@@ -113,16 +113,16 @@ export default function Login() {
             )}
 
             <form onSubmit={handleSubmit}>
-              {/* Username */}
-              <Field label="Username" icon={RiAtLine}>
+              {/* Email */}
+              <Field label="Email" icon={RiAtLine}>
                 <input
                   className={inputCls}
-                  type="text"
-                  placeholder="Enter your username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   disabled={loading}
-                  autoComplete="username"
+                  autoComplete="email"
                   autoFocus
                 />
               </Field>

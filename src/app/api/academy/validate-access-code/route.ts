@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       collection: 'users',
       where: {
         institution: { equals: institution.id },
-        role: { equals: 'student' },
+        roles: { equals: 'student' },
       },
     })
 

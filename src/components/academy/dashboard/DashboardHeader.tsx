@@ -12,8 +12,6 @@ interface DashboardHeaderProps {
 }
 
 export default function DashboardHeader({ fullName, onLogout, loggingOut }: DashboardHeaderProps) {
-  const firstName = fullName.split(' ')[0]
-
   return (
     <header className="bg-white border-b border-blue-100 shadow-sm shadow-blue-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
@@ -31,7 +29,7 @@ export default function DashboardHeader({ fullName, onLogout, loggingOut }: Dash
             </div>
             <div>
               <h1 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-tight">
-                Hey, {firstName}!
+                Hey, {fullName}!
               </h1>
               <p className="text-xs text-slate-500 font-semibold">
                 Ready to learn something new today?
@@ -43,7 +41,7 @@ export default function DashboardHeader({ fullName, onLogout, loggingOut }: Dash
           <button
             onClick={onLogout}
             disabled={loggingOut}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-500 font-black text-xs uppercase tracking-widest hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2.5 cursor-pointer rounded-2xl border-2 border-slate-200 bg-slate-50 text-slate-500 font-black text-xs uppercase tracking-widest hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {loggingOut ? (
               <Loader2 className="w-4 h-4 animate-spin" />

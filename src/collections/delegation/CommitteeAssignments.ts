@@ -80,10 +80,6 @@ export const CommitteeAssignments: CollectionConfig = {
       relationTo: 'delegation-applications',
       required: true,
       index: true,
-      defaultValue: ({ req }) => {
-        const delegationId = req.query?.delegation as string
-        return delegationId || undefined
-      },
     },
 
     {

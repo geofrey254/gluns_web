@@ -39,5 +39,5 @@ export default function AcademyAuthGate() {
     return <AcademyLandingPage />
   }
 
-  return <AcademyDashboard student={user} />
+  return <AcademyDashboard student={{ user }} />
 }

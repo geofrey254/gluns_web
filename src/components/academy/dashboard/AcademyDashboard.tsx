@@ -14,26 +14,28 @@ import Loading from '@/app/(frontend)/loading'
 interface User {
   id: string
   fullName: string
-  username: string
-  enrolledCourses?: any[]
+  email: string
+  enrolledCourses: any[]
   currentCourse?: any
   currentModule?: any
 }
 
+interface Student {
+  user: User
+}
 interface AcademyDashboardProps {
-  student?: User
+  student?: Student
 }
 
 export default function AcademyDashboard({ student: initialStudent }: AcademyDashboardProps) {
   const router = useRouter()
   const { logout: authLogout } = useAuthGate()
 
-  const [student, setStudent] = useState<User | null>(initialStudent || null)
+  const [student, setStudent] = useState<Student | null>(initialStudent || null)
   const [courses, setCourses] = useState<any[]>([])
   const [loading, setLoading] = useState(!initialStudent)
   const [loggingOut, setLoggingOut] = useState(false)
   const [error, setError] = useState('')
-  console.log('AcademyDashboard rendered with student:', student)
 
   useEffect(() => {
     if (!initialStudent) {
@@ -49,7 +51,7 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
       const response = await fetch('/api/academy/student-profile', { credentials: 'include' })
       if (!response.ok) throw new Error('Failed to fetch student data')
       const data = await response.json()
-      setStudent(data.student.user)
+      setStudent({ user: data.student.user })
       fetchCourses()
     } catch (err) {
       console.error('Error fetching student data:', err)
@@ -57,7 +59,6 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
       setLoading(false)
     }
   }
-
   const fetchCourses = async () => {
     try {
       const response = await fetch('/api/academy/courses', { credentials: 'include' })
@@ -118,7 +119,7 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
 
         {/* Header */}
         <DashboardHeader
-          fullName={student?.fullName || 'Student'}
+          fullName={student?.user?.fullName || 'Student'}
           onLogout={handleLogout}
           loggingOut={loggingOut}
         />
@@ -127,16 +128,16 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Stats */}
           <StatsRow
-            enrolledCount={student?.enrolledCourses?.length || 0}
+            enrolledCount={student?.user.enrolledCourses?.length || 0}
             streak={0}
             achievements={0}
           />
 
           {/* Current course */}
-          {student?.currentCourse && (
+          {student?.user.currentCourse && (
             <CurrentCourseCard
-              course={student.currentCourse}
-              currentModule={student.currentModule}
+              course={student.user.currentCourse}
+              currentModule={student.user.currentModule}
               onContinue={handleStartCourse}
             />
           )}

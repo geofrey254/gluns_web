@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function GET(req: Request) {
   const cookie = req.headers.get('cookie') || ''
 
-  const res = await fetch(`${process.env.PAYLOAD_URL}/api/users/me`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users/me`, {
     headers: { cookie },
   })
 

@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   const body = await req.json()
 
   // 1️⃣ Create user
-  const signupRes = await fetch(`${process.env.PAYLOAD_URL}/api/users`, {
+  const signupRes = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   }
 
   // 2️⃣ Log in the new user to get the HTTP-only cookie
-  const loginRes = await fetch(`${process.env.PAYLOAD_URL}/api/users/login`, {
+  const loginRes = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',

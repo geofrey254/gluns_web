@@ -7,14 +7,17 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: nu
 
   if (!id) return NextResponse.json({ message: 'Delegation ID is required' }, { status: 400 })
 
-  const res = await fetch(`${process.env.PAYLOAD_URL}/api/delegation-applications/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `JWT ${process.env.PAYLOAD_SECRET}`, // admin token
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/delegation-applications/${id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${process.env.PAYLOAD_SECRET}`, // admin token
+      },
+      body: JSON.stringify(body),
     },
-    body: JSON.stringify(body),
-  })
+  )
 
   const data = await res.json()
 

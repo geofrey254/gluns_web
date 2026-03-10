@@ -24,7 +24,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   checkAuth: async () => {
     try {
-      const res = await fetch(`${process.env.PAYLOAD_URL}/api/users/me`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users/me`, {
         credentials: 'include',
       })
 

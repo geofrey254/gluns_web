@@ -26,7 +26,16 @@ const nextConfig = {
        {
         protocol:'https',
         hostname:'www.gluns.org'
-      }
+      },
+      {
+        protocol:'https',
+        hostname:'gluns.org'
+      },
+       {
+        protocol: 'https',
+        hostname: 'www.gluns.org',
+        pathname: '/api/**',
+      },
     ]
   }
 }

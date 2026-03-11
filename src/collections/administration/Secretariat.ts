@@ -2,6 +2,12 @@ import { CollectionConfig } from 'payload'
 
 export const Secretariat: CollectionConfig = {
   slug: 'secretariat',
+  access: {
+    read: () => true,
+    create: ({ req }) => req.user?.roles === 'admin',
+    update: ({ req }) => req.user?.roles === 'admin',
+    delete: ({ req }) => req.user?.roles === 'admin',
+  },
   admin: {
     useAsTitle: 'full_name',
     description: 'Add Secretariat Member',

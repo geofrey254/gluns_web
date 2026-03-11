@@ -1,9 +1,14 @@
-'use client'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useSearchParams } from 'next/navigation'
 import RegisterForm from '@/components/eventspage/register/RegisterForm'
 import RegisterHero from '@/components/eventspage/register/RegisterHero'
 import ContactInfo from '@/components/contactpage/ContactInfo'
+
+// metadata
+export const metadata = {
+  title: 'School Registration',
+  description: 'Register for our upcoming school events',
+}
 
 export default function SchoolRegistration() {
   const searchParams = useSearchParams()

@@ -5,12 +5,6 @@ import RegisterForm from '@/components/eventspage/register/RegisterForm'
 import RegisterHero from '@/components/eventspage/register/RegisterHero'
 import ContactInfo from '@/components/contactpage/ContactInfo'
 
-// metadata
-export const metadata = {
-  title: 'School Registration',
-  description: 'Register for our upcoming school events',
-}
-
 export default function SchoolRegistration() {
   const searchParams = useSearchParams()
   const eventFromUrl = searchParams.get('event') || ''

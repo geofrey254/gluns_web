@@ -124,7 +124,7 @@ export default buildConfig({
     CommitteeAssignments,
   ],
   serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
-  cors: [process.env.NEXT_PUBLIC_PAYLOAD_URL || '', 'http://localhost:3000'],
+  cors: [process.env.NEXT_PUBLIC_CORS_ORIGIN || '', 'http://localhost:3000'],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

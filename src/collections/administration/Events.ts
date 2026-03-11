@@ -12,13 +12,13 @@ export const Events: CollectionConfig = {
   access: {
     read: () => true,
     create: ({ req }: AccessArgs) => {
-      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+      return req.user?.roles === 'admin'
     },
     update: ({ req }: AccessArgs) => {
-      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+      return req.user?.roles === 'admin'
     },
     delete: ({ req }: AccessArgs) => {
-      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+      return req.user?.roles === 'admin'
     },
   },
   fields: [

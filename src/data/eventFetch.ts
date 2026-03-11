@@ -9,6 +9,7 @@ export async function fetchEvents() {
     collection: 'event', // required
     depth: 2,
     pagination: false,
+    sort: 'date',
   })
 
   return {

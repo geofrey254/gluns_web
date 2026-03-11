@@ -269,7 +269,8 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
                         : events.currency === 'EUR'
                           ? '€'
                           : ''}
-                    {events.cost}
+                    {/* separate values in comma */}
+                    {events.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </p>
                 </div>
               </div>
@@ -292,7 +293,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
             </div>
           </div>
 
-          <article className="prose prose-xl px-8 md:px-24 max-w-none prose-headings:text-[#104179] prose-headings:font-bold prose-a:text-[#104179] prose-a:no-underline hover:prose-a:text-[#85c226] prose-a:transition-colors prose-img:rounded-xl prose-img:shadow-lg prose-p:text-gray-700 prose-p:leading-relaxed">
+          <article className="prose prose-xl px-2 max-w-none prose-headings:text-[#104179] prose-headings:font-bold prose-a:text-[#104179] prose-a:no-underline hover:prose-a:text-[#85c226] prose-a:transition-colors prose-img:rounded-xl prose-img:shadow-lg prose-p:text-gray-700 prose-p:leading-relaxed">
             <RichText data={events.description} className="richtext" />
           </article>
         </div>

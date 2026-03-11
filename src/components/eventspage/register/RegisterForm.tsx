@@ -17,20 +17,20 @@ import {
 
 interface FormData {
   id: number
-  schoolName: string
-  contactPerson: string
+  school_name: string
+  contact_person: string
   email: string
-  phone: string
+  phone_number: string
   event: string
-  numStudents: string
+  students: string
 }
 
 interface Errors {
-  schoolName?: string
-  contactPerson?: string
+  school_name?: string
+  contact_person?: string
   email?: string
-  phone?: string
-  numStudents?: string
+  phone_number?: string
+  students?: string
   form?: string
 }
 
@@ -40,12 +40,12 @@ export default function RegisterForm({ event }: { event: string }) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     id: 0,
-    schoolName: '',
-    contactPerson: '',
+    school_name: '',
+    contact_person: '',
     email: '',
-    phone: '',
+    phone_number: '',
     event: event,
-    numStudents: '',
+    students: '',
   })
   const [errors, setErrors] = useState<Errors>({})
 
@@ -66,12 +66,12 @@ export default function RegisterForm({ event }: { event: string }) {
     const newErrors: Errors = {}
     let isValid = true
 
-    if (!formData.schoolName.trim()) {
-      newErrors.schoolName = 'School name is required'
+    if (!formData.school_name.trim()) {
+      newErrors.school_name = 'School name is required'
       isValid = false
     }
-    if (!formData.contactPerson.trim()) {
-      newErrors.contactPerson = 'Contact person is required'
+    if (!formData.contact_person.trim()) {
+      newErrors.contact_person = 'Contact person is required'
       isValid = false
     }
     if (!formData.email.trim()) {
@@ -81,14 +81,21 @@ export default function RegisterForm({ event }: { event: string }) {
       newErrors.email = 'Please enter a valid email address'
       isValid = false
     }
-    if (!formData.numStudents || Number(formData.numStudents) < 1) {
-      newErrors.numStudents = 'Please enter the number of students'
+    if (!formData.students || Number(formData.students) < 1) {
+      newErrors.students = 'Please enter the number of students'
       isValid = false
     }
 
     setErrors(newErrors)
     return isValid
   }
+
+  useEffect(() => {
+    fetch('/api/registration-form')
+      .then((res) => res.json())
+      .then((data) => setFormData(data))
+      .catch(() => console.error('Could not load form data'))
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -148,6 +155,19 @@ export default function RegisterForm({ event }: { event: string }) {
     },
   }
 
+  if (!formData)
+    return (
+      <section className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <div className="bg-[#104179] border border-[#85cc26] rounded-lg p-6 sm:p-8 text-center flex flex-col items-center space-y-4 shadow-md max-w-md mx-auto">
+          <LoaderCircle className="w-10 h-10 text-white animate-spin" />
+          <h3 className="text-lg sm:text-xl font-semibold text-white">Please Wait!</h3>
+          <p className="text-gray-50 text-sm sm:text-base">
+            We{"'"}re loading the registration form for you.
+          </p>
+        </div>
+      </section>
+    )
+
   if (isSubmitted) {
     return (
       <motion.div
@@ -204,25 +224,25 @@ export default function RegisterForm({ event }: { event: string }) {
               <School className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                name="schoolName"
-                value={formData.schoolName}
+                name="school_name"
+                value={formData.school_name}
                 onChange={handleChange}
                 className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
                   ${
-                    errors.schoolName
+                    errors.school_name
                       ? 'border-red-300 focus:border-red-500'
                       : 'border-gray-200 dark:border-gray-700 focus:border-[#85c226]'
                   } focus:outline-none`}
                 placeholder="Greenwood High School"
               />
-              {errors.schoolName && (
+              {errors.school_name && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-1 text-red-500 text-sm mt-2"
                 >
                   <AlertCircle className="w-4 h-4" />
-                  {errors.schoolName}
+                  {errors.school_name}
                 </motion.div>
               )}
             </div>
@@ -237,25 +257,25 @@ export default function RegisterForm({ event }: { event: string }) {
               <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                name="contactPerson"
-                value={formData.contactPerson}
+                name="contact_person"
+                value={formData.contact_person}
                 onChange={handleChange}
                 className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
                   ${
-                    errors.contactPerson
+                    errors.contact_person
                       ? 'border-red-300 focus:border-red-500'
                       : 'border-gray-200 dark:border-gray-700 focus:border-[#85c226]'
                   } focus:outline-none`}
                 placeholder="Jane Smith"
               />
-              {errors.contactPerson && (
+              {errors.contact_person && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-1 text-red-500 text-sm mt-2"
                 >
                   <AlertCircle className="w-4 h-4" />
-                  {errors.contactPerson}
+                  {errors.contact_person}
                 </motion.div>
               )}
             </div>
@@ -306,8 +326,8 @@ export default function RegisterForm({ event }: { event: string }) {
               <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="tel"
-                name="phone"
-                value={formData.phone}
+                name="phone_number"
+                value={formData.phone_number}
                 onChange={handleChange}
                 className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 dark:border-gray-700 focus:border-[#85c226] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none"
                 placeholder="+254 700 000 000"
@@ -345,26 +365,26 @@ export default function RegisterForm({ event }: { event: string }) {
             <Users className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="number"
-              name="numStudents"
-              value={formData.numStudents}
+              name="students"
+              value={formData.students}
               onChange={handleChange}
               min={1}
               className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
                 ${
-                  errors.numStudents
+                  errors.students
                     ? 'border-red-300 focus:border-red-500'
                     : 'border-gray-200 dark:border-gray-700 focus:border-[#85c226]'
                 } focus:outline-none`}
               placeholder="e.g. 30"
             />
-            {errors.numStudents && (
+            {errors.students && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-1 text-red-500 text-sm mt-2"
               >
                 <AlertCircle className="w-4 h-4" />
-                {errors.numStudents}
+                {errors.students}
               </motion.div>
             )}
           </div>

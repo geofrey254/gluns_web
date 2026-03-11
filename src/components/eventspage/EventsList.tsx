@@ -69,7 +69,7 @@ export default async function EventsList() {
   return (
     <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
       {/* Events Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {events.map((event, index) => (
           <div
             key={index}
@@ -109,11 +109,12 @@ export default async function EventsList() {
                 <span className="text-[#104179] font-semibold text-sm 2xl:text-lg">
                   {event.date ? new Date(event.date).toLocaleDateString('en-US', dateOptions) : ''}
                 </span>
-
-                <h3 className="text-2xl 2xl:text-3xl font-bold text-[#104179] mb-2">
-                  {event.title}
-                </h3>
-                <p className="text-sm 2xl:text-xl text-gray-600">{event.subtitle}</p>
+                <Link href={`/events/${event.slug}`}>
+                  <h3 className="text-2xl 2xl:text-3xl font-bold text-[#104179] mb-2 hover:text-[#85c226] transition-colors duration-300">
+                    {event.title}
+                  </h3>
+                </Link>
+                <p className="text-sm 2xl:text-xl text-gray-600 line-clamp-3">{event.subtitle}</p>
 
                 <Link
                   href={`/events/${event.slug}`}

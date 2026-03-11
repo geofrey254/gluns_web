@@ -1,5 +1,6 @@
 // collections/Faculty.ts
 import { CollectionConfig } from 'payload'
+import { AccessArgs } from 'payload'
 
 export const Faculty: CollectionConfig = {
   slug: 'faculty-advisors',
@@ -12,18 +13,20 @@ export const Faculty: CollectionConfig = {
     group: 'Delegation Management',
   },
   access: {
-    read: ({ req }) => {
+    read: ({ req }: AccessArgs) => {
       if (!req.user) return false
-      return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
+      return !!(req.user && 'roles' in req.user && (req.user.roles.includes('admin') || req.user.roles.includes('teacher')))
     },
-    create: ({ req }) => req.user?.roles === 'teacher' || req.user?.roles === 'admin',
-    update: ({ req }) => {
-      if (!req.user) return false
-      return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
+    create: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && (req.user.roles.includes('admin') || req.user.roles.includes('teacher')))
     },
-    delete: ({ req }) => {
+    update: ({ req, data }: AccessArgs) => {
       if (!req.user) return false
-      return req.user.roles === 'admin' || { teacher: { equals: req.user.id } }
+      return !!(req.user && 'roles' in req.user && (req.user.roles.includes('admin') || req.user.id === data?.teacher))
+    },
+    delete: ({ req }: AccessArgs) => {
+      if (!req.user) return false
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
     },
   },
 

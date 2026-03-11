@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { AccessArgs } from 'payload'
 
 export const Delegations: CollectionConfig = {
   slug: 'delegations',
@@ -7,12 +8,18 @@ export const Delegations: CollectionConfig = {
     group: 'Delegation Management',
   },
   access: {
-    read: ({ req }) =>
-      !!(req.user?.roles?.includes('admin') || req.user?.roles?.includes('teacher')),
+    read: ({ req }: AccessArgs) =>
+      !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.roles.includes('teacher'))
+      ),
 
-    create: ({ req }) => !!req.user?.roles?.includes('admin'),
+    create: ({ req }: AccessArgs) =>
+      !!(req.user && 'roles' in req.user && req.user.roles.includes('admin')),
 
-    update: ({ req }) => !!req.user?.roles?.includes('admin'),
+    update: ({ req }: AccessArgs) =>
+      !!(req.user && 'roles' in req.user && req.user.roles.includes('admin')),
   },
 
   fields: [

@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { AccessArgs } from 'payload'
 
 export const CommitteeTeam: CollectionConfig = {
   slug: 'committee-team',
@@ -7,10 +8,18 @@ export const CommitteeTeam: CollectionConfig = {
     group: 'Committee Management',
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin',
-    create: ({ req }) => req.user?.roles === 'admin',
-    update: ({ req }) => req.user?.roles === 'admin',
-    delete: ({ req }) => req.user?.roles === 'admin',
+    read: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+    create: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+    update: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+    delete: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
   },
   fields: [
     {

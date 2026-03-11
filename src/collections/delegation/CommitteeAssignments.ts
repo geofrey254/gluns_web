@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CollectionConfig } from 'payload'
+import { AccessArgs } from 'payload'
 
 export const CommitteeAssignments: CollectionConfig = {
   slug: 'committee-assignments',
@@ -13,14 +14,27 @@ export const CommitteeAssignments: CollectionConfig = {
   access: {
     read: () => true,
 
-    create: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
+    create: ({ req }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.roles.includes('teacher'))
+      )
+    },
 
-    update: ({ req }) =>
-      req.user?.roles === 'admin' ||
-      req.user?.roles === 'secretariat' ||
-      req.user?.roles === 'teacher',
+    update: ({ req }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') ||
+          req.user.roles.includes('secretariat') ||
+          req.user.roles.includes('teacher'))
+      )
+    },
 
-    delete: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
+    delete: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
   },
 
   hooks: {
@@ -60,9 +74,6 @@ export const CommitteeAssignments: CollectionConfig = {
   },
 
   fields: [
-    /**
-     * Delegation (anchor field)
-     */
     {
       name: 'delegation',
       type: 'relationship',
@@ -71,9 +82,6 @@ export const CommitteeAssignments: CollectionConfig = {
       index: true,
     },
 
-    /**
-     * Delegates (1–2 only)
-     */
     {
       name: 'delegates',
       type: 'relationship',
@@ -94,7 +102,11 @@ export const CommitteeAssignments: CollectionConfig = {
           delegation: { equals: delegationId },
         }
 
-        if (user?.roles === 'admin' || user?.roles === 'secretariat') {
+        if (
+          user &&
+          'roles' in user &&
+          (user.roles?.includes('admin') || user.roles?.includes('secretariat'))
+        ) {
           return baseFilter
         }
 

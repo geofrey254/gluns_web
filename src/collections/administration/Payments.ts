@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload'
+import { AccessArgs } from 'payload'
 
 export const Payments: CollectionConfig = {
   slug: 'payments',
@@ -7,7 +8,13 @@ export const Payments: CollectionConfig = {
     group: 'Administration',
   },
   access: {
-    read: ({ req }) => req.user?.roles === 'admin' || req.user?.roles === 'teacher',
+    read: ({ req }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.roles.includes('teacher'))
+      )
+    },
     create: () => false,
     update: () => false,
     delete: () => true,

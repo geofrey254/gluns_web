@@ -97,7 +97,7 @@ export default async function EventsList() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   {' '}
-                  <h2 className="flex items-center gap-1 text-[#104179] 2xl:text-2xl">
+                  <h2 className="flex items-center gap-1 text-[#104179] text-lg 2xl:text-2xl">
                     <span>
                       <IoLocationSharp className="text-[#85c226]" />
                     </span>
@@ -114,7 +114,7 @@ export default async function EventsList() {
                     {event.title}
                   </h3>
                 </Link>
-                <p className="text-sm 2xl:text-xl text-gray-600 line-clamp-3">{event.subtitle}</p>
+                <p className="text-lg 2xl:text-xl text-gray-600 line-clamp-3">{event.subtitle}</p>
 
                 <Link
                   href={`/events/${event.slug}`}

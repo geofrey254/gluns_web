@@ -180,7 +180,7 @@ export default buildConfig({
         number: true,
         payment: false,
       },
-      defaultToEmail: 'info.gluns@gmail.com',
+      defaultToEmail: 'info@gluns.org',
       formOverrides: {
         admin: {
           group: 'Forms',

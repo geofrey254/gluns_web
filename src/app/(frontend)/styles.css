@@ -140,7 +140,7 @@
   font-weight: 700;
   line-height: 1.3;
   margin: 2.5rem 0 1.25rem;
-  color: #111827;
+  color: #104179;
   scroll-margin-top: 6rem;
 }
 
@@ -166,7 +166,7 @@
 
 .richtext h2 {
   font-size: 2rem;
-  color: #111827;
+  color: #104179;
   position: relative;
   padding-left: 1rem;
 }
@@ -212,8 +212,13 @@
 .richtext p {
   margin-bottom: 1.75rem;
   text-align: left;
-  color: #374151;
+  color: #6a7282;
   font-weight: normal;
+}
+
+.richtext p strong {
+  font-weight: 600;
+  color: #104179;
 }
 
 

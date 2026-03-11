@@ -103,19 +103,17 @@ export default async function EventsList() {
                     </span>
                     {event.location}
                   </h2>
-                  <span className="text-[#104179] font-semibold text-sm 2xl:text-3xl bg-white border border-[#104179] px-3 py-1 rounded-lg">
-                    {event.date
-                      ? new Date(event.date).toLocaleDateString('en-US', dateOptions)
-                      : ''}
-                  </span>
                 </div>
 
                 <div className="w-full h-0.5 bg-[#85c226] mb-2"></div>
+                <span className="text-[#104179] font-semibold text-sm 2xl:text-lg">
+                  {event.date ? new Date(event.date).toLocaleDateString('en-US', dateOptions) : ''}
+                </span>
 
                 <h3 className="text-2xl 2xl:text-3xl font-bold text-[#104179] mb-2">
                   {event.title}
                 </h3>
-                <p className="text-sm 2xl:text-xl">{event.subtitle}</p>
+                <p className="text-sm 2xl:text-xl text-gray-600">{event.subtitle}</p>
 
                 <Link
                   href={`/events/${event.slug}`}

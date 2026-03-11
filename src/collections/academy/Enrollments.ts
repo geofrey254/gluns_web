@@ -21,7 +21,7 @@ export const Enrollments: CollectionConfig = {
       required: true,
       index: true,
     },
-
+    { name: 'currentLesson', type: 'relationship', relationTo: 'lessons' },
     {
       name: 'enrolledAt',
       type: 'date',

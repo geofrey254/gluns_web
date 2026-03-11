@@ -40,17 +40,15 @@ export default async function CourseLearnPage({ params }: { params: Promise<{ sl
 
   if (user?.id) {
     const studentResult = await payload.find({
-      collection: 'users',
-      where: { id: { equals: user.id } },
+      collection: 'enrollments',
+      where: { student: { equals: user.id } },
       limit: 1,
       depth: 2,
     })
 
     const student = studentResult.docs[0]
     const currentCourseId =
-      typeof student?.currentCourse === 'number'
-        ? student.currentCourse
-        : student?.currentCourse?.id
+      typeof student?.course === 'number' ? student.course : student?.course?.id
 
     if (currentCourseId === course.id && student?.currentLesson) {
       if (typeof student.currentLesson === 'number') {

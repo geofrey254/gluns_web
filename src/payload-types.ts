@@ -310,6 +310,7 @@ export interface Enrollment {
   id: number;
   student: number | User;
   course: number | Course;
+  currentLesson?: (number | null) | Lesson;
   enrolledAt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -1298,6 +1299,7 @@ export interface InstitutionsSelect<T extends boolean = true> {
 export interface EnrollmentsSelect<T extends boolean = true> {
   student?: T;
   course?: T;
+  currentLesson?: T;
   enrolledAt?: T;
   updatedAt?: T;
   createdAt?: T;

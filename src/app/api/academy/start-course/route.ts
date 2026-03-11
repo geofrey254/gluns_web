@@ -11,22 +11,16 @@ export async function POST(req: Request) {
     }
 
     const payload = await getPayload({ config })
+
     const { user } = await payload.auth({ headers: req.headers })
 
     if (!user || !user.id || user.roles !== 'student') {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
-    const studentResult = await payload.find({
-      collection: 'users',
-      where: { id: { equals: user.id }, roles: { equals: 'student' } },
-      limit: 1,
-    })
-
-    const student = studentResult.docs[0]
-    if (!student) {
-      return NextResponse.json({ error: 'Student not found' }, { status: 404 })
-    }
+    // ------------------------------------------------
+    // Find course
+    // ------------------------------------------------
 
     const coursesResult = await payload.find({
       collection: 'courses',
@@ -38,9 +32,43 @@ export async function POST(req: Request) {
     })
 
     const course = coursesResult.docs[0]
+
     if (!course) {
       return NextResponse.json({ error: 'Course not found' }, { status: 404 })
     }
+
+    // ------------------------------------------------
+    // Check if student already enrolled
+    // ------------------------------------------------
+
+    const existingEnrollmentResult = await payload.find({
+      collection: 'enrollments',
+      where: {
+        and: [{ student: { equals: user.id } }, { course: { equals: course.id } }],
+      },
+      limit: 1,
+    })
+
+    const existingEnrollment = existingEnrollmentResult.docs[0]
+
+    // ------------------------------------------------
+    // If already enrolled → resume course
+    // ------------------------------------------------
+
+    if (existingEnrollment) {
+      return NextResponse.json(
+        {
+          redirectPath: `/academy/courses/${course.slug}/learn`,
+          courseId: course.id,
+          lessonId: existingEnrollment.currentLesson,
+        },
+        { status: 200 },
+      )
+    }
+
+    // ------------------------------------------------
+    // Find first module
+    // ------------------------------------------------
 
     const modulesResult = await payload.find({
       collection: 'modules',
@@ -52,12 +80,17 @@ export async function POST(req: Request) {
     })
 
     const firstModule = modulesResult.docs[0]
+
     if (!firstModule) {
       return NextResponse.json(
         { error: 'No published modules found for this course' },
         { status: 400 },
       )
     }
+
+    // ------------------------------------------------
+    // Find first lesson
+    // ------------------------------------------------
 
     const lessonsResult = await payload.find({
       collection: 'lessons',
@@ -69,6 +102,7 @@ export async function POST(req: Request) {
     })
 
     const firstLesson = lessonsResult.docs[0]
+
     if (!firstLesson) {
       return NextResponse.json(
         { error: 'No published lessons found for this course' },
@@ -76,23 +110,15 @@ export async function POST(req: Request) {
       )
     }
 
-    const existingEnrolled = Array.isArray(student.enrolledCourses)
-      ? student.enrolledCourses.map((courseRef: number | { id: number }) =>
-          typeof courseRef === 'number' ? courseRef : courseRef.id,
-        )
-      : []
+    // ------------------------------------------------
+    // Create enrollment
+    // ------------------------------------------------
 
-    const enrolledCourses = existingEnrolled.includes(course.id)
-      ? existingEnrolled
-      : [...existingEnrolled, course.id]
-
-    await payload.update({
-      collection: 'users',
-      id: user.id,
+    const enrollment = await payload.create({
+      collection: 'enrollments',
       data: {
-        enrolledCourses,
-        currentCourse: course.id,
-        currentModule: firstModule.id,
+        student: user.id,
+        course: course.id,
         currentLesson: firstLesson.id,
       },
     })
@@ -103,11 +129,13 @@ export async function POST(req: Request) {
         courseId: course.id,
         moduleId: firstModule.id,
         lessonId: firstLesson.id,
+        enrollmentId: enrollment.id,
       },
       { status: 200 },
     )
   } catch (error) {
     console.error('Error starting course:', error)
+
     return NextResponse.json({ error: 'Failed to start course' }, { status: 500 })
   }
 }

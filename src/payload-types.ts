@@ -182,12 +182,11 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  roles: 'admin' | 'secretariat' | 'editor' | 'teacher' | 'student';
-  fullName: string;
+  roles: ('admin' | 'secretariat' | 'editor' | 'teacher' | 'student')[];
+  fullName?: string | null;
   username?: string | null;
   institution?: (number | null) | Institution;
   age?: number | null;
-  ageGroup?: ('8-10' | '11-13' | '14-17' | '18+') | null;
   delegationName?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -1218,7 +1217,6 @@ export interface UsersSelect<T extends boolean = true> {
   username?: T;
   institution?: T;
   age?: T;
-  ageGroup?: T;
   delegationName?: T;
   updatedAt?: T;
   createdAt?: T;

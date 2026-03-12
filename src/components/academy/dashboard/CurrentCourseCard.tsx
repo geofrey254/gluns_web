@@ -2,28 +2,27 @@
 
 import React from 'react'
 import { RiPlayCircleLine, RiArrowRightLine, RiTimeLine } from 'react-icons/ri'
+import { Course } from '@/app/types/course'
 
 interface CurrentCourseCardProps {
-  course: {
-    id: string
+  course: Course
+  currentLesson?: {
+    id: number
     title?: string
   }
-  currentModule?: {
-    title?: string
-  } | null
   onContinue: (courseId: string) => void
 }
 
 export default function CurrentCourseCard({
   course,
-  currentModule,
+  currentLesson,
   onContinue,
 }: CurrentCourseCardProps) {
   console.log(
     'Rendering CurrentCourseCard with course:',
     course,
-    'and currentModule:',
-    currentModule,
+    'and currentLesson:',
+    currentLesson,
   )
   return (
     <div className="mb-8">
@@ -31,7 +30,7 @@ export default function CurrentCourseCard({
         Continue Learning
       </h2>
 
-      <div className="bg-linear-to-r from-[#104179] to-blue-700 rounded-3xl p-6 sm:p-8 shadow-lg shadow-blue-200 relative overflow-hidden">
+      <div className="bg-[#104179] rounded-3xl p-6 sm:p-8 shadow-lg shadow-blue-200 relative overflow-hidden">
         {/* Decorative ring */}
         <div className="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/10 pointer-events-none" />
         <div className="absolute -bottom-10 -right-2 w-28 h-28 rounded-full bg-white/5 pointer-events-none" />
@@ -42,21 +41,19 @@ export default function CurrentCourseCard({
               <RiPlayCircleLine className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-black text-white leading-tight mb-1">
-                {course.title || 'Current Course'}
-              </h3>
+              <h3 className="text-lg font-black text-white leading-tight mb-1">{course.title}</h3>
               <div className="flex items-center gap-1.5 text-blue-100">
                 <RiTimeLine className="w-3.5 h-3.5" />
                 <span className="text-xs font-semibold">
-                  {currentModule ? `Module: ${currentModule.title}` : 'Start your next lesson'}
+                  {currentLesson ? `Lesson: ${currentLesson.title}` : 'Start your next lesson'}
                 </span>
               </div>
             </div>
           </div>
 
           <button
-            onClick={() => onContinue(course.id)}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-white text-blue-700 font-black text-sm hover:bg-blue-50 active:scale-[0.97] transition-all shadow-md shrink-0"
+            onClick={() => onContinue(course.id.toString())}
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-white text-[#104179] font-bold cursor-pointer hover:scale-105 text-sm hover:bg-blue-50 active:scale-[0.97] transition-all shadow-md shrink-0"
           >
             Continue
             <RiArrowRightLine className="w-4 h-4" />

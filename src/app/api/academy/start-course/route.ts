@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
     const { user } = await payload.auth({ headers: req.headers })
 
-    if (!user || !user.id || user.roles !== 'student') {
+    if (!user?.roles?.includes('student')) {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 

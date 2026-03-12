@@ -11,18 +11,15 @@ import CourseCard from './CourseCard'
 import EmptyCoursesState from './EmptyCoursesState'
 import Loading from '@/app/(frontend)/loading'
 
-interface User {
-  id: string
-  fullName: string
-  email: string
-  enrolledCourses: any[]
-  currentCourse?: any
-  currentModule?: any
-}
+// types
+import { Enrollment } from '@/app/types/course'
+import { User } from '@/app/types/types'
 
 interface Student {
   user: User
+  enrollments: Enrollment[]
 }
+
 interface AcademyDashboardProps {
   student?: Student
 }
@@ -37,41 +34,36 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
   const [loggingOut, setLoggingOut] = useState(false)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    if (!initialStudent) {
-      fetchStudentData()
-    } else {
-      fetchCourses()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const fetchDashboard = async () => {
+    try {
+      const res = await fetch('/api/academy/student-dashboard', {
+        credentials: 'include',
+      })
 
-  const fetchStudentData = async () => {
-    try {
-      const response = await fetch('/api/academy/student-profile', { credentials: 'include' })
-      if (!response.ok) throw new Error('Failed to fetch student data')
-      const data = await response.json()
-      setStudent({ user: data.student.user })
-      fetchCourses()
-    } catch (err) {
-      console.error('Error fetching student data:', err)
-      setError('Failed to load student data')
-      setLoading(false)
-    }
-  }
-  const fetchCourses = async () => {
-    try {
-      const response = await fetch('/api/academy/courses', { credentials: 'include' })
-      if (response.ok) {
-        const data = await response.json()
-        setCourses(data.courses)
+      if (res.status === 401) {
+        setError('unauthenticated')
+        return
       }
+
+      const data = await res.json()
+
+      setStudent({
+        user: data.user,
+        enrollments: data.enrollments,
+      })
+
+      setCourses(data.courses)
     } catch (err) {
-      console.error('Error fetching courses:', err)
+      console.error(err)
+      setError('Failed to load dashboard')
     } finally {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchDashboard()
+  }, [])
 
   const handleLogout = async () => {
     setLoggingOut(true)
@@ -87,25 +79,14 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
     router.push(`/academy/courses/${courseId}`)
   }
 
+  useEffect(() => {
+    if (error === 'unauthenticated') {
+      router.push('/academy/auth/login')
+    }
+  }, [error, router])
+
   if (loading) {
     return <Loading />
-  }
-
-  /* ── Error ── */
-  if (error) {
-    return (
-      <div className="min-h-screen bg-blue-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl border border-red-100 shadow-lg p-10 w-full max-w-sm text-center">
-          <p className="text-red-500 font-black mb-5 text-sm">{error}</p>
-          <button
-            onClick={() => router.push('/academy')}
-            className="px-6 py-3 rounded-2xl bg-[#104179] text-white font-black text-sm hover:bg-[#0d3a66] transition-colors"
-          >
-            Go Back
-          </button>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -128,20 +109,19 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Stats */}
           <StatsRow
-            enrolledCount={student?.user.enrolledCourses?.length || 0}
-            streak={0}
+            enrolledCount={student?.enrollments?.length || 0}
+            completedLessons={0}
             achievements={0}
           />
 
           {/* Current course */}
-          {student?.user.currentCourse && (
+          {student?.enrollments && student.enrollments.length > 0 && (
             <CurrentCourseCard
-              course={student.user.currentCourse}
-              currentModule={student.user.currentModule}
+              course={student.enrollments[0].course}
+              currentLesson={student.enrollments[0].currentLesson}
               onContinue={handleStartCourse}
             />
           )}
-
           {/* Available courses */}
           <div>
             <h2 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 px-1">

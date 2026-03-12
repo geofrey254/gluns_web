@@ -18,7 +18,7 @@ export default function DashboardHeader({ fullName, onLogout, loggingOut }: Dash
         <div className="flex items-center justify-between gap-4">
           {/* Brand + greeting */}
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-blue-500 to-[#104179] flex items-center justify-center shadow-md shadow-blue-200 shrink-0">
+            <div className="w-16 h-16 rounded-2xl bg-[#104179] flex items-center justify-center shadow-md shadow-blue-200 shrink-0">
               <Image
                 src="/logos/4.png"
                 alt="Gluns Logo"

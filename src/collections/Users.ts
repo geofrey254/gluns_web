@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { canUpdateUser } from './hooks/AccessHooks'
+import { AccessArgs } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -11,13 +11,30 @@ export const Users: CollectionConfig = {
   access: {
     create: () => true,
     read: () => true,
-    delete: canUpdateUser,
-    update: canUpdateUser,
+    update: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+    delete: ({ req }: AccessArgs) => {
+      return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
+    },
+  },
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data.age) {
+          if (data.age <= 10) data.ageGroup = '8-10'
+          else if (data.age <= 13) data.ageGroup = '11-13'
+          else if (data.age <= 17) data.ageGroup = '14-17'
+          else data.ageGroup = '18+'
+        }
+      },
+    ],
   },
   fields: [
     {
       name: 'roles',
       type: 'select',
+      hasMany: true,
       required: true,
       saveToJWT: true,
       options: [
@@ -32,7 +49,10 @@ export const Users: CollectionConfig = {
     {
       name: 'fullName',
       type: 'text',
-      required: true,
+      required: false,
+      admin: {
+        condition: (data) => data.roles === 'student',
+      },
     },
     {
       name: 'username',
@@ -56,15 +76,6 @@ export const Users: CollectionConfig = {
     {
       name: 'age',
       type: 'number',
-      admin: {
-        condition: (data) => data.roles === 'student',
-      },
-    },
-
-    {
-      name: 'ageGroup',
-      type: 'select',
-      options: ['8-10', '11-13', '14-17', '18+'],
       admin: {
         condition: (data) => data.roles === 'student',
       },

@@ -44,7 +44,7 @@ export function StartCourseButton({ courseSlug }: { courseSlug: string }) {
         type="button"
         onClick={handleStart}
         disabled={isStarting}
-        className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#104179] hover:bg-[#0d3a66] disabled:opacity-70 disabled:cursor-not-allowed active:scale-[0.98] text-white px-5 py-3.5 font-black text-sm transition-all shadow-lg shadow-blue-200"
+        className="w-full inline-flex items-center justify-center gap-2 cursor-pointer rounded-2xl bg-[#104179] hover:bg-[#0d3a66] disabled:opacity-70 disabled:cursor-not-allowed active:scale-[0.98] text-white px-5 py-3.5 font-black text-sm transition-all shadow-lg shadow-blue-200"
       >
         {isStarting ? (
           <RiLoader4Line className="w-5 h-5 animate-spin" />

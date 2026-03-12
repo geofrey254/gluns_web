@@ -75,8 +75,8 @@ export default function AcademyDashboard({ student: initialStudent }: AcademyDas
     }
   }
 
-  const handleStartCourse = (courseId: string) => {
-    router.push(`/academy/courses/${courseId}`)
+  const handleStartCourse = (courseSlug: string) => {
+    router.push(`/academy/courses/${courseSlug}/learn`)
   }
 
   useEffect(() => {

@@ -10,7 +10,7 @@ interface CurrentCourseCardProps {
     id: number
     title?: string
   }
-  onContinue: (courseId: string) => void
+  onContinue: (courseSlug: string) => void
 }
 
 export default function CurrentCourseCard({
@@ -52,7 +52,7 @@ export default function CurrentCourseCard({
           </div>
 
           <button
-            onClick={() => onContinue(course.id.toString())}
+            onClick={() => onContinue(course.slug)}
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-white text-[#104179] font-bold cursor-pointer hover:scale-105 text-sm hover:bg-blue-50 active:scale-[0.97] transition-all shadow-md shrink-0"
           >
             Continue

@@ -38,7 +38,6 @@ export const ContentBlocks: CollectionConfig = {
     { name: 'requiresCompletionAction', type: 'checkbox' },
     { name: 'completionType', type: 'text' },
     { name: 'interactionConfig', type: 'json' },
-    { name: 'estimatedReadTime', type: 'number' },
     { name: 'pointsAwarded', type: 'number' },
     { name: 'isOptional', type: 'checkbox' },
   ],

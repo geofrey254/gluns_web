@@ -17,9 +17,7 @@ export const Sections: CollectionConfig = {
       hasMany: true,
     },
     { name: 'exercise', type: 'relationship', relationTo: 'exercises' },
-    { name: 'estimatedDuration', type: 'text' },
     { name: 'required', type: 'checkbox', defaultValue: true },
-    { name: 'completionRule', type: 'text' },
     { name: 'isPublished', type: 'checkbox', defaultValue: false },
   ],
 }

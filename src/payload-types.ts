@@ -365,10 +365,7 @@ export interface Lesson {
   module: number | Module;
   objective?: string | null;
   orderIndex?: number | null;
-  duration?: string | null;
   sections?: (number | Section)[] | null;
-  passingScore?: number | null;
-  isPreviewable?: boolean | null;
   requiredToComplete?: boolean | null;
   isPublished?: boolean | null;
   updatedAt: string;
@@ -385,9 +382,7 @@ export interface Section {
   orderIndex?: number | null;
   contentBlocks?: (number | ContentBlock)[] | null;
   exercise?: (number | null) | Exercise;
-  estimatedDuration?: string | null;
   required?: boolean | null;
-  completionRule?: string | null;
   isPublished?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -444,7 +439,6 @@ export interface ContentBlock {
     | number
     | boolean
     | null;
-  estimatedReadTime?: number | null;
   pointsAwarded?: number | null;
   isOptional?: boolean | null;
   updatedAt: string;
@@ -1328,10 +1322,7 @@ export interface LessonsSelect<T extends boolean = true> {
   module?: T;
   objective?: T;
   orderIndex?: T;
-  duration?: T;
   sections?: T;
-  passingScore?: T;
-  isPreviewable?: T;
   requiredToComplete?: T;
   isPublished?: T;
   updatedAt?: T;
@@ -1364,9 +1355,7 @@ export interface SectionsSelect<T extends boolean = true> {
   orderIndex?: T;
   contentBlocks?: T;
   exercise?: T;
-  estimatedDuration?: T;
   required?: T;
-  completionRule?: T;
   isPublished?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1387,7 +1376,6 @@ export interface ContentBlocksSelect<T extends boolean = true> {
   requiresCompletionAction?: T;
   completionType?: T;
   interactionConfig?: T;
-  estimatedReadTime?: T;
   pointsAwarded?: T;
   isOptional?: T;
   updatedAt?: T;

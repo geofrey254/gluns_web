@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { Breadcrumbs } from '@/components/academy/course/BreadCrumbs'
 import { RiArrowLeftLine, RiBookOpenLine, RiTimeLine } from 'react-icons/ri'
 import type { Lesson, Module } from '@/payload-types'
+import LessonReader from '@/components/academy/learn/LessonReader'
 
 type LessonWithModule = Lesson & {
   module?: number | Module
@@ -56,7 +57,7 @@ export default async function CourseLearnPage({ params }: { params: Promise<{ sl
           collection: 'lessons',
           where: { id: { equals: student.currentLesson } },
           limit: 1,
-          depth: 1,
+          depth: 4,
         })
         activeLesson = lessonResult.docs[0] as LessonWithModule | undefined
       } else {
@@ -87,7 +88,7 @@ export default async function CourseLearnPage({ params }: { params: Promise<{ sl
       },
       sort: 'orderIndex',
       limit: 1,
-      depth: 1,
+      depth: 4,
     })
 
     activeLesson = lessonResult.docs[0] as LessonWithModule | undefined
@@ -122,7 +123,7 @@ export default async function CourseLearnPage({ params }: { params: Promise<{ sl
 
   return (
     <div className="min-h-screen bg-blue-50">
-      <Breadcrumbs title={`${course.title} • Learn`} />
+      <Breadcrumbs title={`${course.title}`} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
         <div className="mb-4">
@@ -143,12 +144,6 @@ export default async function CourseLearnPage({ params }: { params: Promise<{ sl
                 {activeModule.title}
               </span>
             )}
-            {activeLesson.duration && (
-              <span className="inline-flex items-center gap-1.5 rounded-2xl bg-blue-50 border border-blue-100 text-[#104179] px-3 py-1.5 text-xs font-black uppercase tracking-widest">
-                <RiTimeLine className="w-3.5 h-3.5" />
-                {activeLesson.duration}
-              </span>
-            )}
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight mb-3">
@@ -161,13 +156,10 @@ export default async function CourseLearnPage({ params }: { params: Promise<{ sl
           </p>
 
           <div className="mt-8 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 px-4 py-5">
-            <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2">
-              Lesson Content
-            </p>
-            <p className="text-sm text-slate-500 font-semibold">
-              Lesson sections and interactive blocks are ready to be displayed here as your academy
-              reader experience expands.
-            </p>
+            <LessonReader
+              sections={activeLesson.sections || []}
+              studentAgeGroup={course.ageGroupsAllowed?.[0]}
+            />
           </div>
         </div>
       </div>

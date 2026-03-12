@@ -1,5 +1,3 @@
-import { C } from 'vitest/dist/chunks/environment.d.cL3nLXbE.js'
-
 export interface Course {
   id: number
   title?: string

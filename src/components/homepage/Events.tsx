@@ -129,7 +129,7 @@ export default async function Events() {
                     </span>
                     {event.location}
                   </h2>
-                  <span className="text-[#104179] font-semibold text-sm 2xl:text-3xl bg-white border border-[#104179] px-3 py-1 rounded-lg">
+                  <span className="text-[#104179] font-semibold text-sm 2xl:text-lg">
                     {event.date
                       ? new Date(event.date).toLocaleDateString('en-US', dateOptions)
                       : ''}

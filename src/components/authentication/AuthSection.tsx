@@ -43,6 +43,8 @@ export default function AuthSection() {
           body: JSON.stringify({ delegationName, email, password }),
         })
 
+        console.log('Signup response:', res)
+
         if (!res.ok) {
           const error = await res.json()
           alert(error.message)
@@ -146,7 +148,7 @@ export default function AuthSection() {
                     id="delegation-name"
                     type="text"
                     onChange={(e) => setDelegationName(e.target.value)}
-                    placeholder="Enter delegation name"
+                    placeholder="Enter the name of your institution"
                     className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
                   />
                 </div>

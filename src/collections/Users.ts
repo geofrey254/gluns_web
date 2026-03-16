@@ -33,6 +33,11 @@ export const Users: CollectionConfig = {
       ],
       defaultValue: 'teacher',
     },
+    {
+      name: 'fullName',
+      type: 'text',
+      required: false,
+    },
 
     {
       name: 'delegationName',
@@ -40,7 +45,7 @@ export const Users: CollectionConfig = {
       required: true,
       saveToJWT: true,
       admin: {
-        condition: (data, { user }) => !!user && user.roles === 'teacher',
+        condition: (data, { user }) => !!user && user.roles.includes('teacher'),
       },
     },
   ],

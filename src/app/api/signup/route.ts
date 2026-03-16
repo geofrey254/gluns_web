@@ -11,8 +11,12 @@ export async function POST(req: Request) {
       email: body.email,
       password: body.password,
       delegationName: body.delegationName, // your extra field
+      fullName: body.delegationName, // supply a value
+      roles: ['teacher'],
     }),
   })
+
+  console.log('Signup response:', signupRes)
 
   const signupData = await signupRes.json()
 

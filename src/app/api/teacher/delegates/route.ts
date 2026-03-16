@@ -45,7 +45,7 @@ export async function POST(req: Request) {
   const { user } = await payload.auth({ headers: req.headers })
   if (!user) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  if (!('roles' in user) || user.roles !== 'teacher') {
+  if (!('roles' in user) || !user.roles.includes('teacher')) {
     return NextResponse.json({ message: 'Only teachers can add delegates' }, { status: 403 })
   }
 

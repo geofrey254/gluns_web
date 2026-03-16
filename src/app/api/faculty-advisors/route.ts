@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  if (!('roles' in user) || user.roles !== 'teacher') {
+  if (!('roles' in user) || !user.roles.includes('teacher')) {
     return NextResponse.json(
       { message: 'Only teachers can create faculty advisors' },
       { status: 403 },

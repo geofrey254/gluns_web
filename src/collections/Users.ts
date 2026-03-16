@@ -18,18 +18,6 @@ export const Users: CollectionConfig = {
       return !!(req.user && 'roles' in req.user && req.user.roles.includes('admin'))
     },
   },
-  hooks: {
-    beforeChange: [
-      ({ data }) => {
-        if (data.age) {
-          if (data.age <= 10) data.ageGroup = '8-10'
-          else if (data.age <= 13) data.ageGroup = '11-13'
-          else if (data.age <= 17) data.ageGroup = '14-17'
-          else data.ageGroup = '18+'
-        }
-      },
-    ],
-  },
   fields: [
     {
       name: 'roles',
@@ -42,43 +30,8 @@ export const Users: CollectionConfig = {
         { label: 'Secretariat', value: 'secretariat' },
         { label: 'Editor', value: 'editor' },
         { label: 'Teacher', value: 'teacher' },
-        { label: 'Student', value: 'student' },
       ],
-      defaultValue: 'student',
-    },
-    {
-      name: 'fullName',
-      type: 'text',
-      required: false,
-      admin: {
-        condition: (data) => data.roles === 'student',
-      },
-    },
-    {
-      name: 'username',
-      type: 'text',
-      required: true,
-      unique: true,
-      saveToJWT: true,
-      admin: {
-        condition: (data) => data.roles === 'student',
-      },
-    },
-    {
-      name: 'institution',
-      type: 'relationship',
-      relationTo: 'institutions',
-      admin: {
-        condition: (data) => data.roles === 'student',
-      },
-    },
-
-    {
-      name: 'age',
-      type: 'number',
-      admin: {
-        condition: (data) => data.roles === 'student',
-      },
+      defaultValue: 'teacher',
     },
 
     {

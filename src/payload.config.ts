@@ -39,18 +39,6 @@ import { Faculty } from './collections/delegation/Faculty'
 import { Payments } from './collections/administration/Payments'
 import { Sponsors } from './collections/administration/Sponsors'
 
-// Academy collections
-import { Enrollments } from './collections/academy/Enrollments'
-import { Institutions } from './collections/academy/Institutions'
-import { Courses } from './collections/academy/Courses'
-import { Lessons } from './collections/academy/Lessons'
-import { Modules } from './collections/academy/Modules'
-import { Sections } from './collections/academy/Sections'
-import { ContentBlocks } from './collections/academy/ContentBlocks'
-import { Exercises } from './collections/academy/Exercises'
-import { Achievements } from './collections/academy/Achievements'
-import { Badges } from './collections/academy/Badges'
-
 // endpoints
 
 const filename = fileURLToPath(import.meta.url)
@@ -91,20 +79,6 @@ export default buildConfig({
     Users,
     Media,
     Pages,
-
-    // Academy collections
-    Institutions,
-    Enrollments,
-    Courses,
-    Lessons,
-    Modules,
-    Sections,
-    ContentBlocks,
-    Exercises,
-    Achievements,
-    Badges,
-    // #####################
-
     Documents,
     Portraits,
     DelegationApplications,
@@ -123,7 +97,7 @@ export default buildConfig({
     PositionPapers,
     CommitteeAssignments,
   ],
-  serverURL: process.env.NEXT_PUBLIC_BASE_URL,
+  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
   cors: [process.env.NEXT_PUBLIC_CORS_ORIGIN || '', 'http://localhost:3000'],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

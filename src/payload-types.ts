@@ -70,16 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
-    institutions: Institution;
-    enrollments: Enrollment;
-    courses: Course;
-    lessons: Lesson;
-    modules: Module;
-    sections: Section;
-    'content-blocks': ContentBlock;
-    exercises: Exercise;
-    achievements: Achievement;
-    badges: Badge;
     documents: Document;
     portraits: Portrait;
     'delegation-applications': DelegationApplication;
@@ -109,16 +99,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    institutions: InstitutionsSelect<false> | InstitutionsSelect<true>;
-    enrollments: EnrollmentsSelect<false> | EnrollmentsSelect<true>;
-    courses: CoursesSelect<false> | CoursesSelect<true>;
-    lessons: LessonsSelect<false> | LessonsSelect<true>;
-    modules: ModulesSelect<false> | ModulesSelect<true>;
-    sections: SectionsSelect<false> | SectionsSelect<true>;
-    'content-blocks': ContentBlocksSelect<false> | ContentBlocksSelect<true>;
-    exercises: ExercisesSelect<false> | ExercisesSelect<true>;
-    achievements: AchievementsSelect<false> | AchievementsSelect<true>;
-    badges: BadgesSelect<false> | BadgesSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     portraits: PortraitsSelect<false> | PortraitsSelect<true>;
     'delegation-applications': DelegationApplicationsSelect<false> | DelegationApplicationsSelect<true>;
@@ -182,11 +162,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  roles: ('admin' | 'secretariat' | 'editor' | 'teacher' | 'student')[];
-  fullName?: string | null;
-  username?: string | null;
-  institution?: (number | null) | Institution;
-  age?: number | null;
+  roles: ('admin' | 'secretariat' | 'editor' | 'teacher')[];
   delegationName?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -205,22 +181,6 @@ export interface User {
       }[]
     | null;
   password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "institutions".
- */
-export interface Institution {
-  id: number;
-  name: string;
-  contactEmail?: string | null;
-  enrollmentCode: string;
-  maxStudents: number;
-  currentStudents?: number | null;
-  expiresAt?: string | null;
-  active?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * Media
@@ -300,226 +260,6 @@ export interface Portrait {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "enrollments".
- */
-export interface Enrollment {
-  id: number;
-  student: number | User;
-  course: number | Course;
-  currentLesson?: (number | null) | Lesson;
-  enrolledAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Add Course
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "courses".
- */
-export interface Course {
-  id: number;
-  title: string;
-  /**
-   * Auto-generated from title if left blank
-   */
-  slug: string;
-  description?: string | null;
-  thumbnail?: (number | null) | Media;
-  difficultyLevel?: ('beginner' | 'intermediate' | 'advanced') | null;
-  estimatedDuration?: string | null;
-  ageGroupsAllowed?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
-  modules?: (number | Module)[] | null;
-  isPublished?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "modules".
- */
-export interface Module {
-  id: number;
-  title: string;
-  slug: string;
-  description?: string | null;
-  course: number | Course;
-  orderIndex?: number | null;
-  lessons?: (number | Lesson)[] | null;
-  unlockCondition?: ('sequential' | 'allPreviousComplete' | 'instructorUnlock' | 'dateUnlock') | null;
-  unlockDate?: string | null;
-  isPublished?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "lessons".
- */
-export interface Lesson {
-  id: number;
-  title: string;
-  module: number | Module;
-  objective?: string | null;
-  orderIndex?: number | null;
-  sections?: (number | Section)[] | null;
-  requiredToComplete?: boolean | null;
-  isPublished?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections".
- */
-export interface Section {
-  id: number;
-  title: string;
-  lesson: number | Lesson;
-  orderIndex?: number | null;
-  contentBlocks?: (number | ContentBlock)[] | null;
-  exercise?: (number | null) | Exercise;
-  required?: boolean | null;
-  isPublished?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "content-blocks".
- */
-export interface ContentBlock {
-  id: number;
-  blockType?:
-    | (
-        | 'text'
-        | 'video'
-        | 'image'
-        | 'scenario'
-        | 'simulation'
-        | 'dialogue'
-        | 'timeline'
-        | 'roleplay'
-        | 'example'
-        | 'infographic'
-      )
-    | null;
-  title?: string | null;
-  bodyContent?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  media?: (number | null) | Media;
-  orderIndex?: number | null;
-  visibleForAgeGroups?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
-  difficulty?: string | null;
-  language?: string | null;
-  requiresCompletionAction?: boolean | null;
-  completionType?: string | null;
-  interactionConfig?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  pointsAwarded?: number | null;
-  isOptional?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "exercises".
- */
-export interface Exercise {
-  id: number;
-  question?: string | null;
-  instructions?: string | null;
-  type?:
-    | (
-        | 'multipleChoice'
-        | 'trueFalse'
-        | 'shortAnswer'
-        | 'matching'
-        | 'ordering'
-        | 'scenarioDecision'
-        | 'dragDrop'
-        | 'roleplayResponse'
-        | 'caseAnalysis'
-      )
-    | null;
-  options?:
-    | {
-        option?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  correctAnswer?: string | null;
-  acceptableAnswers?:
-    | {
-        value?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  explanation?: string | null;
-  hint?: string | null;
-  retryAllowed?: boolean | null;
-  maxAttempts?: number | null;
-  points?: number | null;
-  passingScore?: number | null;
-  penaltyPerAttempt?: number | null;
-  ageVariants?: ('8-10' | '11-13' | '14-17' | '18+')[] | null;
-  difficulty?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "achievements".
- */
-export interface Achievement {
-  id: number;
-  student?: (number | null) | User;
-  badge?: (number | null) | Badge;
-  earnedDate?: string | null;
-  triggerSource?: string | null;
-  courseContext?: (number | null) | Course;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "badges".
- */
-export interface Badge {
-  id: number;
-  name?: string | null;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  criteriaType?: string | null;
-  criteriaValue?: string | null;
-  pointsReward?: number | null;
-  rarity?: string | null;
-  visible?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * Media
@@ -1044,46 +784,6 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
-        relationTo: 'institutions';
-        value: number | Institution;
-      } | null)
-    | ({
-        relationTo: 'enrollments';
-        value: number | Enrollment;
-      } | null)
-    | ({
-        relationTo: 'courses';
-        value: number | Course;
-      } | null)
-    | ({
-        relationTo: 'lessons';
-        value: number | Lesson;
-      } | null)
-    | ({
-        relationTo: 'modules';
-        value: number | Module;
-      } | null)
-    | ({
-        relationTo: 'sections';
-        value: number | Section;
-      } | null)
-    | ({
-        relationTo: 'content-blocks';
-        value: number | ContentBlock;
-      } | null)
-    | ({
-        relationTo: 'exercises';
-        value: number | Exercise;
-      } | null)
-    | ({
-        relationTo: 'achievements';
-        value: number | Achievement;
-      } | null)
-    | ({
-        relationTo: 'badges';
-        value: number | Badge;
-      } | null)
-    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -1207,10 +907,6 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   roles?: T;
-  fullName?: T;
-  username?: T;
-  institution?: T;
-  age?: T;
   delegationName?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1266,180 +962,6 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "institutions_select".
- */
-export interface InstitutionsSelect<T extends boolean = true> {
-  name?: T;
-  contactEmail?: T;
-  enrollmentCode?: T;
-  maxStudents?: T;
-  currentStudents?: T;
-  expiresAt?: T;
-  active?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "enrollments_select".
- */
-export interface EnrollmentsSelect<T extends boolean = true> {
-  student?: T;
-  course?: T;
-  currentLesson?: T;
-  enrolledAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "courses_select".
- */
-export interface CoursesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  thumbnail?: T;
-  difficultyLevel?: T;
-  estimatedDuration?: T;
-  ageGroupsAllowed?: T;
-  modules?: T;
-  isPublished?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "lessons_select".
- */
-export interface LessonsSelect<T extends boolean = true> {
-  title?: T;
-  module?: T;
-  objective?: T;
-  orderIndex?: T;
-  sections?: T;
-  requiredToComplete?: T;
-  isPublished?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "modules_select".
- */
-export interface ModulesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  course?: T;
-  orderIndex?: T;
-  lessons?: T;
-  unlockCondition?: T;
-  unlockDate?: T;
-  isPublished?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections_select".
- */
-export interface SectionsSelect<T extends boolean = true> {
-  title?: T;
-  lesson?: T;
-  orderIndex?: T;
-  contentBlocks?: T;
-  exercise?: T;
-  required?: T;
-  isPublished?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "content-blocks_select".
- */
-export interface ContentBlocksSelect<T extends boolean = true> {
-  blockType?: T;
-  title?: T;
-  bodyContent?: T;
-  media?: T;
-  orderIndex?: T;
-  visibleForAgeGroups?: T;
-  difficulty?: T;
-  language?: T;
-  requiresCompletionAction?: T;
-  completionType?: T;
-  interactionConfig?: T;
-  pointsAwarded?: T;
-  isOptional?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "exercises_select".
- */
-export interface ExercisesSelect<T extends boolean = true> {
-  question?: T;
-  instructions?: T;
-  type?: T;
-  options?:
-    | T
-    | {
-        option?: T;
-        id?: T;
-      };
-  correctAnswer?: T;
-  acceptableAnswers?:
-    | T
-    | {
-        value?: T;
-        id?: T;
-      };
-  explanation?: T;
-  hint?: T;
-  retryAllowed?: T;
-  maxAttempts?: T;
-  points?: T;
-  passingScore?: T;
-  penaltyPerAttempt?: T;
-  ageVariants?: T;
-  difficulty?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "achievements_select".
- */
-export interface AchievementsSelect<T extends boolean = true> {
-  student?: T;
-  badge?: T;
-  earnedDate?: T;
-  triggerSource?: T;
-  courseContext?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "badges_select".
- */
-export interface BadgesSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  icon?: T;
-  criteriaType?: T;
-  criteriaValue?: T;
-  pointsReward?: T;
-  rarity?: T;
-  visible?: T;
   updatedAt?: T;
   createdAt?: T;
 }

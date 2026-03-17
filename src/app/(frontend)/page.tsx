@@ -7,6 +7,7 @@ import Process from '@/components/homepage/Process'
 import Events from '@/components/homepage/Events'
 import CTA from '@/components/homepage/CTA'
 import WelcomeNote from '@/components/homepage/WelcomeNote'
+import Video from '@/components/homepage/Video'
 
 export default function page() {
   return (
@@ -18,6 +19,7 @@ export default function page() {
       <Process />
       <Events />
       <WelcomeNote />
+      <Video />
       <CTA />
     </>
   )

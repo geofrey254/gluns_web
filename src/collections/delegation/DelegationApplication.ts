@@ -20,6 +20,13 @@ export const DelegationApplications: CollectionConfig = {
         (req.user.roles.includes('admin') || req.user.id === data?.user)
       )
     },
+    delete: ({ req, data }: AccessArgs) => {
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('admin') || req.user.id === data?.user)
+      )
+    },
   },
   hooks: {
     afterChange: [createDelegationOnApproval],

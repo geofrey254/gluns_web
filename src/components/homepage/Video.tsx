@@ -3,23 +3,24 @@ import React from 'react'
 export default function Video() {
   return (
     <section className="relative rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white/20">
-      <div className="relative w-full h-screen min-h-[560px] max-h-[900px]">
+      <div className="relative w-full h-[60vh] md:h-screen min-h-[560px]">
         {/* Video Background */}
-        <video
-          preload="none"
-          autoPlay
-          playsInline
-          muted
-          loop
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/video/gluns.mp4" type="video/mp4" />
-        </video>
-
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 
+               w-[177.77vh] h-[56.25vw] 
+               min-w-full min-h-full 
+               -translate-x-1/2 -translate-y-1/2 
+               pointer-events-none"
+            src="https://www.youtube.com/embed/NQiB7AKgbOA?autoplay=1&mute=1&controls=0&loop=1&playlist=NQiB7AKgbOA&playsinline=1&modestbranding=1&rel=0"
+            title="GLUNS Recap"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+          />
+        </div>
         {/* Layered Overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-[#104179]/95 via-[#104179]/30 to-black/50 z-10" />
         <div className="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/30 z-10" />
-
         {/* Top-left event badge */}
         <div className="absolute top-8 left-8 z-20 flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -30,7 +31,6 @@ export default function Video() {
             Event Recap
           </span>
         </div>
-
         {/* Top-right date tag */}
         <div className="absolute top-8 right-8 z-20">
           <div className="border border-white/25 rounded-full px-4 py-1.5 backdrop-blur-sm bg-white/5">
@@ -42,7 +42,6 @@ export default function Video() {
             </span>
           </div>
         </div>
-
         {/* Center Text Overlay */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6">
           <p

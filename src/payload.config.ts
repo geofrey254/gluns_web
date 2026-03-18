@@ -97,7 +97,7 @@ export default buildConfig({
     PositionPapers,
     CommitteeAssignments,
   ],
-  serverURL: process.env.NEXT_PUBLIC_PAYLOAD_URL,
+  serverURL: process.env.PAYLOAD_URL,
   cors: [process.env.NEXT_PUBLIC_CORS_ORIGIN || '', 'http://localhost:3000'],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

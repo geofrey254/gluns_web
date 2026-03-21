@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FaFacebookF, FaInstagram, FaXTwitter, FaLinkedinIn } from 'react-icons/fa6'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from 'react-icons/fa6'
 
 export default function Footer() {
   return (
@@ -118,7 +118,7 @@ export default function Footer() {
 
                 {/* Instagram */}
                 <Link
-                  href="#"
+                  href="https://www.instagram.com/gluns_org/"
                   aria-label="Instagram"
                   className="w-11 h-11 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-xl bg-gray-100 text-gray-600 
     hover:bg-[#104179] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm"
@@ -128,17 +128,17 @@ export default function Footer() {
 
                 {/* X (Twitter) */}
                 <Link
-                  href="#"
-                  aria-label="Twitter / X"
+                  href="https://www.tiktok.com/@gluns_org"
+                  aria-label="Tiktok"
                   className="w-11 h-11 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-xl bg-gray-100 text-gray-600 
     hover:bg-[#104179] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm"
                 >
-                  <FaXTwitter size={18} className="w-6 h-6 2xl:w-9 2xl:h-9" />
+                  <FaTiktok size={18} className="w-6 h-6 2xl:w-9 2xl:h-9" />
                 </Link>
 
                 {/* LinkedIn */}
                 <Link
-                  href="#"
+                  href="https://www.linkedin.com/company/global-leaders-un-symposium/"
                   aria-label="LinkedIn"
                   className="w-11 h-11 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-xl bg-gray-100 text-gray-600 
     hover:bg-[#104179] hover:text-white hover:scale-110 transition-all duration-300 shadow-sm"

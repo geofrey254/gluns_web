@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [committeesRes, blogsRes, eventsRes] = await Promise.all([
     fetch(`${apiUrl}/committees`, { next: { revalidate: 3600 } }),
     fetch(`${apiUrl}/blog`, { next: { revalidate: 3600 } }),
-    fetch(`${apiUrl}/events`, { next: { revalidate: 3600 } }),
+    fetch(`${apiUrl}/event`, { next: { revalidate: 3600 } }),
   ])
 
   if (!committeesRes.ok) throw new Error(`Failed to fetch committees: ${committeesRes.statusText}`)

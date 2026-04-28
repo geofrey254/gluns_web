@@ -25,16 +25,16 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="text-gray-600 text-base 2xl:text-2xl leading-relaxed max-w-sm">
+            <p className="text-gray-600 text-lg md:text-xl 2xl:text-3xl leading-relaxed max-w-sm">
               Empowering the next generation of global leaders through diplomacy, collaboration, and
               world-class Model UN experiences.
             </p>
 
             {/* Call to Action */}
-            <div className="mt-8 pt-6 border-t border-white/20">
+            <div className="pt-3 border-t border-white/20">
               <Link
                 href="/authentication"
-                className="inline-flex items-center justify-center px-6 py-3 2xl:px-8 2xl:py-4 bg-[#85c226] text-white font-bold text-sm 2xl:text-xl rounded-xl hover:bg-white hover:text-[#104179] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                className="inline-flex items-center justify-center px-6 py-3 2xl:px-8 2xl:py-4 bg-[#85c226] text-white font-bold text-lg md:text-xl 2xl:text-2xl rounded-xl hover:bg-white hover:text-[#104179] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               >
                 Register Now
               </Link>
@@ -52,14 +52,14 @@ export default function Footer() {
               <ul className="space-y-3">
                 {[
                   { name: 'About Us', href: '/about' },
-                  { name: 'Committees', href: '/committees' },
+                  { name: 'Organs', href: '/organs' },
                   { name: 'Events', href: '/events' },
                   { name: 'Contact', href: '/contact' },
                 ].map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-[#104179] transition-colors duration-200 text-sm 2xl:text-2xl flex items-center gap-2 group"
+                      className="text-gray-600 hover:text-[#104179] transition-colors duration-200 text-lg md:text-xl 2xl:text-2xl flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-[#104179] group-hover:w-4 transition-all duration-300"></span>
                       {link.name}
@@ -84,7 +84,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-600 hover:text-[#104179] transition-colors duration-200 text-sm 2xl:text-2xl flex items-center gap-2 group"
+                      className="text-gray-600 hover:text-[#104179] transition-colors duration-200 text-lg md:text-xl 2xl:text-2xl flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-[#104179] group-hover:w-4 transition-all duration-300"></span>
                       {link.name}
@@ -101,7 +101,7 @@ export default function Footer() {
                 Connect
               </h3>
 
-              <p className="text-gray-600 text-sm 2xl:text-2xl mb-5 leading-relaxed">
+              <p className="text-gray-600 text-lg md:text-xl 2xl:text-2xl mb-5 leading-relaxed">
                 Join our community and stay connected with global leaders
               </p>
 

@@ -12,9 +12,9 @@ export default function Hero() {
       <div className="absolute inset-0 bg-linear-to-br from-[#051220]/95 via-[#051220]/85 to-transparent" />
 
       <div className="relative z-10 w-full md:max-w-2xl lg:max-w-3xl 2xl:max-w-5xl py-20">
-        <h3 className="text-[#ffffff] font-semibold text-xl 2xl:text-3xl flex items-center">
+        <h3 className="text-[#ffffff] font-semibold text-2xl 2xl:text-3xl flex items-center">
           <span>
-            <SiUnitednations className="inline-block mr-2 text-2xl md:text-3xl 2xl:text-4xl mb-1" />
+            <SiUnitednations className="inline-block mr-2 text-2xl md:text-2xl 2xl:text-4xl mb-1" />
           </span>
           Welcome to GLUNS
         </h3>

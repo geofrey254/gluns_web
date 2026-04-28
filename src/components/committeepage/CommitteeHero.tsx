@@ -13,7 +13,7 @@ export default function CommitteeHero() {
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-4">
             <div className="w-2 h-2 bg-[#85c226] rounded-full animate-pulse"></div>
             <span className="text-white text-xs font-semibold tracking-wider uppercase">
-              Our Committees{' '}
+              Our Organs{' '}
             </span>
           </div>
 
@@ -22,11 +22,11 @@ export default function CommitteeHero() {
               Explore the Councils, Where Delegates Shape Solutions
             </h1>
 
-            <p className="text-white leading-relaxed text-xl md:text-2xl md:w-[60%]">
-              GLUNS hosts a diverse range of committees designed to challenge students, deepen
-              global awareness, and develop real diplomatic skills. Each committee tackles critical
-              global issues, encouraging delegates to think creatively, collaborate meaningfully,
-              and lead with purpose.
+            <p className="text-white leading-relaxed text-xl md:text-2xl md:w-[90%]">
+              GLUNS hosts a diverse range of organs designed to challenge students, deepen global
+              awareness, and develop real diplomatic skills. Each organ tackles critical global
+              issues, encouraging delegates to think creatively, collaborate meaningfully, and lead
+              with purpose.
             </p>
           </div>
         </div>

@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch multiple collections in parallel
   const [committeesRes, blogsRes, eventsRes] = await Promise.all([
-    fetch(`${apiUrl}/committees`, { next: { revalidate: 3600 } }),
+    fetch(`${apiUrl}/organs`, { next: { revalidate: 3600 } }),
     fetch(`${apiUrl}/blog`, { next: { revalidate: 3600 } }),
     fetch(`${apiUrl}/event`, { next: { revalidate: 3600 } }),
   ])
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const events: { slug: string }[] = eventsData.docs ?? []
 
   const committeeEntries: MetadataRoute.Sitemap = committees.map((c) => ({
-    url: `${siteUrl}/committees/${c.slug}`,
+    url: `${siteUrl}/organs/${c.slug}`,
     lastModified: new Date().toISOString(),
     changeFrequency: 'monthly',
     priority: 0.7,
@@ -67,7 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${siteUrl}/committees`,
+      url: `${siteUrl}/organs`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,

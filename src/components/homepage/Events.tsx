@@ -19,12 +19,12 @@ export default async function Events() {
     return (
       <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
         {/* Header */}
-        <div className="flex flex-col justify-center items-center text-center mb-8">
-          <h3 className="text-[#104179] text-xs 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
+        <div className="flex flex-col justify-center items-center text-center mb-8 ">
+          <h3 className="text-[#104179] text-xs md:text-sm 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
             Events
           </h3>
-          <h2 className="text-[#104179] text-4xl md:text-5xl font-bold mt-3">Upcoming Events</h2>
-          <p className="text-[#104179] max-w-2xl mx-auto mt-4 text-lg">
+          <h2 className="text-[#104179] text-3xl md:text-5xl font-bold mt-3">Upcoming Events</h2>
+          <p className="text-[#104179] max-w-2xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl">
             Join hundreds of young delegates in a dynamic, interactive, professionally organized
             Model UN experience.
           </p>
@@ -83,12 +83,12 @@ export default async function Events() {
   return (
     <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
       {/* Header */}
-      <div className="flex flex-col justify-center items-center text-center mb-16">
-        <h3 className="text-[#104179] text-xs 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
+      <div className="flex flex-col justify-center items-center text-center mb-8">
+        <h3 className="text-[#104179] text-xs md:text-sm 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
           Events
         </h3>
-        <h2 className="text-[#104179] text-4xl md:text-5xl font-bold mt-3">Upcoming Events</h2>
-        <p className="text-[#104179] max-w-2xl mx-auto mt-4 text-lg">
+        <h2 className="text-[#104179] text-3xl md:text-5xl font-bold mt-3">Upcoming Events</h2>
+        <p className="text-[#104179] max-w-2xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl">
           Join hundreds of young delegates in a dynamic, interactive, professionally organized Model
           UN experience.
         </p>
@@ -123,7 +123,7 @@ export default async function Events() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   {' '}
-                  <h2 className="flex items-center gap-1 text-[#104179] 2xl:text-2xl">
+                  <h2 className="flex items-center gap-1 text-[#104179] text-sm 2xl:text-2xl">
                     <span>
                       <IoLocationSharp className="text-[#85c226]" />
                     </span>
@@ -141,7 +141,7 @@ export default async function Events() {
                 <h3 className="text-2xl 2xl:text-3xl font-bold text-[#104179] mb-2">
                   {event.title}
                 </h3>
-                <p className="text-sm 2xl:text-xl">{event.subtitle}</p>
+                <p className="text-sm 2xl:text-xl line-clamp-3">{event.subtitle}</p>
 
                 <Link
                   href={`/events/${event.slug}`}

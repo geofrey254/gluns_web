@@ -47,7 +47,7 @@ export default async function CommitteeList() {
 
             {/* Content */}
             <div className="p-6 md:p-8 flex flex-col gap-4">
-              <Link href={`/committees/${committee.slug}`}>
+              <Link href={`/organs/${committee.slug}`}>
                 <h3 className="text-2xl md:text-3xl font-bold text-[#104179] leading-tight">
                   {committee.name}
                 </h3>
@@ -59,7 +59,7 @@ export default async function CommitteeList() {
 
               {/* CTA Link */}
               <Link
-                href={`/committees/${committee.slug}`}
+                href={`/organs/${committee.slug}`}
                 className="inline-flex items-center gap-2 text-[#104179] font-semibold mt-2 group-hover:gap-4 transition-all duration-300"
               >
                 <span>Learn More</span>
@@ -76,11 +76,11 @@ export default async function CommitteeList() {
 
         <div className="relative z-10">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Join a Committee?
+            Ready to Join an Organ?
           </h3>
           <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
             Take the first step towards becoming a global leader. Register for our upcoming
-            conference and choose your committee.
+            conference and choose your organ.
           </p>
           <Link
             href="/authentication"

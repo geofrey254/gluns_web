@@ -45,23 +45,23 @@ export async function generateMetadata({
 
   if (!committee) {
     return {
-      title: 'Committee Not Found | GLUNS',
+      title: 'Organ Not Found | GLUNS',
       description:
-        'This GLUNS committee could not be found. Explore our Model United Nations committees and leadership simulations in Kenya, Africa, and internationally.',
+        'This GLUNS organ could not be found. Explore our Model United Nations organs and leadership simulations in Kenya, Africa, and internationally.',
     }
   }
 
-  const title = `${committee.title} | GLUNS Committee`
+  const title = `${committee.title} | GLUNS Organ`
   const description =
     committee.description ||
-    `Discover the ${committee.title} committee at GLUNS, a Model United Nations simulation empowering students in Kenya, Africa, and around the world.`
+    `Discover the ${committee.title} organ at GLUNS, a Model United Nations simulation empowering students in Kenya, Africa, and around the world.`
 
   const imageUrl =
     typeof committee?.committee_photo === 'object' && committee.committee_photo?.url
       ? committee.committee_photo.url
       : '/seo/committee.jpg'
 
-  const url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committees/${slug}`
+  const url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/organs/${slug}`
 
   return {
     title,
@@ -95,11 +95,11 @@ export async function generateMetadata({
       'GLUNS',
       'Global Leaders United Nations Symposium',
 
-      // Committee / Core
-      'Model United Nations committee',
-      'MUN committee',
-      'Student diplomacy committee',
-      'High school MUN committee',
+      // Organ / Core
+      'Model United Nations organ',
+      'MUN organ',
+      'Student diplomacy organ',
+      'High school MUN organ',
 
       // Geography
       'Model United Nations Kenya',
@@ -161,10 +161,10 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
                   <Link
-                    href="/committees"
+                    href="/organs"
                     className="text-white/90 hover:text-[#85c226] transition-all duration-300 font-medium"
                   >
-                    Committees
+                    Organs
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>

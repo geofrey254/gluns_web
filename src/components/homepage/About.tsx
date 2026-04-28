@@ -45,16 +45,16 @@ export default function About() {
           {/* Header with decorative element */}
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <h3 className="text-[#104179] text-xs 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
+              <h3 className="text-[#104179] text-xs md:text-sm 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
                 Who We Are
               </h3>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#104179] leading-tight">
+            <h2 className="text-3xl md:text-5xl 2xl:text-3xl font-bold text-[#104179] leading-tight">
               About GLUNS
             </h2>
           </div>
 
-          <p className="text-base md:text-lg 2xl:text-2xl text-gray-700 leading-relaxed">
+          <p className="text-base md:text-xl 2xl:text-3xl text-gray-700 leading-relaxed">
             The Global Leaders United Nations Symposium (GLUNS) is a platform created to empower
             high school students with the skills and confidence to engage in meaningful global
             conversations. Through structured debates, policy discussions, and leadership-based

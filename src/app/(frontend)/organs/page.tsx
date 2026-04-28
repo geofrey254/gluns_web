@@ -5,16 +5,16 @@ import CommitteeHero from '@/components/committeepage/CommitteeHero'
 import CommitteeList from '@/components/committeepage/CommitteeList'
 
 export const metadata = {
-  title: 'GLUNS Committees | Model United Nations (MUN) Kenya, Africa & Worldwide',
+  title: 'GLUNS Organs | Model United Nations (MUN) Kenya, Africa & Worldwide',
   description:
-    'Explore all GLUNS Model United Nations (MUN) committees. Learn about our high school and youth leadership committees in Kenya, across Africa, and internationally, and discover opportunities to participate in global diplomacy simulations.',
+    'Explore all GLUNS Model United Nations (MUN) organs. Learn about our high school and youth leadership organs in Kenya, across Africa, and internationally, and discover opportunities to participate in global diplomacy simulations.',
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
 
   openGraph: {
-    title: 'GLUNS Committees – Model United Nations in Kenya, Africa & Worldwide',
+    title: 'GLUNS Organs – Model United Nations in Kenya, Africa & Worldwide',
     description:
-      'Browse all GLUNS committees and learn about student leadership, diplomacy, and Model United Nations programs across Kenya, Africa, and internationally.',
-    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committees`,
+      'Browse all GLUNS organs and learn about student leadership, diplomacy, and Model United Nations programs across Kenya, Africa, and internationally.',
+    url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/organs`,
     siteName: 'GLUNS',
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/committees`,
+    canonical: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/organs`,
   },
 
   keywords: [
@@ -38,8 +38,8 @@ export const metadata = {
     'Global Leaders United Nations Symposium',
 
     // Core Topic
-    'Model United Nations committees',
-    'MUN committees',
+    'Model United Nations organs',
+    'MUN organs',
     'High school Model UN',
 
     // Geography

@@ -56,12 +56,12 @@ export default function SecHero() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
-                href="/committees"
+                href="/organs"
                 className="group flex items-center gap-3 px-8 py-4 text-white rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-2xl hover:translate-y-0.5"
                 style={{ backgroundColor: '#104179' }}
               >
                 <Users className="w-5 h-5" />
-                <span>View Committees</span>
+                <span>View Organs</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
 

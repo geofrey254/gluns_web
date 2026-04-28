@@ -15,19 +15,20 @@ export default async function Committee() {
     <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen 2xl:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-16 py-20 overflow-hidden">
       {/* Section Header */}
       <div className="flex flex-col justify-center items-center text-center mb-16">
-        <h3 className="text-[#104179] text-xs tracking-widest border border-[#104179] rounded-xl px-4 py-1">
-          Committees
+        <h3 className="text-[#104179] text-xs md:text-sm 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
+          Organs
         </h3>
-        <h2 className="text-4xl md:text-5xl text-[#104179] mt-2 font-semibold">
-          Explore Our Specialized Committees
+        <h2 className="text-3xl md:text-5xl 2xl:text-3xl text-[#104179] mt-2 font-semibold">
+          Explore the Structure of GLUNS
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-lg 2xl:text-2xl leading-relaxed">
-          GLUNS provides diverse committees that challenge students to debate, negotiate, and solve
-          real-world issues from a global perspective.
+        <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl leading-relaxed">
+          GLUNS is organized into three main organs: the General Assembly, the International Court
+          of Justice, and the International Law Commission—each offering a distinct approach to
+          global governance, diplomacy, and law.
         </p>
       </div>
 
-      {/* Committees Grid */}
+      {/* Organs Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
         {committee
           .slice(0, 3)
@@ -71,7 +72,7 @@ export default async function Committee() {
 
                 {/* CTA Link */}
                 <Link
-                  href={`/committees/${committee.slug}`}
+                  href={`/organs/${committee.slug}`}
                   className="inline-flex items-center gap-2 text-[#104179] font-semibold mt-2 group-hover:gap-4 transition-all duration-300"
                 >
                   <span>Learn More</span>
@@ -84,10 +85,10 @@ export default async function Committee() {
 
       <div className="flex justify-center items-center mt-8">
         <Link
-          href="/committees"
-          className="flex items-center justify-center gap-4 border border-[#104179] text-[#104179] text-xl 2xl:text-2xl rounded-xl px-4 py-2 hover:scale-105 transition-transform delay-200"
+          href="/organs"
+          className="flex items-center justify-center gap-4 border border-[#104179] text-[#104179] text-lg md:text-xl 2xl:text-2xl rounded-xl px-4 py-2 hover:scale-105 transition-transform delay-200"
         >
-          Explore Committees
+          Explore Organs
           <GrLinkNext className="-rotate-45" />
         </Link>
       </div>

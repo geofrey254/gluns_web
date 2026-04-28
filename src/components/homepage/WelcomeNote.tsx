@@ -22,14 +22,14 @@ export default function WelcomeNote() {
               </svg>
               Message from the Administration
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
               A Word from the{' '}
               <span className="text-white relative inline-block">
                 Administration
                 <div className="absolute -bottom-2 left-0 right-0 h-1 bg-white opacity-20 rounded-full"></div>
               </span>
             </h2>
-            <p className="text-white text-lg max-w-2xl mx-auto">
+            <p className="text-white text-lg md:text-xl 2xl:text-3xl max-w-2xl mx-auto">
               Leading with vision, unity, and purpose for a better tomorrow
             </p>
           </div>
@@ -48,7 +48,7 @@ export default function WelcomeNote() {
 
                   <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-gray-100">
                     {/* Image Container */}
-                    <div className="relative aspect-5/5 overflow-hidden bg-linear-to-br from-gray-50 to-gray-100">
+                    <div className="relative aspect-5/6 overflow-hidden bg-linear-to-br from-gray-50 to-gray-100">
                       <Image
                         width={600}
                         height={750}
@@ -62,15 +62,6 @@ export default function WelcomeNote() {
                       <div className="absolute top-4 right-4 bg-[#104179]/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
                         <p className="text-white font-bold text-sm">GLUNS 2026</p>
                       </div>
-                    </div>
-
-                    {/* Info Card */}
-                    <div className="p-6 bg-white">
-                      <h3 className="text-2xl font-bold text-[#104179] mb-2">Noosha Aval</h3>
-                      <p className="text-[#104179] font-semibold mb-1">Chief Advisor</p>
-                      <p className="text-gray-500 text-sm mb-4">
-                        Global Leaders United Nations Symposium
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -88,7 +79,7 @@ export default function WelcomeNote() {
                 </div>
 
                 <div className="space-y-6 text-gray-700 leading-relaxed mt-4">
-                  <p className="text-lg md:text-xl font-light">
+                  <p className="text-lg md:text-xl 2xl:text-3xl">
                     Welcome to the{' '}
                     <span className="font-bold text-[#104179]">
                       Global Leaders United Nations Symposium
@@ -96,13 +87,13 @@ export default function WelcomeNote() {
                     . It is my profound honor to invite you to this extraordinary gathering of
                     minds, leaders, and visionaries from across the globe.
                   </p>
-                  <p className="text-base md:text-lg">
+                  <p className="text-lg md:text-xl 2xl:text-3xl">
                     In an era of unprecedented challenges and opportunities, GLUNS stands as a
                     beacon of collaboration, innovation, and collective action. Together, we will
                     explore solutions to our world{"'"}s most pressing issues and forge partnerships
                     that transcend borders.
                   </p>
-                  <p className="text-base md:text-lg">
+                  <p className="text-lg md:text-xl 2xl:text-3xl">
                     Your participation enriches our dialogue and strengthens our shared commitment
                     to building a more sustainable, equitable, and peaceful future for all nations
                     and peoples.
@@ -113,21 +104,29 @@ export default function WelcomeNote() {
               {/* Signature Card */}
               <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-l-4 border-[#104179]">
                 <div className="flex items-center justify-between flex-wrap gap-6">
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <div
                       className="text-3xl md:text-4xl font-bold text-[#104179] italic"
                       style={{ fontFamily: 'Georgia, serif' }}
                     >
                       Noosha Aval
                     </div>
-                    <p className="text-sm text-gray-600 font-medium">Chief Advisor</p>
-                    <p className="text-xs text-gray-500">Global Leaders United Nations Symposium</p>
+                    <p className="text-xs md:text-sm 2xl:text-lg text-gray-600 font-medium">
+                      Chief Advisor
+                    </p>
+                    <p className="text-xs md:text-sm 2xl:text-lg text-gray-500">
+                      Global Leaders United Nations Symposium
+                    </p>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <div className="text-right mr-4">
-                      <p className="text-xs text-gray-500 uppercase tracking-wide">Dated</p>
-                      <p className="text-sm font-semibold text-gray-700">2026</p>
+                      <p className="text-xs md:text-sm 2xl:text-lg text-gray-500 uppercase tracking-wide">
+                        Dated
+                      </p>
+                      <p className="text-xs md:text-sm 2xl:text-lg font-semibold text-gray-700">
+                        2026
+                      </p>
                     </div>
                     <div className="w-20 h-20 border-2 border-[#104179] rounded-lg flex items-center justify-center">
                       <div className="text-center">

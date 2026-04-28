@@ -33,7 +33,7 @@ export default function Navbar() {
     { name: 'About', link: '/about' },
     { name: 'The Secretariat', link: '/the-secretariat' },
     { name: 'Events', link: '/events' },
-    { name: 'Committees', link: '/committees' },
+    { name: 'Organs', link: '/organs' },
     { name: 'Blog', link: '/blog' },
     { name: 'Contact', link: '/contact' },
   ]

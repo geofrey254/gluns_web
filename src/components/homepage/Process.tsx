@@ -44,13 +44,13 @@ export default function Process() {
     <section className="relative bg-[#104179] rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-20 overflow-hidden border-t border-white">
       {/* Header */}
       <div className="flex flex-col justify-center items-center text-center mb-16 md:mb-4 max-w-3xl mx-auto">
-        <h3 className="text-white text-xs 2xl:text-lg tracking-widest border border-white rounded-xl px-4 py-1">
+        <h3 className="text-white text-xs md:text-sm 2xl:text-lg tracking-widest border border-white rounded-xl px-4 py-1">
           How We Do It
         </h3>
-        <h2 className="text-white text-4xl md:text-5xl font-bold mt-4 leading-tight">
+        <h2 className="text-white text-3xl md:text-5xl font-bold mt-4 leading-tight">
           Experience the GLUNS Journey
         </h2>
-        <p className="text-gray-200 mt-4 text-base 2xl:text-2xl">
+        <p className="text-gray-200 mt-4 text-lg md:text-xl 2xl:text-3xl">
           A vibrant mix of debates, cultural activities, workshops, and global collaborations.
         </p>
       </div>
@@ -85,7 +85,9 @@ export default function Process() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-gray-200 text-sm 2xl:text-base leading-relaxed mb-3">{event.desc}</p>
+                    <p className="text-gray-200 text-sm 2xl:text-base leading-relaxed mb-3">
+                      {event.desc}
+                    </p>
                   </div>
                 </div>
               </div>

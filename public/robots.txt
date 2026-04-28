@@ -9,7 +9,7 @@ Allow: /
 Allow: /about
 Allow: /contact
 Allow: /events
-Allow: /committees
+Allow: /organs
 Allow: /blog
 Allow: /faqs
 Allow: /sponsors

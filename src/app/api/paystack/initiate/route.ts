@@ -71,7 +71,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         email: user.email,
         amount: delegateSlotsPurchased * PRICE_PER_DELEGATE_NGN * 100,
-        callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/paystack/verify`,
+        callback_url: `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/paystack/verify`,
         metadata: {
           teacherId,
           delegationId,

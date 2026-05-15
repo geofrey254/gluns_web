@@ -80,6 +80,14 @@ export async function generateMetadata({
     title,
     description: `Verify ${trainer.full_name} as an official GLUNS trainer for ${trainer.organ}.`,
     metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+    robots: {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false,
+      },
+    },
     alternates: {
       canonical: url,
     },

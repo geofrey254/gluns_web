@@ -3,8 +3,8 @@ export const dynamic = 'force-dynamic'
 import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.PAYLOAD_URL
-  const apiUrl = process.env.PAYLOAD_API_URL
+  const siteUrl = process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'https://www.gluns.org'
+  const apiUrl = process.env.PAYLOAD_API_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL
 
   // Fetch multiple collections in parallel
   const [committeesRes, blogsRes, eventsRes] = await Promise.all([

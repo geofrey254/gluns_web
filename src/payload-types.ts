@@ -80,6 +80,7 @@ export interface Config {
     event: Event;
     blog: Blog;
     sponsors: Sponsor;
+    trainers: Trainer;
     committees: Committee;
     'committee-categories': CommitteeCategory;
     'committee-team': CommitteeTeam;
@@ -109,6 +110,7 @@ export interface Config {
     event: EventSelect<false> | EventSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+    trainers: TrainersSelect<false> | TrainersSelect<true>;
     committees: CommitteesSelect<false> | CommitteesSelect<true>;
     'committee-categories': CommitteeCategoriesSelect<false> | CommitteeCategoriesSelect<true>;
     'committee-team': CommitteeTeamSelect<false> | CommitteeTeamSelect<true>;
@@ -450,6 +452,22 @@ export interface Sponsor {
   id: number;
   name: string;
   logo: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Add trainer records for QR badge verification
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trainers".
+ */
+export interface Trainer {
+  id: number;
+  full_name: string;
+  verification_code?: string | null;
+  organ: string;
+  photo?: (number | null) | Portrait;
+  gender: 'male' | 'female';
   updatedAt: string;
   createdAt: string;
 }
@@ -825,6 +843,10 @@ export interface PayloadLockedDocument {
         value: number | Sponsor;
       } | null)
     | ({
+        relationTo: 'trainers';
+        value: number | Trainer;
+      } | null)
+    | ({
         relationTo: 'committees';
         value: number | Committee;
       } | null)
@@ -1119,6 +1141,19 @@ export interface BlogSelect<T extends boolean = true> {
 export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trainers_select".
+ */
+export interface TrainersSelect<T extends boolean = true> {
+  full_name?: T;
+  verification_code?: T;
+  organ?: T;
+  photo?: T;
+  gender?: T;
   updatedAt?: T;
   createdAt?: T;
 }

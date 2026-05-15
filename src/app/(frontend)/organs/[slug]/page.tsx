@@ -228,7 +228,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
             <div className="flex items-center space-x-4">
               <div className="h-1 w-16 bg-[#85c226]"></div>
               <h2 className="text-4xl md:text-5xl font-bold text-[#104179] tracking-tight">
-                Committee Summary
+                Organ Summary
               </h2>
               <div className="h-1 w-16 bg-[#85c226]"></div>
             </div>
@@ -240,7 +240,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
         </div>
 
         {/* Committee Members Section */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 lg:p-16 mb-16 border-t-8 border-[#85c226]">
+        {/* <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 lg:p-16 mb-16 border-t-8 border-[#85c226]">
           <div className="flex items-center justify-center mb-12">
             <div className="flex items-center space-x-4">
               <div className="h-1 w-16 bg-[#104179]"></div>
@@ -252,7 +252,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
           </div>
 
           <CommitteeMembers members={members} />
-        </div>
+        </div> */}
       </div>
 
       {/* Bottom Spacer */}

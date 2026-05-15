@@ -10,8 +10,8 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       email: body.email,
       password: body.password,
-      delegationName: body.delegationName, // your extra field
-      fullName: body.delegationName, // supply a value
+      delegationName: body.delegationName,
+      fullName: body.delegationName,
       roles: ['teacher'],
     }),
   })

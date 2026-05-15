@@ -38,6 +38,7 @@ import { Faculty } from './collections/delegation/Faculty'
 
 import { Payments } from './collections/administration/Payments'
 import { Sponsors } from './collections/administration/Sponsors'
+import { Trainers } from './collections/administration/Trainers'
 
 // endpoints
 
@@ -89,6 +90,7 @@ export default buildConfig({
     Events,
     Blog,
     Sponsors,
+    Trainers,
     Committees,
     CommitteeCategories,
     CommitteeTeam,

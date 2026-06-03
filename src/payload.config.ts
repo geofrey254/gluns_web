@@ -39,6 +39,7 @@ import { Faculty } from './collections/delegation/Faculty'
 import { Payments } from './collections/administration/Payments'
 import { Sponsors } from './collections/administration/Sponsors'
 import { Trainers } from './collections/administration/Trainers'
+import { BackgroundGuides } from './collections/background-guides/BackgroundGuides'
 
 // endpoints
 
@@ -91,6 +92,7 @@ export default buildConfig({
     Blog,
     Sponsors,
     Trainers,
+    BackgroundGuides,
     Committees,
     CommitteeCategories,
     CommitteeTeam,

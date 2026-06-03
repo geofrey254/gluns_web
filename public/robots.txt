@@ -24,6 +24,7 @@ Disallow: /payments/
 Disallow: /delegation-applications/
 Disallow: /delegation-portal
 Disallow: /position-papers/
+Disallow: /background-guides/
 
 # Sitemap location
 Sitemap: https://www.gluns.org/sitemap.xml

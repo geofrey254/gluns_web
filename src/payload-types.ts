@@ -81,6 +81,7 @@ export interface Config {
     blog: Blog;
     sponsors: Sponsor;
     trainers: Trainer;
+    'background-guides': BackgroundGuide;
     committees: Committee;
     'committee-categories': CommitteeCategory;
     'committee-team': CommitteeTeam;
@@ -111,6 +112,7 @@ export interface Config {
     blog: BlogSelect<false> | BlogSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     trainers: TrainersSelect<false> | TrainersSelect<true>;
+    'background-guides': BackgroundGuidesSelect<false> | BackgroundGuidesSelect<true>;
     committees: CommitteesSelect<false> | CommitteesSelect<true>;
     'committee-categories': CommitteeCategoriesSelect<false> | CommitteeCategoriesSelect<true>;
     'committee-team': CommitteeTeamSelect<false> | CommitteeTeamSelect<true>;
@@ -468,6 +470,32 @@ export interface Trainer {
   organ: string;
   photo?: (number | null) | Portrait;
   gender: 'male' | 'female';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Publish password-protected committee background guides for delegates.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "background-guides".
+ */
+export interface BackgroundGuide {
+  id: number;
+  title: string;
+  /**
+   * Auto-generated from the title, but can be customized if needed.
+   */
+  slug: string;
+  description?: string | null;
+  organ?: string | null;
+  committee?: string | null;
+  guideFile: number | Media;
+  /**
+   * Enter a new password to replace the existing one.
+   */
+  password?: string | null;
+  passwordHash?: string | null;
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -847,6 +875,10 @@ export interface PayloadLockedDocument {
         value: number | Trainer;
       } | null)
     | ({
+        relationTo: 'background-guides';
+        value: number | BackgroundGuide;
+      } | null)
+    | ({
         relationTo: 'committees';
         value: number | Committee;
       } | null)
@@ -1154,6 +1186,23 @@ export interface TrainersSelect<T extends boolean = true> {
   organ?: T;
   photo?: T;
   gender?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "background-guides_select".
+ */
+export interface BackgroundGuidesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  organ?: T;
+  committee?: T;
+  guideFile?: T;
+  password?: T;
+  passwordHash?: T;
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -11,6 +11,7 @@ export async function GET() {
     'User-agent: *',
     'Disallow: /api/',
     'Disallow: /admin/',
+
     'Allow: /',
     '',
     `Sitemap: ${sitemap}`,

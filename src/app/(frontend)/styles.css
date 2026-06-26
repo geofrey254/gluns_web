@@ -584,3 +584,48 @@
     box-shadow: none;
   }
 }
+
+
+@media print {
+  /* Hide everything on the page except the invoice */
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice-print-area,
+  #invoice-print-area * {
+    visibility: visible;
+  }
+
+  #invoice-print-area {
+    position: fixed;
+    inset: 0;
+    padding: 24px 32px;
+    background: white;
+  }
+
+  /* A5 page size */
+  @page {
+    size: A5 portrait;
+    margin: 0;
+  }
+
+  /* Force light mode — no dark backgrounds on paper */
+  #invoice-print-area {
+    color-scheme: light;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Kill shadows, borders, rounded corners */
+  #invoice-print-area .no-print-border {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Hide action buttons */
+  #invoice-print-actions {
+    display: none !important;
+  }
+}

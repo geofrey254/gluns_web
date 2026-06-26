@@ -8,4 +8,6 @@ export interface InvoiceData {
   eventDetail: string
   lineItems: { desc: string; qty: number; unit: number; total: number }[]
   totalAmt: number
+  priceKnown: boolean
+  currency: string // add this
 }

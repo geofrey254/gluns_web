@@ -12,13 +12,11 @@ import {
   Mail,
   Phone,
   School,
-  Users,
   Hash,
   Calendar,
   Send,
   AlertCircle,
   LoaderCircle,
-  Contact,
 } from 'lucide-react'
 
 // subcomponents
@@ -73,12 +71,12 @@ export default function RegistrationForm({ events: propEvents }: RegistrationFor
     if (propEvents && propEvents.length > 0) return
     async function fetchEvents() {
       try {
-        const response = await fetch('/api/event')
+        const response = await fetch('/api/events')
         const data = await response.json()
 
         console.log('Events from API:', data.docs)
 
-        const r = data.docs.map((event: any) => ({
+        const r = data.docs.map((event: Event) => ({
           id: event.id,
           title: event.title,
         }))
@@ -96,8 +94,12 @@ export default function RegistrationForm({ events: propEvents }: RegistrationFor
     setSubmitting(true)
     setGlobalError(null)
 
+    console.log('eventId:', data.eventId)
+    console.log('typeof:', typeof data.eventId)
+    console.log(JSON.stringify(data))
+
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/registrations`, {
+      const res = await fetch('/api/registrations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +123,7 @@ export default function RegistrationForm({ events: propEvents }: RegistrationFor
 
           phoneNumber: data.phoneNumber,
 
-          event: data.eventId,
+          event: Number(data.eventId),
         }),
       })
 
@@ -132,12 +134,6 @@ export default function RegistrationForm({ events: propEvents }: RegistrationFor
 
         throw new Error(JSON.stringify(error))
       }
-
-      console.log('Submitting registration:', {
-        ...data,
-        event: data.eventId,
-        eventType: typeof data.eventId,
-      })
     } catch (error) {
       console.error('Registration submission error:', error)
       setGlobalError('There was a problem submitting your registration. Please try again.')

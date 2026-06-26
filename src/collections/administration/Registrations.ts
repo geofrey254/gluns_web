@@ -76,20 +76,76 @@ export const Registrations: CollectionConfig = {
           subject: `Registration Received - ${event.title}`,
 
           html: `
-            <h2>Registration Successful</h2>
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width:600px; margin:auto; border:1px solid #e5e7eb; border-radius:8px; overflow:hidden;">
 
-            <p>Thank you for registering.</p>
+      <div style="background:#104179; color:#ffffff; padding:24px; text-align:center;">
+        <h2 style="margin:0;">Registration Received</h2>
+        <p style="margin:8px 0 0;">
+          Thank you for registering for <strong>${event.title}</strong>.
+        </p>
+      </div>
 
-            <p><strong>Invoice Number:</strong> ${doc.invoiceNumber}</p>
+      <div style="padding:24px; color:#374151;">
 
-            <p><strong>Event:</strong> ${event.title}</p>
+        <p>Hello,</p>
 
-            <p><strong>Location:</strong> ${event.location}</p>
+        <p>
+          We've successfully received your registration. Your request is currently
+          being reviewed, and we'll contact you shortly with the next steps.
+        </p>
 
-            <p><strong>Date:</strong> ${new Date(event.date).toLocaleDateString()}</p>
+        <table
+          width="100%"
+          cellpadding="10"
+          cellspacing="0"
+          style="border-collapse:collapse; margin:24px 0;"
+        >
+          <tr style="background:#f8fafc;">
+            <td><strong>Invoice Number</strong></td>
+            <td>${doc.invoiceNumber}</td>
+          </tr>
 
-            <p>We will contact you shortly.</p>
-          `,
+          <tr>
+            <td><strong>Event</strong></td>
+            <td>${event.title}</td>
+          </tr>
+
+          <tr style="background:#f8fafc;">
+            <td><strong>Date</strong></td>
+            <td>${new Date(event.date).toLocaleDateString()}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Location</strong></td>
+            <td>${event.location}</td>
+          </tr>
+
+          <tr style="background:#f8fafc;">
+            <td><strong>Total Amount</strong></td>
+            <td>${doc.totalAmount}</td>
+          </tr>
+        </table>
+
+        <p>
+          Please keep your invoice number for future reference:
+          <strong>${doc.invoiceNumber}</strong>.
+        </p>
+
+        <p>
+          If you have any questions, simply reply to this email and our team will
+          be happy to assist you.
+        </p>
+
+      </div>
+
+      <div
+        style="background:#104179; color:#ffffff; text-align:center; padding:16px; font-size:13px;"
+      >
+        Thank you for choosing Global Learning &amp; United Nations Simulation.
+      </div>
+
+    </div>
+  `,
         })
 
         await req.payload.sendEmail({
@@ -99,7 +155,7 @@ export const Registrations: CollectionConfig = {
 
           html: `
     <div style="font-family: Arial, Helvetica, sans-serif; max-width:700px; margin:auto; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden;">
-      <div style="background:#0f172a; color:#fff; padding:20px;">
+      <div style="background:#104179; color:#fff; padding:20px;">
         <h2 style="margin:0;">New Registration Received</h2>
         <p style="margin:8px 0 0;">
           A new registration has been submitted through the website.

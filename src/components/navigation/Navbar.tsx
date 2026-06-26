@@ -71,16 +71,16 @@ export default function Navbar() {
           {/* Right Section */}
           <div className="flex gap-2 items-center">
             <Link
-              href="/delegation-portal"
+              href="/registration"
               className="hidden md:flex relative overflow-hidden border border-[#104179] text-[#104179] p-2 text-center items-center font-semibold rounded-md transition-colors duration-300 before:absolute before:inset-0 before:bg-[#104179] before:translate-y-full before:transition-transform before:duration-300 hover:before:translate-y-0 hover:text-[#fffff6]"
             >
-              <span className="relative z-10 text-base 2xl:text-xl text-center">
-                Delegation Portal
-              </span>
+              <span className="relative z-10 text-base 2xl:text-xl text-center">Register Now </span>
             </Link>
             {/* Mobile Menu Button */}
             <button
               className="ml-2 md:hidden cursor-pointer hover:scale-105 transition-transform"
+              title={isMenuOpen ? 'Close Menu' : 'Open Menu'}
+              aria-label={isMenuOpen ? 'Close Menu' : 'Open Menu'}
               onClick={toggleMenu}
             >
               <HiMenuAlt2 size={40} className="text-[#104179]" />
@@ -99,6 +99,8 @@ export default function Navbar() {
                 <div className="flex justify-end">
                   <button
                     onClick={toggleMenu}
+                    title="Close Menu"
+                    aria-label="Close Menu"
                     className="cursor-pointer hover:scale-105 transition-transform"
                   >
                     <RiCloseLargeLine size={30} className="text-[#104179]" />
@@ -119,11 +121,11 @@ export default function Navbar() {
                   ))}
 
                   <Link
-                    href="/delegation-portal"
+                    href="/registration"
                     className="flex relative overflow-hidden border border-[#104179] text-[#104179] p-2 text-center items-center font-semibold rounded-md transition-colors duration-300 before:absolute before:inset-0 before:bg-[#104179] before:translate-y-full before:transition-transform before:duration-300 hover:before:translate-y-0 hover:text-[#fffff6]"
                   >
                     <span className="relative z-10 text-base 2xl:text-xl text-center">
-                      Delegation Portal
+                      Register Now{' '}
                     </span>
                   </Link>
                 </div>

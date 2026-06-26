@@ -8,12 +8,14 @@ export default function DelegationHeader({
   loggingOut,
   onLogout,
   onOpenSidebar,
+  isDelegateAccount,
 }: {
   activeSection: string
   formData: Delegation
   loggingOut: boolean
   onLogout: () => void
   onOpenSidebar: () => void
+  isDelegateAccount?: boolean
 }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
@@ -21,20 +23,26 @@ export default function DelegationHeader({
         <div className="flex items-center gap-4">
           <button
             onClick={onOpenSidebar}
+            aria-label="Open navigation menu"
+            title="Open navigation menu"
             className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <Menu className="w-6 h-6 text-gray-700" />
           </button>
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-              {activeSection === 'application' && 'Delegation Portal'}
+              {activeSection === 'application' &&
+                (isDelegateAccount ? 'Delegate Portal' : 'Delegation Portal')}
               {activeSection === 'delegates' && 'Add Delegates'}
               {activeSection === 'advisors' && 'Faculty Advisors'}
               {activeSection === 'assignments' && 'Country Assignments'}
               {activeSection === 'account' && 'Account Settings'}
             </h1>
             <p className="text-gray-600">
-              {activeSection === 'application' && 'Complete your delegation application'}
+              {activeSection === 'application' &&
+                (isDelegateAccount
+                  ? 'Complete your individual delegate registration'
+                  : 'Complete your delegation application')}
               {activeSection === 'delegates' && 'Register your delegation members'}
               {activeSection === 'advisors' && 'Add faculty advisor information'}
               {activeSection === 'assignments' && 'View your country assignments'}

@@ -77,6 +77,7 @@ export default function DelegationPortal() {
 
   // hooks
   const { user, checkingAuth, logout: authLogout } = useAuthGate()
+  const isDelegateAccount = !!user?.roles?.includes('delegate')
 
   const steps = [
     { title: 'Basic Info', icon: Users },
@@ -253,6 +254,7 @@ export default function DelegationPortal() {
         onClose={() => setSidebarOpen(false)}
         activeSection={activeSection}
         onSectionChange={setActiveSection}
+        isDelegateAccount={isDelegateAccount}
       />
 
       {/* Main Content */}
@@ -265,6 +267,7 @@ export default function DelegationPortal() {
             loggingOut={loggingOut}
             onLogout={handleLogout}
             onOpenSidebar={() => setSidebarOpen(true)}
+            isDelegateAccount={isDelegateAccount}
           />
           {/* Application Section */}
           {activeSection === 'application' && (
@@ -281,14 +284,19 @@ export default function DelegationPortal() {
                 stepsLength={steps.length}
                 nextStep={nextStep}
                 prevStep={prevStep}
+                isDelegateAccount={isDelegateAccount}
               />
 
               {/* Help Text */}
               <div className="mt-6 bg-blue-50 rounded-xl p-4 border border-blue-100">
                 <p className="text-sm text-blue-900">
-                  <span className="font-semibold">Need help?</span> All fields marked with{' '}
-                  <span className="text-red-500">*</span> are required. You can save your progress
-                  at any time and return later to complete your application.
+                  <span className="font-semibold">Need help?</span>{' '}
+                  {isDelegateAccount
+                    ? 'Complete your delegate registration details below. Once approved, you will move to payment and receipt issuance inside the portal.'
+                    : 'All fields marked with '}
+                  {!isDelegateAccount && <span className="text-red-500">*</span>}
+                  {!isDelegateAccount &&
+                    ' are required. You can save your progress at any time and return later to complete your application.'}
                 </p>
               </div>
             </>

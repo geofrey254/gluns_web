@@ -10,7 +10,7 @@ export async function GET() {
     // You can use `slug` or `id` to fetch your form
     const form = await payload.findByID({
       collection: 'forms',
-      id: '2', // or use slug: 'contact-form' if you have a slug field
+      id: '2',
     })
 
     return NextResponse.json(form)

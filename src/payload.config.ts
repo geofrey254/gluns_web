@@ -21,6 +21,7 @@ import { Delegates } from './collections/delegation/Delegates'
 
 import Blog from './collections/Blog'
 import { Events } from './collections/administration/Events'
+import { Registrations } from './collections/administration/Registrations'
 
 // assignments
 import { PositionPapers } from './collections/delegation/PositionPapers'
@@ -89,6 +90,7 @@ export default buildConfig({
     Faculty,
     Payments,
     Events,
+    Registrations,
     Blog,
     Sponsors,
     Trainers,
@@ -101,7 +103,8 @@ export default buildConfig({
     PositionPapers,
     CommitteeAssignments,
   ],
-  serverURL: process.env.PAYLOAD_URL,
+  // serverURL: process.env.PAYLOAD_URL,
+  serverURL: 'http://localhost:3000',
   cors: [process.env.NEXT_PUBLIC_CORS_ORIGIN || '', 'http://localhost:3000'],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

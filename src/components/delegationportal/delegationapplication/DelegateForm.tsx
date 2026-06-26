@@ -255,6 +255,7 @@ export default function DelegateForm({ open, delegate, onClose, onSaved }: Props
                   id="gradeLevel"
                   name="gradeLevel"
                   value={formData.gradeLevel}
+                  title="Select grade level"
                   onChange={(e) => {
                     setFormData((prev) => ({ ...prev, gradeLevel: e.target.value }))
                     setError(null)

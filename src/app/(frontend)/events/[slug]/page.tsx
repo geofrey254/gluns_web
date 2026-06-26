@@ -185,7 +185,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
       </div>
 
       {/* Committee Hero */}
-      <div className="relative h-[500px] w-full overflow-hidden">
+      <div className="relative h-[600px] w-full overflow-hidden">
         {/* Overlay with Pattern */}
         <div className="absolute inset-0 bg-[#104179]"></div>
 
@@ -195,15 +195,6 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center px-8 md:px-4">
-          {/* register floating button  */}
-          <div className="absolute top-4 right-4">
-            <Link
-              href={`/events/register?event=${encodeURIComponent(events.title)}`}
-              className="bg-white text-[#104179] px-6 py-2 text-lg rounded-lg font-semibold hover:bg-[#104179] hover:text-white transition-all duration-300"
-            >
-              Register Now
-            </Link>
-          </div>
           <div className="max-w-4xl w-full text-center space-y-6">
             <div className="inline-block">
               <h1 className="text-5xl md:text-7xl font-black text-white tracking-normal md:tracking-tight mb-4">
@@ -274,6 +265,14 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
                 </div>
               </div>
             )}
+          </div>
+          <div className="flex justify-center mt-8 md:mt-12">
+            <Link
+              href="/registration"
+              className="bg-[#104179] text-[#fffff6] px-6 py-2 text-lg rounded-lg font-semibold hover:bg-[#85c226] hover:text-white transition-all duration-300"
+            >
+              Register Now
+            </Link>
           </div>
         </div>
       </div>

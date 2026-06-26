@@ -11,10 +11,12 @@ export default function AuthSection() {
 
   const [loading, setLoading] = useState(false)
   const [isLogin, setIsLogin] = useState(true)
+  const [accountRole, setAccountRole] = useState<'teacher' | 'delegate'>('teacher')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [delegationName, setDelegationName] = useState('')
+  const [fullName, setFullName] = useState('')
   const setUser = useAuthStore((s) => s.setUser)
 
   useEffect(() => {
@@ -40,7 +42,13 @@ export default function AuthSection() {
         const res = await fetch('/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ delegationName, email, password }),
+          body: JSON.stringify({
+            roles: accountRole,
+            delegationName,
+            fullName,
+            email,
+            password,
+          }),
         })
 
         console.log('Signup response:', res)
@@ -134,24 +142,62 @@ export default function AuthSection() {
             <p className="text-center text-white/65 mb-8 text-sm sm:text-base">
               {isLogin
                 ? 'Enter your email and password to access your delegation account.'
-                : 'Submit an application to register your delegation and join upcoming conferences.'}
+                : accountRole === 'teacher'
+                  ? 'Create a school delegation account to register your institution and join upcoming conferences.'
+                  : 'Create an individual delegate account to join upcoming conferences.'}
             </p>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               {!isLogin && (
-                <div>
-                  <label htmlFor="delegation-name" className="text-white/80 text-sm mb-1 block">
-                    Delegation Name
-                  </label>
-                  <input
-                    id="delegation-name"
-                    type="text"
-                    onChange={(e) => setDelegationName(e.target.value)}
-                    placeholder="Enter the name of your institution"
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-                  />
-                </div>
+                <>
+                  <div>
+                    <label htmlFor="account-role" className="text-white/80 text-sm mb-1 block">
+                      Account Type
+                    </label>
+                    <select
+                      id="account-role"
+                      value={accountRole}
+                      onChange={(e) => setAccountRole(e.target.value as 'teacher' | 'delegate')}
+                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                    >
+                      <option value="teacher" className="text-[#104179]">
+                        School / Teacher Account
+                      </option>
+                      <option value="delegate" className="text-[#104179]">
+                        Individual Delegate Account
+                      </option>
+                    </select>
+                  </div>
+
+                  {accountRole === 'teacher' ? (
+                    <div>
+                      <label htmlFor="delegation-name" className="text-white/80 text-sm mb-1 block">
+                        Delegation Name
+                      </label>
+                      <input
+                        id="delegation-name"
+                        type="text"
+                        onChange={(e) => setDelegationName(e.target.value)}
+                        placeholder="Enter the name of your institution"
+                        className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <label htmlFor="full-name" className="text-white/80 text-sm mb-1 block">
+                        Full Name
+                      </label>
+                      <input
+                        id="full-name"
+                        type="text"
+                        onChange={(e) => setFullName(e.target.value)}
+                        placeholder="Enter your full name"
+                        className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                      />
+                    </div>
+                  )}
+                </>
               )}
 
               <div>

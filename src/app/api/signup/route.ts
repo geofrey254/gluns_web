@@ -2,21 +2,28 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   const body = await req.json()
+  // Fix: Safely handle if roles comes in as an array or a string
+  const isDelegate = Array.isArray(body.roles)
+    ? body.roles.includes('delegate')
+    : body.roles === 'delegate'
 
-  // 1️⃣ Create user
+  const role = isDelegate ? 'delegate' : 'teacher'
+
+  // Create user
   const signupRes = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       email: body.email,
       password: body.password,
-      delegationName: body.delegationName,
-      fullName: body.delegationName,
-      roles: ['teacher'],
+      delegationName: role === 'teacher' ? body.delegationName : null,
+      fullName: role === 'delegate' ? body.fullName : body.delegationName,
+      roles: [role],
     }),
   })
 
-  console.log('Signup response:', signupRes)
+  console.log('Incoming body:', body)
+  console.log('Computed role:', role)
 
   const signupData = await signupRes.json()
 
@@ -27,7 +34,7 @@ export async function POST(req: Request) {
     )
   }
 
-  // 2️⃣ Log in the new user to get the HTTP-only cookie
+  // Log in the new user to get the HTTP-only cookie
   const loginRes = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/users/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

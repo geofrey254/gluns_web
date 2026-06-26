@@ -16,16 +16,35 @@ type SidebarProps = {
   onClose: () => void
   activeSection: string
   onSectionChange: (section: string) => void
+  isDelegateAccount?: boolean
 }
 
-export function Sidebar({ status, isOpen, onClose, activeSection, onSectionChange }: SidebarProps) {
-  const menuItems = [
-    { id: 'application', label: 'Application', icon: FileText },
-    { id: 'delegates', label: 'Add Delegates', icon: UserPlus, requiresApproval: true },
-    { id: 'advisors', label: 'Faculty Advisors', icon: Briefcase, requiresApproval: true },
-    { id: 'assignments', label: 'Country Assignments', icon: Globe, requiresApproval: true },
-    { id: 'account', label: 'Account Settings', icon: SettingsIcon },
-  ]
+export function Sidebar({
+  status,
+  isOpen,
+  onClose,
+  activeSection,
+  onSectionChange,
+  isDelegateAccount,
+}: SidebarProps) {
+  const menuItems = isDelegateAccount
+    ? [
+        { id: 'application', label: 'Application', icon: FileText },
+        {
+          id: 'delegates',
+          label: 'Registration & Payment',
+          icon: UserPlus,
+          requiresApproval: true,
+        },
+        { id: 'account', label: 'Account Settings', icon: SettingsIcon },
+      ]
+    : [
+        { id: 'application', label: 'Application', icon: FileText },
+        { id: 'delegates', label: 'Add Delegates', icon: UserPlus, requiresApproval: true },
+        { id: 'advisors', label: 'Faculty Advisors', icon: Briefcase, requiresApproval: true },
+        { id: 'assignments', label: 'Country Assignments', icon: Globe, requiresApproval: true },
+        { id: 'account', label: 'Account Settings', icon: SettingsIcon },
+      ]
 
   const isApproved = status === 'approved'
 
@@ -51,6 +70,8 @@ export function Sidebar({ status, isOpen, onClose, activeSection, onSectionChang
             </div>
             <button
               onClick={onClose}
+              aria-label="Close navigation menu"
+              title="Close navigation menu"
               className="lg:hidden w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600"
             >
               <X className="w-5 h-5" />

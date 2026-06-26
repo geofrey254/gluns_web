@@ -347,6 +347,7 @@ export default function RegisterForm({ event }: { event: string }) {
               type="text"
               name="event"
               value={formData.event}
+              placeholder="Event Name"
               readOnly
               className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400 cursor-not-allowed focus:outline-none"
             />

@@ -4,8 +4,9 @@ import { logoutAction } from '../api/logout/logout'
 interface User {
   id: string
   email: string
-  roles: 'admin' | 'teacher'
+  roles: Array<'admin' | 'secretariat' | 'editor' | 'teacher' | 'delegate'>
   delegationName?: string
+  fullName?: string
 }
 
 interface AuthState {

@@ -11,6 +11,7 @@ export default function DelegationFormStep({
   handleSave,
   saving,
   stepsLength,
+  isDelegateAccount,
 }: {
   currentStep: number
   formData: Delegation
@@ -21,23 +22,35 @@ export default function DelegationFormStep({
   handleSave: () => void
   saving: boolean
   stepsLength: number
+  isDelegateAccount?: boolean
 }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-8">
       {currentStep === 0 && (
         <div className="space-y-6 animate-fade-in">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Basic Information</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            {isDelegateAccount ? 'Delegate Details' : 'Basic Information'}
+          </h2>
+          {isDelegateAccount && (
+            <div className="rounded-xl border border-[#104179]/10 bg-[#104179]/5 p-4 text-sm text-[#104179]">
+              This registration is for a single delegate account. The portal will keep the same
+              approval and payment flow, but the wording is tailored for individual students.
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Delegation Name */}
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Delegation Name <span className="text-red-500">*</span>
+                {isDelegateAccount ? 'Delegate Full Name' : 'Delegation Name'}{' '}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 name="delegationName"
                 value={formData.delegationName}
                 onChange={handleChange}
-                placeholder="Enter your delegation name"
+                placeholder={
+                  isDelegateAccount ? 'Enter your full name' : 'Enter your delegation name'
+                }
                 className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
               />
             </div>
@@ -45,46 +58,70 @@ export default function DelegationFormStep({
             {/* Country of Origin */}
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Country of Origin <span className="text-red-500">*</span>
+                {isDelegateAccount ? 'Country of Residence' : 'Country of Origin'}{' '}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 name="countryOfOrigin"
                 value={formData.countryOfOrigin}
                 onChange={handleChange}
-                placeholder="Enter your country"
+                placeholder={
+                  isDelegateAccount ? 'Enter your country of residence' : 'Enter your country'
+                }
                 className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
               />
             </div>
 
-            {/* Number of Delegates */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Number of Delegates <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="numberOfDelegates"
-                value={formData.numberOfDelegates}
-                onChange={handleChange}
-                min={1}
-                className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-              />
-            </div>
+            {!isDelegateAccount ? (
+              <>
+                {/* Number of Delegates */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Number of Delegates <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    name="numberOfDelegates"
+                    value={formData.numberOfDelegates}
+                    placeholder="Enter the number of delegates"
+                    onChange={handleChange}
+                    min={1}
+                    className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                  />
+                </div>
 
-            {/* Number of Faculty Advisors */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Number of Faculty Advisors <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                name="numberOfFacultyAdvisors"
-                value={formData.numberOfFacultyAdvisors}
-                onChange={handleChange}
-                min={0}
-                className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-              />
-            </div>
+                {/* Number of Faculty Advisors */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Number of Faculty Advisors <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    name="numberOfFacultyAdvisors"
+                    placeholder="Enter the number of faculty advisors"
+                    value={formData.numberOfFacultyAdvisors}
+                    onChange={handleChange}
+                    min={0}
+                    className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
+                  <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                    Delegate Count
+                  </p>
+                  <p className="text-lg font-semibold text-gray-900">1 delegate</p>
+                </div>
+                <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
+                  <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                    Faculty Advisors
+                  </p>
+                  <p className="text-lg font-semibold text-gray-900">0 advisors</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -92,17 +129,20 @@ export default function DelegationFormStep({
       {currentStep === 1 && (
         <div className="space-y-6 animate-fade-in">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Experience & Background</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              {isDelegateAccount ? 'Delegate Background' : 'Experience & Background'}
+            </h2>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Previous MUN Experience <span className="text-red-500">*</span>
+              {isDelegateAccount ? 'Previous MUN / Debate Experience' : 'Previous MUN Experience'}{' '}
+              <span className="text-red-500">*</span>
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              Describe your delegation{"'"}s previous experiences with Model United Nations. If you
-              don{"'"}t have any MUN experience, please describe other relevant experiences such as
-              debate, public speaking, or mock trial.
+              {isDelegateAccount
+                ? 'Tell us about your Model United Nations, debate, public speaking, or leadership experience.'
+                : "Describe your delegation's previous experiences with Model United Nations. If you don't have any MUN experience, please describe other relevant experiences such as debate, public speaking, or mock trial."}
             </p>
             <textarea
               name="previousExperience"
@@ -116,10 +156,13 @@ export default function DelegationFormStep({
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              GLUNS Experience <span className="text-red-500">*</span>
+              {isDelegateAccount ? 'Grade / Year Level' : 'GLUNS Experience'}{' '}
+              <span className="text-red-500">*</span>
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              Has your delegation participated in GLUNS before? If so, how many years?
+              {isDelegateAccount
+                ? 'Tell us your current grade or year level.'
+                : 'Has your delegation participated in GLUNS before? If so, how many years?'}
             </p>
             <input
               name="hmunExperience"
@@ -135,16 +178,19 @@ export default function DelegationFormStep({
       {currentStep === 2 && (
         <div className="space-y-6 animate-fade-in">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Committee Preferences</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              {isDelegateAccount ? 'Delegate Preferences' : 'Committee Preferences'}
+            </h2>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Preferred Regions
+              {isDelegateAccount ? 'Preferred Committees / Tracks' : 'Preferred Regions'}
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              Is there a type of country or region of the world in which your delegation is
-              particularly interested? (max 255 characters)
+              {isDelegateAccount
+                ? 'Tell us which committees or conference tracks you would like to join.'
+                : 'Is there a type of country or region of the world in which your delegation is particularly interested? (max 255 characters)'}
             </p>
             <input
               name="preferredRegions"
@@ -158,30 +204,36 @@ export default function DelegationFormStep({
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Double Delegations <span className="text-red-500">*</span>
+              {isDelegateAccount ? 'Single Delegate Registration' : 'Double Delegations'}{' '}
+              <span className="text-red-500">*</span>
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              Does your delegation prefer double delegations (e.g., DISEC, SOCHUM, SPECPOL, Legal
-              Committee, UNSC)?
+              {isDelegateAccount
+                ? 'This account is registered as a single delegate, so the portal will keep this set to no.'
+                : 'Does your delegation prefer double delegations (e.g., DISEC, SOCHUM, SPECPOL, Legal Committee, UNSC)?'}
             </p>
             <select
               name="prefersDoubleDelegations"
               value={formData.prefersDoubleDelegations}
               onChange={handleChange}
+              title="Select whether your delegation prefers double delegations"
               className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow bg-white"
             >
-              <option value="yes">Yes, we prefer double delegations</option>
+              <option value="yes" disabled={isDelegateAccount}>
+                Yes, we prefer double delegations
+              </option>
               <option value="no">No, we prefer single delegations</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Crisis Committee Requests
+              {isDelegateAccount ? 'Special Requests' : 'Crisis Committee Requests'}
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              How many allocations in our Crisis Committees would your delegation like? Which
-              specific committees? (max 255 characters) Note: Allocations are limited.
+              {isDelegateAccount
+                ? 'Share any accessibility, scheduling, or committee preferences here. (max 255 characters)'
+                : 'How many allocations in our Crisis Committees would your delegation like? Which specific committees? (max 255 characters) Note: Allocations are limited.'}
             </p>
             <textarea
               name="crisisCommitteeRequests"
@@ -196,16 +248,19 @@ export default function DelegationFormStep({
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Committee Interests <span className="text-red-500">*</span>
+              {isDelegateAccount ? 'Committee Interest' : 'Committee Interests'}{' '}
+              <span className="text-red-500">*</span>
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              Select your interest in specialized committees. We recommend experienced delegates for
-              advanced committees and require limited/no crisis experience for novice committees.
+              {isDelegateAccount
+                ? 'Select the type of committee you would like to join.'
+                : 'Select your interest in specialized committees. We recommend experienced delegates for advanced committees and require limited/no crisis experience for novice committees.'}
             </p>
             <select
               name="committeeInterests"
               value={formData.committeeInterests}
               onChange={handleChange}
+              title="Select your committee interest"
               className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow bg-white"
             >
               <option value="advanced">Advanced Committees (AHCSG, AHCDG, UNSC)</option>

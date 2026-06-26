@@ -78,6 +78,7 @@ export interface Config {
     'faculty-advisors': FacultyAdvisor;
     payments: Payment;
     event: Event;
+    registrations: Registration;
     blog: Blog;
     sponsors: Sponsor;
     trainers: Trainer;
@@ -109,6 +110,7 @@ export interface Config {
     'faculty-advisors': FacultyAdvisorsSelect<false> | FacultyAdvisorsSelect<true>;
     payments: PaymentsSelect<false> | PaymentsSelect<true>;
     event: EventSelect<false> | EventSelect<true>;
+    registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     trainers: TrainersSelect<false> | TrainersSelect<true>;
@@ -166,7 +168,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  roles: ('admin' | 'secretariat' | 'editor' | 'teacher')[];
+  roles: ('admin' | 'secretariat' | 'editor' | 'teacher' | 'delegate')[];
   fullName?: string | null;
   delegationName?: string | null;
   updatedAt: string;
@@ -412,6 +414,27 @@ export interface Event {
   date: string;
   cost?: number | null;
   currency?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registrations".
+ */
+export interface Registration {
+  id: number;
+  registrationType: 'individual' | 'school';
+  fullName?: string | null;
+  grade?: number | null;
+  schoolName: string;
+  contactPerson?: string | null;
+  numOfStudents?: number | null;
+  email: string;
+  phoneNumber: string;
+  event: number | Event;
+  invoiceNumber?: string | null;
+  totalAmount?: number | null;
+  status?: ('pending' | 'confirmed' | 'cancelled') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -863,6 +886,10 @@ export interface PayloadLockedDocument {
         value: number | Event;
       } | null)
     | ({
+        relationTo: 'registrations';
+        value: number | Registration;
+      } | null)
+    | ({
         relationTo: 'blog';
         value: number | Blog;
       } | null)
@@ -1149,6 +1176,26 @@ export interface EventSelect<T extends boolean = true> {
   date?: T;
   cost?: T;
   currency?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registrations_select".
+ */
+export interface RegistrationsSelect<T extends boolean = true> {
+  registrationType?: T;
+  fullName?: T;
+  grade?: T;
+  schoolName?: T;
+  contactPerson?: T;
+  numOfStudents?: T;
+  email?: T;
+  phoneNumber?: T;
+  event?: T;
+  invoiceNumber?: T;
+  totalAmount?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }

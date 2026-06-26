@@ -38,23 +38,23 @@ export default function ContactInfo() {
     {
       icon: Mail,
       title: 'Delegations & Registration',
-      value: 'admin@gluns.org',
+      value: 'delegateaffairs@gluns.org',
       description: 'For schools, delegations, and registrations.',
-      href: 'mailto:delegations@gluns.org',
+      href: 'mailto:delegateaffairs@gluns.org',
     },
     {
       icon: Mail,
       title: 'Partnerships & Sponsorships',
       value: 'info@gluns.org',
       description: 'Collaborate or sponsor our programs.',
-      href: 'mailto:partnerships@gluns.org',
+      href: 'mailto:info@gluns.org',
     },
     {
       icon: Mail,
       title: 'Media & Press',
       value: 'admin@gluns.org',
       description: 'Press, interviews, and media requests.',
-      href: 'mailto:media@gluns.org',
+      href: 'mailto:admin@gluns.org',
     },
   ]
 

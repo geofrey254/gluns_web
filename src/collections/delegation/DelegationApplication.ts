@@ -10,7 +10,11 @@ export const DelegationApplications: CollectionConfig = {
   },
   access: {
     create: ({ req }: AccessArgs) => {
-      return !!(req.user && 'roles' in req.user && req.user.roles.includes('teacher'))
+      return !!(
+        req.user &&
+        'roles' in req.user &&
+        (req.user.roles.includes('teacher') || req.user.roles.includes('delegate'))
+      )
     },
     read: () => true,
     update: ({ req, data }: AccessArgs) => {

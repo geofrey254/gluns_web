@@ -51,8 +51,6 @@ export default function AuthSection() {
           }),
         })
 
-        console.log('Signup response:', res)
-
         if (!res.ok) {
           const error = await res.json()
           alert(error.message)

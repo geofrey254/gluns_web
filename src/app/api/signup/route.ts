@@ -22,9 +22,6 @@ export async function POST(req: Request) {
     }),
   })
 
-  console.log('Incoming body:', body)
-  console.log('Computed role:', role)
-
   const signupData = await signupRes.json()
 
   if (!signupRes.ok) {

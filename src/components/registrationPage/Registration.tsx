@@ -75,8 +75,6 @@ export default function RegistrationForm({ events: propEvents }: RegistrationFor
         const response = await fetch('/api/event')
         const data = await response.json()
 
-        console.log('Events from API:', data.docs)
-
         const r = data.docs.map((event: Event) => ({
           id: event.id,
           title: event.title,

@@ -1,4 +1,5 @@
 import React from 'react'
+import Countdown from '@/components/homepage/Countdown'
 import Hero from '@/components/homepage/Hero'
 import About from '@/components/homepage/About'
 import Why from '@/components/homepage/Why'
@@ -12,6 +13,7 @@ import Video from '@/components/homepage/Video'
 export default function page() {
   return (
     <>
+      <Countdown />
       <Hero />
       <About />
       <Why />

@@ -13,7 +13,6 @@ import Video from '@/components/homepage/Video'
 export default function page() {
   return (
     <>
-      <Countdown />
       <Hero />
       <About />
       <Why />

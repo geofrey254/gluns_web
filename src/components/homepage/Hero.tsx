@@ -5,7 +5,7 @@ import { SiUnitednations } from 'react-icons/si'
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#051220] md:min-h-[60vh] lg:min-h-screen 2xl:min-h-[90vh] flex px-6 md:px-8 2xl:px-16 items-center overflow-hidden rounded-t-3xl -mt-7 z-20 overflow-hidden border-t border-white">
+    <section className="relative bg-[#051220] md:min-h-[60vh] lg:min-h-screen 2xl:min-h-[90vh] flex px-6 md:px-8 2xl:px-16 items-center z-20 overflow-hidden">
       {/* gradient overlay */}
       <div className="absolute inset-0 bg-[url(/images/thorne.jpg)] bg-cover bg-top" />
 

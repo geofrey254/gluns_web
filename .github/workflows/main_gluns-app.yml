@@ -29,11 +29,18 @@ jobs:
           npm ci
           npm run build
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: |
+            .next
+            public
+            package.json
+            package-lock.json
+            next.config.*
+            payload.config.*
+          include-hidden-files: true
 
   deploy:
     runs-on: ubuntu-latest

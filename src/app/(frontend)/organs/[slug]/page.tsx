@@ -17,10 +17,6 @@ import {
 } from '@/components/ui/breadcrumb'
 import Link from 'next/link'
 
-import { fetchCommittee } from '@/data/committeeFetch'
-import { fetchCommitteeTeam } from '@/data/committeeFetch'
-import CommitteeMembers from '@/components/committeepage/CommitteeMembers'
-
 import type { Metadata } from 'next'
 
 export async function generateMetadata({
@@ -135,7 +131,6 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
   })
 
   const committee = docs[0]
-  const members = await fetchCommitteeTeam(committee.id)
   if (!committee) {
     notFound()
   }
@@ -261,16 +256,4 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
       <div className="h-16"></div>
     </div>
   )
-}
-
-export async function generateStaticParams() {
-  try {
-    const allCommittees = await fetchCommittee()
-    return allCommittees.committee.map((committee) => ({
-      slug: committee.slug,
-    }))
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
 }

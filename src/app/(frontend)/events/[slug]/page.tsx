@@ -18,8 +18,6 @@ import {
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-import { fetchEvents } from '@/data/eventFetch'
-
 export async function generateMetadata({
   params,
 }: {
@@ -300,16 +298,4 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
       </div>
     </div>
   )
-}
-
-export async function generateStaticParams() {
-  try {
-    const allEvents = await fetchEvents()
-    return allEvents.events.map((event) => ({
-      slug: event.slug,
-    }))
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
 }

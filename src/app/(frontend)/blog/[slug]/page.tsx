@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { fetchAllPosts } from '@/data/blogFetch'
 import { SlashIcon, Calendar } from 'lucide-react'
 import {
   Breadcrumb,
@@ -233,16 +232,4 @@ export default async function PublicationPage({ params }: { params: Promise<{ sl
       </div>
     </div>
   )
-}
-
-export async function generateStaticParams() {
-  try {
-    const allPosts = await fetchAllPosts(1, 100)
-    return allPosts.posts.map((post) => ({
-      slug: post.slug,
-    }))
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
 }

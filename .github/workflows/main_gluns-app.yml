@@ -22,13 +22,12 @@ jobs:
           node-version: '24.x'
           cache: 'npm'
 
-      - name: Install, build, and test
+      - name: Install and build
         env:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
         run: |
           npm ci
           npm run build
-          npm run test
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4

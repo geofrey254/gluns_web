@@ -46,6 +46,11 @@ import { BackgroundGuides } from './collections/background-guides/BackgroundGuid
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const smtpConfigured =
+  !!process.env.SMTP_HOST &&
+  !!process.env.SMTP_PORT &&
+  !!process.env.SMTP_USER &&
+  !!process.env.SMTP_PASS
 
 export default buildConfig({
   admin: {
@@ -117,18 +122,20 @@ export default buildConfig({
     },
   }),
   sharp,
-  email: nodemailerAdapter({
-    defaultFromAddress: `${process.env.SMTP_USER}`,
-    defaultFromName: 'Global Leaders UN Symposium',
-    transport: await nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    }),
-  }),
+  email: smtpConfigured
+    ? nodemailerAdapter({
+        defaultFromAddress: `${process.env.SMTP_USER}`,
+        defaultFromName: 'Global Leaders UN Symposium',
+        transport: nodemailer.createTransport({
+          host: process.env.SMTP_HOST,
+          port: Number(process.env.SMTP_PORT),
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        }),
+      })
+    : undefined,
   plugins: [
     s3Storage({
       collections: {

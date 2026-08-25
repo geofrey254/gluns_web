@@ -9,7 +9,9 @@ export const metadata = {
   title: 'About GLUNS | Global Leaders United Nations Symposium',
   description:
     'Learn about GLUNS (Global Leaders United Nations Symposium), a leading Model United Nations organization based in Kenya with a strong presence across Africa and internationally. Discover our mission to empower youth through diplomacy, leadership, and global engagement.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'About GLUNS - A Global Model United Nations Organization',

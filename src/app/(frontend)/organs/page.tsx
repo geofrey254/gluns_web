@@ -8,7 +8,9 @@ export const metadata = {
   title: 'GLUNS Organs | Model United Nations (MUN) Kenya, Africa & Worldwide',
   description:
     'Explore all GLUNS Model United Nations (MUN) organs. Learn about our high school and youth leadership organs in Kenya, across Africa, and internationally, and discover opportunities to participate in global diplomacy simulations.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS Organs – Model United Nations in Kenya, Africa & Worldwide',

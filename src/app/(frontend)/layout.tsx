@@ -17,7 +17,9 @@ export const metadata = {
     'GLUNS | Global Leaders United Nations Symposium – Model United Nations Kenya, Africa & Worldwide',
   description:
     'GLUNS (Global Leaders United Nations Symposium) organizes premier Model United Nations (MUN) conferences and youth leadership programs in Kenya, across Africa, and internationally. Join students in diplomacy, debate, and global engagement.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS – Model United Nations in Kenya, Africa & Internationally',

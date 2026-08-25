@@ -10,7 +10,9 @@ export const metadata = {
   title: 'Events & Programs Registration | GLUNS Model United Nations Kenya, Africa & Worldwide',
   description:
     'Register for upcoming GLUNS Model United Nations (MUN) events and conferences in Kenya, across Africa, and internationally. Join students from around the world in diplomacy, debate, and leadership.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS Events & Programs Registration – Model United Nations Worldwide',

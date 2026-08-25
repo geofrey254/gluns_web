@@ -79,7 +79,9 @@ export async function generateMetadata({
   return {
     title,
     description: `Verify ${trainer.full_name} as an official GLUNS trainer for ${trainer.organ}.`,
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+    ),
     robots: {
       index: false,
       follow: false,

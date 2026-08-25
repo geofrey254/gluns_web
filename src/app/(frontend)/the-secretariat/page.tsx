@@ -10,7 +10,9 @@ export const metadata = {
   title: 'The Secretariat | GLUNS Leadership – Model United Nations Kenya, Africa & Global',
   description:
     'Meet the GLUNS Secretariat, the leadership team behind the Global Leaders United Nations Symposium. Learn about the experienced student and professional leaders guiding Model United Nations conferences in Kenya, across Africa, and internationally.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'The Secretariat – Leadership of GLUNS Model United Nations',

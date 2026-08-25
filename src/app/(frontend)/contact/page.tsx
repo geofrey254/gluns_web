@@ -8,7 +8,9 @@ export const metadata = {
   title: 'Contact GLUNS | Model United Nations (MUN) Kenya, Africa & Worldwide',
   description:
     'Contact GLUNS (Global Leaders United Nations Symposium) for inquiries about Model United Nations conferences in Kenya, across Africa, and internationally. Reach out for global delegate registration, school partnerships, sponsorships, and youth leadership programs worldwide.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'Contact GLUNS - Global Model United Nations in Kenya, Africa & Worldwide',

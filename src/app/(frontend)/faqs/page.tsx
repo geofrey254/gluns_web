@@ -6,7 +6,9 @@ export const metadata = {
   title: 'GLUNS FAQs | Model United Nations (MUN) Kenya, Africa & Worldwide',
   description:
     'Find answers to frequently asked questions about GLUNS (Global Leaders United Nations Symposium), Model United Nations conferences, committees, events, and youth leadership programs in Kenya, across Africa, and globally.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS FAQs – Model United Nations Conferences & Youth Leadership',

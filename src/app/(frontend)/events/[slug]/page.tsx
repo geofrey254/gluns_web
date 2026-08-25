@@ -61,7 +61,9 @@ export async function generateMetadata({
   return {
     title,
     description,
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+    ),
 
     openGraph: {
       title,

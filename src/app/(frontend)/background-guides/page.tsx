@@ -27,7 +27,9 @@ async function fetchPublishedGuides() {
 export const metadata = {
   title: 'Background Guides | GLUNS',
   description: 'Download password-protected committee background guides for GLUNS delegates.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 }
 
 export default async function BackgroundGuidesPage() {

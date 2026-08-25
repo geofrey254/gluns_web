@@ -16,7 +16,9 @@ export const metadata = {
   title: 'Publications & Blog | GLUNS – Model United Nations Kenya, Africa & Worldwide',
   description:
     'Explore GLUNS publications and blog articles covering Model United Nations, global affairs, diplomacy, youth leadership, and international relations in Kenya, across Africa, and worldwide.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS Publications & Blog – Global MUN Insights',

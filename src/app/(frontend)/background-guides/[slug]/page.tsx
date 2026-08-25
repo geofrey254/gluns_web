@@ -17,6 +17,7 @@ import {
   normalizeGuideRecord,
   verifyGuideAuthToken,
 } from '@/lib/background-guides'
+import { getSiteUrl } from '@/lib/utils'
 import type { GuideRecord } from '@/types/background-guides'
 
 async function fetchGuide(slug: string) {
@@ -58,12 +59,13 @@ export async function generateMetadata({
     }
   }
 
-  const url = `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/background-guides/${guide.slug}`
+  const siteUrl = getSiteUrl()
+  const url = `${siteUrl}/background-guides/${guide.slug}`
 
   return {
     title: `${guide.title} | GLUNS Background Guides`,
     description: 'Password-protected background guide download from GLUNS.',
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+    metadataBase: new URL(siteUrl),
     alternates: {
       canonical: url,
     },

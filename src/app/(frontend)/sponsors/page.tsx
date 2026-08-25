@@ -5,7 +5,9 @@ export const metadata = {
   title: 'GLUNS Sponsors & Partners | Model United Nations Kenya, Africa & Worldwide',
   description:
     'Discover how to become a sponsor or partner of GLUNS (Global Leaders United Nations Symposium). Support Model United Nations conferences, youth leadership programs, and global diplomacy initiatives in Kenya, across Africa, and internationally.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS Sponsors & Partners – Supporting MUN in Kenya, Africa & Worldwide',

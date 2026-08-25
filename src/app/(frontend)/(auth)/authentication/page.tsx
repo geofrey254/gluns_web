@@ -5,7 +5,9 @@ export const metadata = {
   title: 'GLUNS Login & Sign Up | Model United Nations Kenya, Africa & Worldwide',
   description:
     'Access the GLUNS portal to sign up or log in. Manage your student delegation, register for Model United Nations (MUN) conferences, and participate in youth leadership programs in Kenya, Africa, and internationally.',
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}`),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_PAYLOAD_URL || process.env.PAYLOAD_URL || 'http://localhost:3000',
+  ),
 
   openGraph: {
     title: 'GLUNS Authentication – Sign Up or Log In to Model United Nations Portal',

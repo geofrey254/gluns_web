@@ -16,11 +16,11 @@ export default function page() {
       <Hero />
       <About />
       <SchoolMarquee />
-      <Why />
+      {/* <Why />
       <Committee />
       <Process />
       <Events />
-      <WelcomeNote />
+      <WelcomeNote /> */}
       <Video />
       <CTA />
     </>

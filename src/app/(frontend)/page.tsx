@@ -1,7 +1,7 @@
 import React from 'react'
-import Countdown from '@/components/homepage/Countdown'
 import Hero from '@/components/homepage/Hero'
 import About from '@/components/homepage/About'
+import SchoolMarquee from '@/components/homepage/SchoolMarquee'
 import Why from '@/components/homepage/Why'
 import Committee from '@/components/homepage/Committee'
 import Process from '@/components/homepage/Process'
@@ -15,6 +15,7 @@ export default function page() {
     <>
       <Hero />
       <About />
+      <SchoolMarquee />
       <Why />
       <Committee />
       <Process />

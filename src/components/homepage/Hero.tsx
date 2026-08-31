@@ -1,22 +1,23 @@
 import React from 'react'
 import Link from 'next/link'
-import { IoIosArrowForward } from 'react-icons/io'
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#051220] md:min-h-[40vh] lg:min-h-[60vh] 2xl:min-h-[60vh] flex px-6 md:px-8 2xl:px-16 items-center z-20 overflow-hidden">
+    <section className="relative bg-[#051220] min-h-[70vh] md:min-h-[50vh] lg:min-h-[70vh] 2xl:min-h-[70vh] flex px-6 md:px-8 2xl:px-16 items-center z-20 overflow-hidden">
       {/* gradient overlay */}
-      <div className="absolute inset-0 bg-[url(/images/glunshero.jpg)] bg-cover bg-top" />
+      <div className="absolute inset-0 bg-[url(/images/heroweb.jpg)] bg-cover bg-top" />
 
       <div className="absolute inset-0 bg-linear-to-tr from-[#051220]/50 via-[#051220]/65 to-[#051220]/45" />
 
-      <div className="relative z-10 w-full py-20 justify-center items-center flex flex-col gap-4 md:gap-0 2xl:gap-0">
+      <div className="relative z-10 w-full pt-32 pb-20 justify-center items-center flex flex-col gap-4 md:gap-0 2xl:gap-0">
         <h1 className="text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold text-white text-center z-10">
-          SIMULATE. DEBATE. <br />
-          <span className="font-semmibold text-[#85C226] text-center z-10">CHANGE THE WORLD.</span>
+          SIMULATE. DEBATE.
         </h1>
+        <span className="text-[45px] md:text-6xl lg:text-7xl 2xl:text-8xl font-bold text-[#85C226] -mt-4 md:mt-0 text-center z-10">
+          CHANGE THE WORLD.
+        </span>
 
-        <p className="mt-4 text-lg md:text-xl 2xl:text-3xl text-white text-center md:w-1/2 z-10">
+        <p className="md:mt-4 text-lg md:text-xl 2xl:text-3xl text-white text-center md:w-1/2 z-10">
           GLUNS curates rigorous Model UN conferences and solution-focused competitions for students
           who want to engage with the world{"'"}s hardest problems.
         </p>

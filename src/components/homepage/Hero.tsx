@@ -7,7 +7,7 @@ export default function Hero() {
       {/* gradient overlay */}
       <div className="absolute inset-0 bg-[url(/images/heroweb.jpg)] bg-cover bg-top" />
 
-      <div className="absolute inset-0 bg-linear-to-tr from-[#051220]/50 via-[#051220]/65 to-[#051220]/45" />
+      <div className="absolute inset-0 bg-linear-to-tr from-[#051220]/90 via-[#051220]/75 to-[#051220]/45" />
 
       <div className="relative z-10 w-full pt-32 pb-20 justify-center items-center flex flex-col gap-4 md:gap-0 2xl:gap-0">
         <h1 className="text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold text-white text-center z-10">

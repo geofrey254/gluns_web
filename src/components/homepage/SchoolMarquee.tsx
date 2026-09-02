@@ -89,7 +89,6 @@ export function SchoolMarquee() {
           <MarqueeRow reverse />
         </div>
       </div>
-
       <style>{MARQUEE_STYLES}</style>
     </section>
   )

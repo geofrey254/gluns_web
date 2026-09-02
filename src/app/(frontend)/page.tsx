@@ -19,6 +19,9 @@ export default function page() {
       <SchoolMarquee />
       <HomeAbout />
       <Video />
+      <Events />
+      <Why />
+      <Committee />
       <CTA />
     </>
   )

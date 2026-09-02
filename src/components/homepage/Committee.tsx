@@ -12,16 +12,13 @@ export default async function Committee() {
   const { committee } = await fetchCommittee()
 
   return (
-    <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen 2xl:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-16 py-20 overflow-hidden">
+    <section className="relative bg-[#0D1A0D] min-h-screen md:min-h-[60vh] lg:min-h-screen 2xl:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-16 py-20 overflow-hidden">
       {/* Section Header */}
       <div className="flex flex-col justify-center items-center text-center mb-16">
-        <h3 className="text-[#104179] text-xs md:text-sm 2xl:text-lg tracking-widest border border-[#104179] rounded-xl px-4 py-1">
-          Organs
-        </h3>
-        <h2 className="text-3xl md:text-5xl 2xl:text-3xl text-[#104179] mt-2 font-semibold">
+        <h2 className="text-4xl md:text-6xl 2xl:text-5xl text-white mt-2 font-semibold uppercase">
           Explore the Structure of GLUNS
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl leading-relaxed">
+        <p className="text-white/65 max-w-2xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl leading-relaxed">
           GLUNS is organized into three main organs: the General Assembly, the International Court
           of Justice, and the International Law Commission—each offering a distinct approach to
           global governance, diplomacy, and law.
@@ -36,44 +33,23 @@ export default async function Committee() {
           .map((committee, index) => (
             <div
               key={committee.id}
-              className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+              className="group relative transition-all duration-500 overflow-hidden border-l border-gray-100"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Image Container with Overlay */}
-              <div className="relative w-full h-56 overflow-hidden">
-                {typeof committee.photo === 'object' && committee.photo ? (
-                  <Image
-                    src={committee.photo?.url || '/images/committee-placeholder.jpg'}
-                    alt={committee.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center h-full w-full bg-gray-300">
-                    <span className="text-gray-500">No Image Available</span>
-                  </div>
-                )}
-
-                {/* Icon Badge */}
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <FaUsers className="text-[#104179] text-xl" />
-                </div>
-              </div>
-
               {/* Content */}
               <div className="p-6 md:p-8 flex flex-col gap-4">
-                <h3 className="text-2xl md:text-3xl font-bold text-[#104179] leading-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#85c226] leading-tight uppercase">
                   {committee.name}
                 </h3>
 
-                <p className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3">
+                <p className="text-white/65 text-sm md:text-base leading-relaxed line-clamp-3">
                   {committee.description}
                 </p>
 
                 {/* CTA Link */}
                 <Link
                   href={`/organs/${committee.slug}`}
-                  className="inline-flex items-center gap-2 text-[#104179] font-semibold mt-2 group-hover:gap-4 transition-all duration-300"
+                  className="inline-flex items-center gap-2 text-white font-semibold mt-2 group-hover:gap-4 transition-all duration-300"
                 >
                   <span>Learn More</span>
                   <HiArrowRight className="text-xl group-hover:translate-x-1 transition-transform duration-300" />
@@ -86,7 +62,7 @@ export default async function Committee() {
       <div className="flex justify-center items-center mt-8">
         <Link
           href="/organs"
-          className="flex items-center justify-center gap-4 border border-[#104179] text-[#104179] text-lg md:text-xl 2xl:text-2xl rounded-xl px-4 py-2 hover:scale-105 transition-transform delay-200"
+          className="flex items-center justify-center gap-4 border border-white/65 text-white/65 text-lg md:text-xl 2xl:text-2xl px-6 py-4 hover:scale-105 transition-transform delay-200"
         >
           Explore Organs
           <GrLinkNext className="-rotate-45" />

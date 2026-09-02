@@ -19,7 +19,7 @@ export default function Video() {
           />
         </div>
         {/* Layered Overlay */}
-        <div className="absolute inset-0 bg-linear-to-t from-[#104179]/95 via-[#104179]/30 to-black/50 z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0d1a0d]/95 via-[#104179]/30 to-black/50 z-10" />
         <div className="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/30 z-10" />
         {/* Top-left event badge */}
         <div className="absolute top-8 left-8 z-20 flex items-center gap-3">

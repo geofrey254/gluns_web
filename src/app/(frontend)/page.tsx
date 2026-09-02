@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from '@/components/homepage/Hero'
-import About from '@/components/homepage/About'
+import HomeAboutStats from '@/components/homepage/HomeAboutStats'
+import HomeAbout from '@/components/homepage/HomeAbout'
 import SchoolMarquee from '@/components/homepage/SchoolMarquee'
 import Why from '@/components/homepage/Why'
 import Committee from '@/components/homepage/Committee'
@@ -14,13 +15,9 @@ export default function page() {
   return (
     <>
       <Hero />
-      <About />
+      <HomeAboutStats />
       <SchoolMarquee />
-      {/* <Why />
-      <Committee />
-      <Process />
-      <Events />
-      <WelcomeNote /> */}
+      <HomeAbout />
       <Video />
       <CTA />
     </>

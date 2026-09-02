@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function About() {
+export default function HomeAboutStats() {
   const stats = [
     { value: '1+', label: 'Years Building Leaders' },
     { value: '500+', label: 'Delegates Engaged' },
@@ -10,7 +10,7 @@ export default function About() {
 
   return (
     <section className="relative bg-[#0d1a0d] min-h-[70vh] md:min-h-[55vh] lg:min-h-[70vh] 2xl:min-h-[80vh] rounded-t-3xl -mt-7 z-20 overflow-hidden border-t border-white">
-      <div className="max-w-xl lg:max-w-5xl mx-auto flex flex-col gap-6 md:gap-8 2xl:gap-12 px-6 md:px-8 2xl:px-16 py-12 md:py-16 2xl:py-20">
+      <div className="max-w-full lg:max-w-5xl mx-auto flex flex-col gap-6 md:gap-8 2xl:gap-12 px-6 md:px-8 2xl:px-16 py-12 md:py-16 2xl:py-20">
         <h3 className="text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold text-[#85c226] text-left">
           OVER A YEAR SHAPING THE NEXT GENERATION OF GLOBAL LEADERS.
         </h3>

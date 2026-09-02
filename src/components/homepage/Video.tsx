@@ -21,27 +21,8 @@ export default function Video() {
         {/* Layered Overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-[#104179]/95 via-[#104179]/30 to-black/50 z-10" />
         <div className="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/30 z-10" />
-        {/* Top-left event badge */}
-        <div className="absolute top-8 left-8 z-20 flex items-center gap-3">
-          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-          <span
-            className="text-white/80 uppercase tracking-[0.25em] text-xs font-medium"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Event Recap
-          </span>
-        </div>
-        {/* Top-right date tag */}
-        <div className="absolute top-8 right-8 z-20">
-          <div className="border border-white/25 rounded-full px-4 py-1.5 backdrop-blur-sm bg-white/5">
-            <span
-              className="text-white/70 text-xs tracking-widest uppercase"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Feb 2026
-            </span>
-          </div>
-        </div>
+      
+      
         {/* Center Text Overlay */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6">
           <p

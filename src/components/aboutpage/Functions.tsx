@@ -30,17 +30,15 @@ export default function Functions() {
   ]
 
   return (
-    <section className="relative bg-[#104179] rounded-t-3xl -mt-7 z-30 px-6 md:px-12 py-20 overflow-hidden border-t border-white">
+    <section className="relative bg-[#0d1a0d] rounded-t-3xl -mt-7 z-30 px-6 md:px-12 py-20 overflow-hidden border-t border-white">
       {/* Header */}
-      <div className="flex flex-col justify-center items-center text-center mb-16 md:mb-4 max-w-3xl mx-auto">
-        <h3 className="text-white text-xs tracking-widest border border-white rounded-xl px-4 py-1">
-          What We Do{' '}
-        </h3>
-        <h2 className="text-white text-4xl md:text-5xl font-bold mt-4 leading-tight">
+      <div className="flex flex-col justify-center items-center text-center mb-16 md:mb-4 mx-auto">
+        <h2 className="text-white text-4xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold mt-4 leading-tight uppercase">
           A Complete GLUNS Experience{' '}
         </h2>
-        <p className="text-gray-200 mt-4 text-base">
-A Journey That Builds Skills, Perspective, and Purpose        </p>
+        <p className="text-gray-200 mt-4 text-lg lg:text-xl">
+          A Journey That Builds Skills, Perspective, and Purpose{' '}
+        </p>
       </div>
 
       {/* Horizontal Timeline */}
@@ -53,17 +51,16 @@ A Journey That Builds Skills, Perspective, and Purpose        </p>
           <div className="grid grid-cols-3 gap-4">
             {events.map((event, index) => (
               <div key={index} className="relative">
-
                 {/* Content */}
                 <div
                   className={`pt-4 ${index % 2 === 0 ? '' : 'pb-2 md:pb-4 pt-0 flex flex-col-reverse'}`}
                 >
-                  <div className="bg-white/10 h-[45vh] 2xl:h-auto backdrop-blur-sm border border-white/20 rounded-xl p-5 hover:bg-white/15 transition-all duration-300">
+                  <div className="border-l border-white/20 pl-6 md:pl-8 lg:pl-10 2xl:pl-12">
                     {/* Number */}
-                    <div className="text-3xl font-bold text-white/30 mb-2">{event.number}</div>
+                    <div className="text-3xl font-bold text-[#85c226] mb-2">{event.number}</div>
 
                     {/* Title */}
-                    <h3 className="text-white text-3xl font-bold mb-2 leading-tight">
+                    <h3 className="text-white text-3xl font-bold mb-2 leading-tight uppercase">
                       {event.title}
                     </h3>
 

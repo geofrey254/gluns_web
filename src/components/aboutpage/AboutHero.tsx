@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function AboutHero() {
   return (
-    <section className="relative bg-[#051220] min-h-[70vh] md:min-h-[50vh] lg:min-h-[50vh] flex px-6 md:px-8 2xl:px-16 items-center z-20 overflow-hidden">
+    <section className="relative bg-[#051220] min-h-auto md:min-h-[50vh] lg:min-h-[50vh] flex px-6 md:px-8 2xl:px-16 items-center z-20 overflow-hidden">
       {/* gradient overlay */}
       <div className="absolute inset-0 bg-[url(/images/abouthero.jpg)] bg-cover bg-top" />
 

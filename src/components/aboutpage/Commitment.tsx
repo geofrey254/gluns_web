@@ -3,13 +3,15 @@ import Image from 'next/image'
 
 export default function Commitment() {
   return (
-    <section className="relative bg-[#ffffff] w-full md:min-h-[60vh] rounded-t-3xl -mt-7 z-30 px-8 md:px-16 2xl:px-18 py-12 overflow-hidden">
+    <section className="relative bg-[#0d0d0d] w-full md:min-h-[60vh] rounded-t-3xl -mt-7 z-30 px-8 md:px-16 2xl:px-18 py-12 overflow-hidden">
       <div className="grid grid-cols-12 gap-4 md:gap-0">
         <div className="col-span-12 md:col-span-4 mb-2 md:mb-0">
-          <h2 className="text-5xl md:text-7xl text-[rgb(16,65,121)]">Our Commitment</h2>
+          <h2 className="text-5xl md:text-7xl text-white uppercase font-semibold">
+            Our Commitment
+          </h2>
         </div>
         <div className="col-span-12 md:col-span-8 flex flex-col md:justify-end md:items-end gap-8 text-[#104179] mb-12 md:mb-0">
-          <p className="text-xl 2xl:text-2xl font-light md:font-normal">
+          <p className="text-xl 2xl:text-2xl font-light md:font-normal text-white/65">
             GLUNS is committed to creating a safe, inclusive, and intellectually stimulating
             environment where every student{"'"}s voice matters. We provide high-quality programming
             delivered by experienced facilitators, mentors, and international relations

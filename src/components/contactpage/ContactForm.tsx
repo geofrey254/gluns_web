@@ -173,7 +173,7 @@ export default function ContactForm() {
       viewport={{ once: true, amount: 0.3 }}
     >
       <motion.div variants={itemVariants} className="mb-8">
-        <h2 className="text-4xl lg:text-5xl font-bold text-[#104179] dark:text-white mb-4">
+        <h2 className="text-4xl lg:text-5xl font-bold text-[#104179] dark:text-white mb-4 uppercase">
           Connect With Our Team
         </h2>
         <p className="text-gray-600 dark:text-gray-400 text-lg">

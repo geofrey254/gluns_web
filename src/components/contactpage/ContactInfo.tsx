@@ -76,7 +76,9 @@ export default function ContactInfo() {
     >
       {/* Header */}
       <motion.div variants={itemVariants}>
-        <h2 className="text-4xl lg:text-5xl font-bold text-[#104179] mb-4">Get In Touch</h2>
+        <h2 className="text-4xl lg:text-5xl font-bold text-[#104179] mb-4 uppercase">
+          Get In Touch
+        </h2>
         <p className="text-gray-600 text-lg leading-relaxed">
           We’re here to support delegates, schools, partners, and media teams. Choose the right
           contact and we’ll respond shortly.
@@ -121,10 +123,8 @@ export default function ContactInfo() {
           <div>
             <h3 className="text-2xl font-bold text-[#104179] mb-3">Our Office</h3>
             <div className="space-y-2 text-gray-600">
-              <p>
-                Gardens Arcade, 1<sup>st</sup> Floor
-              </p>
-              <p>Gardens, Kikuyu, Kenya</p>
+              <p>Luther Plaza, Nairobi </p>
+              <p> Kenya</p>
             </div>
             <motion.div whileHover={{ scale: 1.05 }} className="inline-block mt-4">
               <Link

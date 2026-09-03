@@ -29,7 +29,7 @@ export default function ContactCTA() {
   return (
     <section className="py-16 md:py-24 px-8 md:px-12 -mt-6 md:-mt-7 dark:border-t dark:border-white rounded-t-4xl relative z-30 overflow-hidden">
       {/* Background with Gradient */}
-      <div className="absolute inset-0 bg-[#104179]"></div>
+      <div className="absolute inset-0 bg-[#0d1a0d]"></div>
 
       {/* Content */}
       <motion.div
@@ -41,12 +41,14 @@ export default function ContactCTA() {
       >
         {/* Header Section */}
         <motion.div variants={itemVariants} className="text-center">
-          <h2 className="text-5xl lg:text-7xl font-bold mb-6">
-            <span className="text-white">Ready to Begin Your GLUNS Journey? </span>
+          <h2 className="text-5xl lg:text-7xl font-bold mb-6 uppercase">
+            <span className="text-white">
+              Ready to Begin Your <span className="text-[#85c226]">GLUNS</span> Journey?{' '}
+            </span>
           </h2>
           <p className="text-base md:text-xl text-purple-100 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Step forward and be part of a global community shaping positive change. Whether you{"'"}re
-            a student, educator, partner, or institution—we{"'"}re here to support your GLUNS
+            Step forward and be part of a global community shaping positive change. Whether you{"'"}
+            re a student, educator, partner, or institution—we{"'"}re here to support your GLUNS
             experience.
           </p>
         </motion.div>

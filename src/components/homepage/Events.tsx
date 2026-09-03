@@ -71,10 +71,10 @@ export default async function Events() {
   }
 
   return (
-    <section className="relative bg-[#0d0d0d] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
+    <section className="relative bg-[#0d0d0d] min-h-screen md:min-h-[60vh] lg:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-16 overflow-hidden">
       {/* Header */}
       <div className="flex flex-col justify-center items-center text-center mb-8">
-        <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold mt-3">
+        <h2 className="text-white text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold mt-3">
           {' '}
           EVENTS & COMPETITIONS
         </h2>

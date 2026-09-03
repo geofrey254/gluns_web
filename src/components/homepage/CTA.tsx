@@ -4,15 +4,13 @@ import Link from 'next/link'
 export default function CTA() {
   return (
     <section className="relative bg-[#104179] rounded-t-3xl -mt-7 z-30 overflow-hidden border-t border-white">
-
       {/* Main Content */}
       <div className="relative px-6 md:px-8 2xl:px-24 py-12 md:py-16 2xl:py-24">
         <div className="max-w-6xl 2xl:max-w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
           {/* LEFT COLUMN */}
           <div className="space-y-6">
-           
             {/* Heading */}
-            <h2 className="text-white text-5xl md:text-5xl lg:text-6xl font-bold leading-tighter tracking-tight uppercase">
+            <h2 className="text-white text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl font-bold leading-tighter tracking-tight uppercase">
               Ready to Shape Tomorrow&apos;s Global Leaders?
             </h2>
 
@@ -44,7 +42,9 @@ export default function CTA() {
             <div className="bg-[#0d1a0d]/30 backdrop-blur-md border border-white/20 p-8 shadow-2xl space-y-6">
               {/* Card Header */}
               <div className="space-y-2">
-                <h3 className="text-white text-2xl 2xl:text-3xl font-bold">Start Your Journey</h3>
+                <h3 className="text-white text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold uppercase">
+                  Start Your Journey
+                </h3>
                 <p className="text-gray-200 text-sm 2xl:text-2xl">
                   Secure your spot in the next generation of global changemakers.
                 </p>

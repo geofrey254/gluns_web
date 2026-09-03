@@ -12,13 +12,13 @@ export default async function Committee() {
   const { committee } = await fetchCommittee()
 
   return (
-    <section className="relative bg-[#0D1A0D] min-h-screen md:min-h-[60vh] lg:min-h-screen 2xl:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-16 py-20 overflow-hidden">
+    <section className="relative bg-[#0D1A0D] min-h-screen md:min-h-[60vh] lg:min-h-auto 2xl:min-h-auto rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-16 py-20 overflow-hidden">
       {/* Section Header */}
       <div className="flex flex-col justify-center items-center text-center mb-16">
-        <h2 className="text-4xl md:text-6xl 2xl:text-5xl text-white mt-2 font-semibold uppercase">
+        <h2 className="text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl text-white mt-2 font-semibold uppercase">
           Explore the Structure of GLUNS
         </h2>
-        <p className="text-white/65 max-w-2xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl leading-relaxed">
+        <p className="text-white/65 max-w-5xl mx-auto mt-4 text-lg md:text-xl 2xl:text-3xl leading-relaxed">
           GLUNS is organized into three main organs: the General Assembly, the International Court
           of Justice, and the International Law Commission—each offering a distinct approach to
           global governance, diplomacy, and law.

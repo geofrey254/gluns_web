@@ -3,12 +3,12 @@ import Image from 'next/image'
 
 export default function Loading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-[#0d0d0d]">
       <div className="relative flex flex-col items-center gap-8">
         {/* Logo container with animated ring */}
         <div className="relative">
           {/* Spinning ring */}
-          <div className="absolute inset-0 w-52 h-52 rounded-full border-4 border-transparent border-t-[#104179] animate-spin" />
+          <div className="absolute inset-0 w-52 h-52 rounded-full border-4 border-transparent border-t-[#85C226] animate-spin" />
 
           {/* Secondary spinning ring */}
           <div
@@ -18,32 +18,30 @@ export default function Loading() {
 
           {/* Logo placeholder - replace with your actual logo */}
           <div className="w-52 h-52 rounded-full bg-white shadow-lg flex items-center justify-center">
-            <div className="w-32 h-32 rounded-full bg-[#104179] flex items-center justify-center">
-              <Image
-                src="/logos/4.png"
-                alt="GLUNS Logo"
-                width={80}
-                height={80}
-                className="object-contain"
-              />
-            </div>
+            <Image
+              src="/logos/2.png"
+              alt="GLUNS Logo"
+              width={180}
+              height={180}
+              className="object-contain"
+            />
           </div>
         </div>
 
         {/* Loading text with animated dots */}
         <div className="flex items-center gap-2">
-          <span className="text-[#104179] text-lg font-medium">Loading</span>
+          <span className="text-white text-lg font-medium">Loading</span>
           <div className="flex gap-1">
             <div
-              className="w-2 h-2 bg-[#104179] rounded-full animate-bounce"
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
               style={{ animationDelay: '0ms' }}
             />
             <div
-              className="w-2 h-2 bg-[#104179] rounded-full animate-bounce"
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
               style={{ animationDelay: '150ms' }}
             />
             <div
-              className="w-2 h-2 bg-[#104179] rounded-full animate-bounce"
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
               style={{ animationDelay: '300ms' }}
             />
           </div>

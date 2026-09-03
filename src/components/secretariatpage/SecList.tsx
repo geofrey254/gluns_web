@@ -220,8 +220,10 @@ export default function SecList({ block }: TeamBlockProps) {
                   {/* Bottom Content */}
                   <div className="text-white">
                     <div className="mb-4">
-                      <div className="w-12 h-1 bg-white mb-4"></div>
-                      <h3 className="text-3xl font-bold mb-2 leading-tight">{sec.full_name}</h3>
+                      <div className="w-12 h-1 bg-[#85c226] mb-4"></div>
+                      <h3 className="text-3xl font-bold mb-2 leading-tight uppercase">
+                        {sec.full_name}
+                      </h3>
                       <p className="text-lg font-medium opacity-90 mb-4">{sec.role}</p>
                     </div>
 
@@ -242,10 +244,7 @@ export default function SecList({ block }: TeamBlockProps) {
 
                 {/* Number Badge */}
                 <div className="absolute top-8 left-8">
-                  <div
-                    className="w-12 h-12 flex items-center justify-center text-white font-black text-xl"
-                    style={{ backgroundColor: '#104179' }}
-                  >
+                  <div className="w-12 h-12 bg-[#104179] flex items-center justify-center text-white font-black text-xl">
                     {String(index + 1).padStart(2, '0')}
                   </div>
                 </div>
@@ -258,7 +257,7 @@ export default function SecList({ block }: TeamBlockProps) {
       {/* Modal */}
       {selectedMember && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-6"
+          className="fixed inset-0 bg-[#0d0d0d] bg-opacity-80 z-50 flex items-center justify-center p-6"
           onClick={() => setSelectedMember(null)}
         >
           <div
@@ -289,7 +288,7 @@ export default function SecList({ block }: TeamBlockProps) {
               )}
 
               <div className="absolute -bottom-8 md:bottom-0 -left-6 md:left-80 p-12 text-white">
-                <h3 className="text-4xl md:text-5xl font-black md:mb-3 tracking-wider">
+                <h3 className="text-4xl md:text-5xl lg:text-6xl font-semibold md:mb-3 uppercase">
                   {selectedMember.full_name}
                 </h3>
                 <p className="text-2xl font-medium">{selectedMember.role}</p>
@@ -297,7 +296,7 @@ export default function SecList({ block }: TeamBlockProps) {
             </div>
 
             {/* Modal Content */}
-            <div className="p-12">
+            <div className="p-8">
               <div
                 className="flex items-center gap-4 mb-8 pb-8 border-b-2"
                 style={{ borderColor: '#104179' }}

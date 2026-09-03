@@ -21,7 +21,7 @@ export default async function CommitteeList() {
         {committee.reverse().map((committee, index) => (
           <div
             key={committee.id}
-            className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
+            className="group relative bg-white transition-all border border-[#104179] duration-500 overflow-hidden"
             style={{ animationDelay: `${index * 100}ms` }}
           >
             {/* Image Container with Overlay */}
@@ -48,12 +48,12 @@ export default async function CommitteeList() {
             {/* Content */}
             <div className="p-6 md:p-8 flex flex-col gap-4">
               <Link href={`/organs/${committee.slug}`}>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#104179] leading-tight">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#104179] leading-tight uppercase">
                   {committee.name}
                 </h3>
               </Link>
 
-              <p className="text-gray-600 text-sm md:text-base leading-relaxed line-clamp-3">
+              <p className="text-gray-600 text-lg md:text-xl lg:text-2xl leading-relaxed line-clamp-3">
                 {committee.description}
               </p>
 
@@ -75,16 +75,16 @@ export default async function CommitteeList() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
 
         <div className="relative z-10">
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl font-semibold text-white mb-4 uppercase">
             Ready to Join an Organ?
           </h3>
-          <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/90 text-lg lg:text-xl mb-8 max-w-2xl mx-auto">
             Take the first step towards becoming a global leader. Register for our upcoming
             conference and choose your organ.
           </p>
           <Link
             href="/authentication"
-            className="inline-flex items-center gap-3 bg-white text-[#104179] px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-xl"
+            className="inline-flex items-center gap-3 bg-white text-[#104179] text-lg lg:text-xl px-8 py-4 font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-xl"
           >
             Register Now
             <HiArrowRight className="text-xl" />

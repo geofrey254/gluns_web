@@ -3,48 +3,16 @@ import Image from 'next/image'
 
 export default function CommitteeHero() {
   return (
-    <section
-      id="about-hero"
-      className="py-12 md:py-16 2xl:py-24 px-8 md:px-12 bg-[#104179] w-full dark:border-t dark:border-white relative z-30 shadow-2xl overflow-hidden flex flex-col items-center justify-center gap-12 md:gap-8"
-    >
-      <div className="w-full h-full flex flex-col md:flex-row justify-center md:items-center">
-        {/* left */}
-        <div className="w-full flex flex-col mx-auto justify-center items-start md:w-[60%] 2xl:w-full">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-4">
-            <div className="w-2 h-2 bg-[#85c226] rounded-full animate-pulse"></div>
-            <span className="text-white text-xs font-semibold tracking-wider uppercase">
-              Our Organs{' '}
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <h1 className="text-5xl lg:text-6xl font-semibold text-white leading-tight">
-              Explore the Councils, Where Delegates Shape Solutions
-            </h1>
-
-            <p className="text-white leading-relaxed text-xl md:text-2xl md:w-[90%]">
-              GLUNS hosts a diverse range of organs designed to challenge students, deepen global
-              awareness, and develop real diplomatic skills. Each organ tackles critical global
-              issues, encouraging delegates to think creatively, collaborate meaningfully, and lead
-              with purpose.
-            </p>
-          </div>
-        </div>
-
-        {/* right */}
-        <div className="flex mt-12 md:mt-0 items-center justify-center relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl hover:scale-105 transition-transform duration-500">
-          <Image
-            src="/logos/6.png"
-            width={500}
-            height={500}
-            alt="GLUNS Logo"
-            className="w-72 2xl:w-xl"
-          />
-        </div>
+    <section className="relative bg-[#0d0d0d] min-h-auto flex px-6 md:px-8 2xl:px-16 py-20 items-center z-20 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-7xl 2xl:max-w-full mx-auto pt-20">
+        <h2 className="text-white text-7xl md:text-8xl col-auto lg:col-span-6 leading-[1.1] uppercase">
+          Our <span className="text-[#85c226]">Organs.</span>
+        </h2>
+        <p className="text-white text-base lg:text-2xl 2xl:text-3xl lg:col-span-6">
+          Discover the various organs that make up our organization and their unique roles in
+          driving our mission forward.
+        </p>
       </div>
-
-      <div className="absolute top-20 -left-20 w-60 h-60 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-20 -right-20 w-60 h-60 bg-white/1 rounded-full blur-3xl pointer-events-none"></div>
     </section>
   )
 }

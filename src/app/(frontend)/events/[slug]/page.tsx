@@ -142,65 +142,20 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <div className="bg-[#104179] border-b-4 border-[#85c226] shadow-lg">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link
-                    href="/"
-                    className="text-white hover:text-[#85c226] transition-all duration-300 font-medium"
-                  >
-                    Home
-                  </Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <SlashIcon className="text-[#85c226]" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link
-                    href="/events"
-                    className="text-white/90 hover:text-[#85c226] transition-all duration-300 font-medium"
-                  >
-                    Events
-                  </Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <SlashIcon className="text-[#85c226]" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbPage className="text-[#85c226] font-semibold">
-                  {events.title}
-                </BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-[#0d0d0d] px-6 md:px-8 2xl:px-16 pb-12 lg:pb-20 relative z-10">
       {/* Committee Hero */}
-      <div className="relative h-[600px] w-full overflow-hidden">
+      <div className="relative h-[80vh] lg:h-[600px] w-full overflow-hidden">
         {/* Overlay with Pattern */}
-        <div className="absolute inset-0 bg-[#104179]"></div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-0 left-0 w-32 h-32 border-t-8 border-l-8 border-[#85c226]"></div>
-        <div className="absolute bottom-0 right-0 w-32 h-32 border-b-8 border-r-8 border-[#85c226]"></div>
+        <div className="absolute inset-0 bg-[#0d0d0d]"></div>
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center px-8 md:px-4">
-          <div className="max-w-4xl w-full text-center space-y-6">
+          <div className="max-w-4xl w-full text-left lg:text-center space-y-6">
             <div className="inline-block">
-              <h1 className="text-5xl md:text-7xl font-black text-white tracking-normal md:tracking-tight mb-4">
+              <h1 className="text-4xl md:text-7xl font-bold uppercase text-white tracking-normal md:tracking-tight mb-4">
                 {events.title}
               </h1>
-              <div className="h-2 bg-[#85c226] w-3/4 mx-auto"></div>
+              <div className="h-2 bg-[#85c226] w-3/4 lg:mx-auto"></div>
             </div>
             {events.subtitle && (
               <p className="text-xl md:text-2xl text-white/90 font-medium max-w-3xl mx-auto">
@@ -217,7 +172,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Date */}
             {events.date && (
-              <div className="flex items-center space-x-4 p-4 border-2 border-[#104179]/20 rounded-xl hover:border-[#85c226] transition-all duration-300">
+              <div className="flex items-center space-x-4 p-4 border-2 border-[#104179]/20 hover:border-[#85c226] transition-all duration-300">
                 <div className="shrink-0 w-14 h-14 bg-[#104179] rounded-lg flex items-center justify-center">
                   <Calendar className="w-7 h-7 text-white" />
                 </div>
@@ -232,7 +187,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
 
             {/* Location */}
             {events.location && (
-              <div className="flex items-center space-x-4 p-4 border-2 border-[#104179]/20 rounded-xl hover:border-[#85c226] transition-all duration-300">
+              <div className="flex items-center space-x-4 p-4 border-2 border-[#104179]/20 hover:border-[#85c226] transition-all duration-300">
                 <div className="shrink-0 w-14 h-14 bg-[#104179] rounded-lg flex items-center justify-center">
                   <MapPin className="w-7 h-7 text-white" />
                 </div>
@@ -245,7 +200,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
 
             {/* Cost */}
             {events.cost && (
-              <div className="flex items-center space-x-4 p-4 border-2 border-[#104179]/20 rounded-xl hover:border-[#85c226] transition-all duration-300">
+              <div className="flex items-center space-x-4 p-4 border-2 border-[#104179]/20 hover:border-[#85c226] transition-all duration-300">
                 <div className="shrink-0 w-14 h-14 bg-[#85c226] rounded-lg flex items-center justify-center">
                   <FaMoneyBillTransfer className="w-7 h-7 text-white" />
                 </div>
@@ -269,7 +224,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
           <div className="flex justify-center mt-8 md:mt-12">
             <Link
               href="/registration"
-              className="bg-[#104179] text-[#fffff6] px-6 py-2 text-lg rounded-lg font-semibold hover:bg-[#85c226] hover:text-white transition-all duration-300"
+              className="bg-[#104179] text-[#fffff6] px-6 py-2 text-lg font-semibold hover:bg-[#85c226] hover:text-white transition-all duration-300"
             >
               Register Now
             </Link>

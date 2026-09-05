@@ -15,7 +15,7 @@ export default async function EventsList() {
 
   if (events.length === 0) {
     return (
-      <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
+      <section className="relative bg-[#0d0d0d] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
         {/* Empty State */}
         <div className="flex flex-col items-center justify-center max-w-2xl mx-auto py-8">
           {/* Icon/Illustration */}
@@ -67,62 +67,48 @@ export default async function EventsList() {
   }
 
   return (
-    <section className="relative bg-[#ffffff] min-h-screen md:min-h-[60vh] lg:min-h-screen rounded-t-3xl -mt-7 z-30 px-6 md:px-12 2xl:px-18 py-12 overflow-hidden">
+    <section className="relative bg-[#0d0d0d] min-h-screen md:min-h-[60vh] lg:min-h-screen z-30 px-6 md:px-12 2xl:px-18 py-6 overflow-hidden">
       {/* Events Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="">
         {events.map((event, index) => (
-          <div
-            key={index}
-            className="rounded-3xl overflow-hidden shadow-md bg-[#104179]/5 border border-[#85c226] hover:shadow-xl transition-all duration-300"
-          >
-            {/* Image */}
-            <div className="h-64 w-full overflow-hidden rounded-b-3xl shadow-lg shadow-[#000000]/20 border-b-2 border-[#85c226]">
-              {typeof event.banner === 'object' && event.banner?.url ? (
-                <Image
-                  width={500}
-                  height={500}
-                  src={event.banner?.url || '/images/event-placeholder.jpg'}
-                  alt={event.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full w-full bg-gray-300">
-                  <span className="text-gray-500">No Image Available</span>
-                </div>
-              )}
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex justify-center items-center gap-3">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  {' '}
-                  <h2 className="flex items-center gap-1 text-[#104179] text-sm 2xl:text-2xl">
-                    <span>
-                      <IoLocationSharp className="text-[#85c226]" />
-                    </span>
-                    {event.location}
-                  </h2>
-                </div>
-
-                <div className="w-full h-0.5 bg-[#85c226] mb-2"></div>
-                <span className="text-[#104179] font-semibold text-sm 2xl:text-lg">
-                  {event.date ? new Date(event.date).toLocaleDateString('en-US', dateOptions) : ''}
-                </span>
-                <Link href={`/events/${event.slug}`}>
-                  <h3 className="text-2xl 2xl:text-3xl font-bold text-[#104179] mb-2 hover:text-[#85c226] transition-colors duration-300">
+          <div key={index} className="border-b border-[#85c226] py-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 py-6">
+              <div className="flex flex-col md:flex-col justify-between items-start gap-4">
+                <Link href={`/events/${event.slug}`} className="flex items-center gap-2">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl font-semibold text-white uppercase lg:w-2xl">
                     {event.title}
                   </h3>
                 </Link>
-                <p className="text-lg 2xl:text-xl text-gray-600 line-clamp-4">{event.subtitle}</p>
+                <span>
+                  <span className="text-white/65 text-lg md:text-xl 2xl:text-3xl ml-1">
+                    {event.location}
+                  </span>
+                </span>
+              </div>
 
-                <Link
-                  href={`/events/${event.slug}`}
-                  className="flex items-center justify-end gap-4 mt-4 text-[#104179] font-semibold hover:text-[#85c226] transition-colors duration-300"
-                >
-                  View Details
-                  <HiArrowRight className="text-xl group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
+              <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+                <span className="text-white/65 text-lg md:text-3xl">
+                  {new Date(event.date).toLocaleDateString(undefined, dateOptions)}
+                </span>
+
+                {/* vertical divider */}
+                <div className="hidden md:block w-1 h-8 bg-[#85c226]"></div>
+
+                {event.cost && (
+                  <div>
+                    <p className="text-4xl font-bold text-[#85c226]">
+                      {event.currency === 'USD'
+                        ? '$'
+                        : event.currency === 'KES'
+                          ? 'KSh '
+                          : event.currency === 'EUR'
+                            ? '€'
+                            : ''}
+                      {/* separate values in comma */}
+                      {event.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

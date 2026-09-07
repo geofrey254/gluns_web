@@ -44,7 +44,6 @@ export const Users: CollectionConfig = {
       type: 'text',
       required: false,
     },
-
     {
       name: 'delegationName',
       type: 'text',

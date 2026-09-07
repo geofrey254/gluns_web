@@ -89,7 +89,7 @@ export default function Navbar() {
           <div className="flex gap-2 items-center">
             <Link
               href="/registration"
-              className="hidden lg:flex relative overflow-hidden border border-white/65 text-white/65 p-2 text-center items-center font-semibold rounded-md transition-colors duration-300 before:absolute before:inset-0 before:bg-[#104179] before:translate-y-full before:transition-transform before:duration-300 hover:before:translate-y-0 hover:text-[#fffff6]"
+              className="hidden lg:flex relative overflow-hidden border border-white/65 text-white/65 p-2 text-center items-center font-semibold transition-colors duration-300 before:absolute before:inset-0 before:bg-[#104179] before:translate-y-full before:transition-transform before:duration-300 hover:before:translate-y-0 hover:text-[#fffff6]"
             >
               <span className="relative z-10 text-base 2xl:text-xl text-center uppercase">
                 Register Now{' '}
